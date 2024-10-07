@@ -1,0 +1,30 @@
+.form-container{
+    display: flex;
+    justify-content: center;
+    margin: 5rem 5rem 5rem 5rem;
+    box-shadow: 0 4px 8px 0 #84bc6259, 0 6px 20px 0 #84bc6259;
+    border-radius: 1rem;
+    padding: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: max-content;
+    background-color: transparent;
+}
+input,h6,button{
+    margin: 0.4rem;
+    border: none;
+}
+input{
+    padding: 5px;
+    background: transparent;
+}
+button{
+    background-color: #84BC62;
+    width: 20.5rem;
+    height: 2.5rem;
+    color: azure;
+    border-radius: 0.5rem;
+}
+h6,label,input,h2{
+    color:#234110;
+}

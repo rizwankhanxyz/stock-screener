@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-//Component
-import Alert from "./Alert";
+//Component, styles
+import Alert from "../components/Alert";
+import "../styles/Register.css";
 
-function Register() {
+function Register({ alert, showAlert }) {
   const [registeredData, setRegistereddata] = useState({
     fullname: "",
     phonenumber: "",
@@ -26,15 +28,22 @@ function Register() {
   const onSubmithandler = (e) => {
     try {
       e.preventDefault();
+      if (registeredData.password !== registeredData.passwordR) {
+        showAlert({
+          type: "danger",
+          msg: "Passwords do not match",
+        });
+      } else {
+      }
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <>
-      <div className="container">
+      <div className="form-container">
         <form onSubmit={onSubmithandler}>
-          <h1>Sign Up</h1>
+          <h2>Sign Up</h2>
           <hr />
           <div>
             <label htmlFor="fullname">
@@ -42,7 +51,7 @@ function Register() {
             </label>
             <input
               type="text"
-              placeholder="Jhone Doe"
+              placeholder="Jhon Doe"
               name="fullname"
               onChange={onChangehanlder}
               required
@@ -66,7 +75,7 @@ function Register() {
             </label>
             <input
               type="email"
-              placeholder="jhonedoe@mail.co"
+              placeholder="jhondoe@mail.globe"
               name="email"
               onChange={onChangehanlder}
               required
@@ -74,7 +83,7 @@ function Register() {
           </div>
 
           <div>
-            <label htmlFor="password]">
+            <label htmlFor="password">
               <b>Password :</b>
             </label>
             <input
@@ -94,21 +103,21 @@ function Register() {
               type="password"
               placeholder="************"
               name="paswwordR"
-              //   onChange={onChangehanlder}
+              onChange={onChangehanlder}
               required
             />
           </div>
-
-          <div className="clearfix">
+          <div>
             <button type="submit" className="signupbtn">
               Sign Up
             </button>
           </div>
-          {/* <div>
-            <p>
-              Already have an account on Tasky, <Link to="/">Login</Link>.
-            </p>
-          </div> */}
+          <div>
+            <h6>
+              Already have an account on with us, <Link to="/login">Login</Link>{" "}
+              here.
+            </h6>
+          </div>
         </form>
       </div>
     </>

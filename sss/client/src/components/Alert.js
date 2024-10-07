@@ -5,7 +5,7 @@ function Alert({ alert }) {
     <>
       {alert != null && (
         <div>
-          <p style={{ width: "50%" }} className={`alert-${alert.type}`}>
+          <p style={{background:"transparent"}} className={`alert-${alert.type}`}>
             <i className="bi bi-exclamation-circle-fill"></i> {alert.msg}
           </p>
         </div>
