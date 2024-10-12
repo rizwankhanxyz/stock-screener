@@ -1,0 +1,6 @@
+body {
+    background-color: #84BC62;
+    opacity: 1;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.15) 1px, #84BC62 1px);
+    background-size: 56px 56px;
+}

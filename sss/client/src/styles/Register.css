@@ -1,30 +1,116 @@
-.form-container{
+*{
+    font-family: Poppins, sans-serif;
+}
+img{
+    height: 60px;
+    object-fit: contain;
+}
+
+.form-container {
     display: flex;
     justify-content: center;
-    margin: 5rem 5rem 5rem 5rem;
-    box-shadow: 0 4px 8px 0 #84bc6259, 0 6px 20px 0 #84bc6259;
-    border-radius: 1rem;
-    padding: 1rem;
-    flex-wrap: wrap;
+    align-items: center;
+    margin: 5rem auto;
+    padding: 2rem;
     width: 100%;
     max-width: max-content;
-    background-color: transparent;
+    background: #ffffff;
+    border: 1px solid #84BC62;
+    box-shadow: 7px 7px #e3f3d9;
+    border-radius: 1rem;
+    animation: fadeIn 1s ease-out;
+    transition: transform 0.3s ease-in-out;
 }
-input,h6,button{
-    margin: 0.4rem;
+
+.form-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.2), -10px -10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h6, h1, button {
+    margin: 0.5rem 0;
     border: none;
 }
-input{
-    padding: 5px;
-    background: transparent;
+.input-group {
+    position: relative;
+    margin: 0.5rem 0;
 }
-button{
-    background-color: #84BC62;
-    width: 20.5rem;
-    height: 2.5rem;
-    color: azure;
+
+  .input-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #84BC62;
+  }
+  .show-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #84BC62;
+}
+  .input-group input {
+    padding: 10px  3rem;
+    width: 100%;
+    border: 1px solid #ced0d4;
     border-radius: 0.5rem;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+
+input {
+    /* border: 1px solid #ced0d4; */
+    /* margin: 0.5rem 0; */
+    /* padding: 10px; */
+    /* width: 100%; */
+    /* border-radius: 0.5rem;
+    transition: box-shadow 0.2s ease-in-out; */
+    /* outline: none; */
 }
-h6,label,input,h2{
-    color:#234110;
+
+input:focus {
+    outline: none;
+    border-color: #84BC62;
+    outline: 1px solid rgba(132, 188, 98, 0.3);
+}
+
+button {
+    background-color: #84BC62;
+    width: 100%;
+    padding: 0.75rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #6da450;
+    transform: scale(1.05);
+}
+
+h1, label, h6,input {
+    color: #234110;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        margin: 3rem auto;
+        padding: 1.5rem;
+    }
 }

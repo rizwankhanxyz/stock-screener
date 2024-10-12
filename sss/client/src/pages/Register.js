@@ -43,39 +43,31 @@ function Register({ alert, showAlert }) {
     <>
       <div className="form-container">
         <form onSubmit={onSubmithandler}>
-          <h2>Sign Up</h2>
+          <img src="./se-logo.png" alt="se-logo" />
           <hr />
           <div>
-            <label htmlFor="fullname">
-              <b>Full Name :</b>
-            </label>
             <input
               type="text"
-              placeholder="Jhon Doe"
+              placeholder="Full Name"
               name="fullname"
               onChange={onChangehanlder}
               required
             />
           </div>
           <div>
-            <label htmlFor="phonenumber">
-              <b>Phone :</b>
-            </label>
             <input
               type="tel"
-              placeholder="8888 888 888"
+              placeholder="Phone"
               name="phonenumber"
               onChange={onChangehanlder}
               required
             />
           </div>
           <div>
-            <label htmlFor="email">
-              <b>Email :</b>
-            </label>
+
             <input
               type="email"
-              placeholder="jhondoe@mail.globe"
+              placeholder="Email Id"
               name="email"
               onChange={onChangehanlder}
               required
@@ -83,12 +75,9 @@ function Register({ alert, showAlert }) {
           </div>
 
           <div>
-            <label htmlFor="password">
-              <b>Password :</b>
-            </label>
             <input
               type="password"
-              placeholder="************"
+              placeholder="Password"
               name="password"
               onChange={onChangehanlder}
               required
@@ -96,12 +85,9 @@ function Register({ alert, showAlert }) {
           </div>
           <Alert alert={alert} />
           <div>
-            <label htmlFor="paswwordR">
-              <b>Repeat Password :</b>
-            </label>
             <input
               type="password"
-              placeholder="************"
+              placeholder="Confirm Password"
               name="paswwordR"
               onChange={onChangehanlder}
               required
@@ -109,13 +95,12 @@ function Register({ alert, showAlert }) {
           </div>
           <div>
             <button type="submit" className="signupbtn">
-              Sign Up
+              Register
             </button>
           </div>
           <div>
             <h6>
-              Already have an account on with us, <Link to="/login">Login</Link>{" "}
-              here.
+              Already have an account with us, <Link to="/login">Login</Link> here.
             </h6>
           </div>
         </form>

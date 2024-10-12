@@ -5,14 +5,12 @@ import { Link } from "react-router-dom";
 import Alert from "../components/Alert";
 import "../styles/Register.css";
 
-function Register({ alert, showAlert }) {
+function Login({ alert, showAlert }) {
   const [registeredData, setRegistereddata] = useState({
-    fullname: "",
-    phonenumber: "",
     email: "",
     password: "",
-    passwordR: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const onChangehanlder = (e) => {
     try {
@@ -39,45 +37,50 @@ function Register({ alert, showAlert }) {
       console.log(error);
     }
   };
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword); // Toggle between true and false
+  };
   return (
     <>
       <div className="form-container">
         <form onSubmit={onSubmithandler}>
-          <h2>Sign In</h2>
-          <hr />
-          <div>
-            <label htmlFor="email">
-              <b>Email :</b>
-            </label>
+          <img src="./se-logo.png" alt="" />
+          <h1><b>Assalamu Alaykum</b></h1>
+          <h6>Welcome to Shairah Equities!</h6>
+          {/* <hr /> */}
+          <div className="input-group">
+            <i className="bi bi-envelope-at"></i>
             <input
               type="email"
-              placeholder="jhondoe@mail.globe"
+              placeholder="Registered Email Id"
               name="email"
               onChange={onChangehanlder}
               required
             />
           </div>
-          <div>
-            <label htmlFor="password">
-              <b>Password :</b>
-            </label>
+          <div className="input-group">
+            <i class="bi bi-shield-lock"></i>
             <input
-              type="password"
-              placeholder="************"
+              type={showPassword ? "text" : "password"}
+              placeholder="Validate Password"
               name="password"
               onChange={onChangehanlder}
               required
             />
+            <i
+              className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"} show-password`} 
+              onClick={togglePasswordVisibility}
+            ></i>
           </div>
           <Alert alert={alert} />
           <div>
             <button type="submit" className="signupbtn">
-              Sign Up
+              Login
             </button>
           </div>
           <div>
             <h6>
-                Don't have an account with us, <Link to="/register">Register</Link> here.
+              Don't have an account with us, <Link to="/register">Register</Link> here.
             </h6>
           </div>
         </form>
@@ -86,4 +89,4 @@ function Register({ alert, showAlert }) {
   );
 }
 
-export default Register;
+export default Login;
