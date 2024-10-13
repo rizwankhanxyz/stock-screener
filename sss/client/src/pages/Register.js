@@ -6,6 +6,7 @@ import Alert from "../components/Alert";
 import "../styles/Register.css";
 
 function Register({ alert, showAlert }) {
+  const [showPassword, setShowPassword] = useState(true);
   const [registeredData, setRegistereddata] = useState({
     fullname: "",
     phonenumber: "",
@@ -39,13 +40,19 @@ function Register({ alert, showAlert }) {
       console.log(error);
     }
   };
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <>
       <div className="form-container">
         <form onSubmit={onSubmithandler}>
           <img src="./se-logo.png" alt="se-logo" />
-          <hr />
-          <div>
+          <h6><strong> Please fill out the form to join us!</strong></h6>
+
+          {/* <hr /> */}
+          <div className="input-group">
+            <i class="bi bi-person-add other-icons"></i>
             <input
               type="text"
               placeholder="Full Name"
@@ -54,7 +61,7 @@ function Register({ alert, showAlert }) {
               required
             />
           </div>
-          <div>
+          {/* <div className="input-group">
             <input
               type="tel"
               placeholder="Phone"
@@ -62,9 +69,9 @@ function Register({ alert, showAlert }) {
               onChange={onChangehanlder}
               required
             />
-          </div>
-          <div>
-
+          </div> */}
+          <div className="input-group">
+            <i className="bi bi-envelope-at other-icons"></i>
             <input
               type="email"
               placeholder="Email Id"
@@ -73,18 +80,24 @@ function Register({ alert, showAlert }) {
               required
             />
           </div>
-
-          <div>
+          <div className="input-group">
+            <i class="bi bi-shield-lock other-icons"></i>
             <input
-              type="password"
+              type={showPassword ? "password" : "text"}
               placeholder="Password"
               name="password"
               onChange={onChangehanlder}
               required
             />
+            <i
+              className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"} show-password`}
+              style={{ position: "absolute", cursor: "pointer", left: "18rem" }}
+              onClick={togglePasswordVisibility}
+            ></i>
           </div>
           <Alert alert={alert} />
-          <div>
+          <div className="input-group">
+            <i class="bi bi-shield-check other-icons"></i>
             <input
               type="password"
               placeholder="Confirm Password"
@@ -100,7 +113,8 @@ function Register({ alert, showAlert }) {
           </div>
           <div>
             <h6>
-              Already have an account with us, <Link to="/login">Login</Link> here.
+              Already have an account with us? <Link to="/login">Login</Link>{" "}
+              here.
             </h6>
           </div>
         </form>

@@ -1,8 +1,9 @@
-*{
+* {
     font-family: Poppins, sans-serif;
 }
-img{
-    height: 60px;
+
+img {
+    height: 50px;
     object-fit: contain;
 }
 
@@ -27,48 +28,43 @@ img{
     box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.2), -10px -10px 30px rgba(0, 0, 0, 0.2);
 }
 
-h6, h1, button {
+h6,
+h1,
+button {
     margin: 0.5rem 0;
     border: none;
 }
-.input-group {
-    position: relative;
-    margin: 0.5rem 0;
+.show-password{
+    position: absolute;
+    right: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #84BC62;
+    cursor: pointer;
+}
+ .forgot-password {
+    color: #84BC62;
+
+    cursor: pointer;
+}
+.input-group .other-icons {
+    position: absolute;
+    left: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: #84BC62;
 }
 
-  .input-group i {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    color: #84BC62;
-  }
-  .show-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #84BC62;
-}
-  .input-group input {
-    padding: 10px  3rem;
+.input-group input {
+    padding: 10px 2.5rem;
+    margin: 0.5rem 0;
     width: 100%;
     border: 1px solid #ced0d4;
-    border-radius: 0.5rem;
+    border-radius: 0.5rem !important;
     transition: box-shadow 0.2s ease-in-out;
-  }
-
-input {
-    /* border: 1px solid #ced0d4; */
-    /* margin: 0.5rem 0; */
-    /* padding: 10px; */
-    /* width: 100%; */
-    /* border-radius: 0.5rem;
-    transition: box-shadow 0.2s ease-in-out; */
-    /* outline: none; */
+    font-size: 1.1rem;
 }
 
 input:focus {
@@ -93,7 +89,10 @@ button:hover {
     transform: scale(1.05);
 }
 
-h1, label, h6,input {
+h1,
+label,
+h6,
+input {
     color: #234110;
 }
 
@@ -102,6 +101,7 @@ h1, label, h6,input {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

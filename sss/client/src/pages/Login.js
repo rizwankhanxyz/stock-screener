@@ -10,7 +10,7 @@ function Login({ alert, showAlert }) {
     email: "",
     password: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   const onChangehanlder = (e) => {
     try {
@@ -26,52 +26,46 @@ function Login({ alert, showAlert }) {
   const onSubmithandler = (e) => {
     try {
       e.preventDefault();
-      if (registeredData.password !== registeredData.passwordR) {
-        showAlert({
-          type: "danger",
-          msg: "Passwords do not match",
-        });
-      } else {
-      }
     } catch (error) {
       console.log(error);
     }
   };
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); // Toggle between true and false
+    setShowPassword(!showPassword);
   };
   return (
     <>
       <div className="form-container">
         <form onSubmit={onSubmithandler}>
-          <img src="./se-logo.png" alt="" />
-          <h1><b>Assalamu Alaykum</b></h1>
-          <h6>Welcome to Shairah Equities!</h6>
+          <img src="./se-logo.png" alt="se-logo" />
+          <h1><strong>Assalamu Alaikum</strong></h1>
+          <h6>Welcome to Shariah Equities!</h6>
           {/* <hr /> */}
           <div className="input-group">
-            <i className="bi bi-envelope-at"></i>
+            <i className="bi bi-envelope-at other-icons"></i>
             <input
               type="email"
-              placeholder="Registered Email Id"
+              placeholder="Email Id"
               name="email"
               onChange={onChangehanlder}
               required
             />
           </div>
           <div className="input-group">
-            <i class="bi bi-shield-lock"></i>
+            <i class="bi bi-shield-lock other-icons"></i>
             <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Validate Password"
+              type={showPassword ? "password": "text"}
+              placeholder="Password"
               name="password"
               onChange={onChangehanlder}
               required
             />
             <i
-              className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"} show-password`} 
+              className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"} show-password`}
               onClick={togglePasswordVisibility}
             ></i>
           </div>
+          <h6 className="forgot-password">Forgot Password?</h6>
           <Alert alert={alert} />
           <div>
             <button type="submit" className="signupbtn">
@@ -80,7 +74,7 @@ function Login({ alert, showAlert }) {
           </div>
           <div>
             <h6>
-              Don't have an account with us, <Link to="/register">Register</Link> here.
+              Don't have an account with us? <Link to="/register">Register</Link> here.
             </h6>
           </div>
         </form>
