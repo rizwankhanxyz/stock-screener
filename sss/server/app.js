@@ -1,9 +1,12 @@
 import express from 'express';
 import "./dbConnect.js";
 import dataRouter from "./controller/dataController.js"
+import cors from "cors";
 
 const server = express()
 server.use(express.json());
+server.use(cors());
+
 
 const PORT = 5000 || 5001;
 server.use("/api/admin",dataRouter)

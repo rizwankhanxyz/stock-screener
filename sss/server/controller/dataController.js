@@ -1,6 +1,12 @@
 import express from "express";
 import dataModel from "../models/dataModel.js";
+import multer from "multer";
+import xlsx from "xlsx";
+
 const router = express.Router();
+// Setup multer storage
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 /*
  * API: /api/admin/add
@@ -11,12 +17,38 @@ const router = express.Router();
  * Validations: so far none
  */
 
-router.post("/add", async (req,res)=>{
-    try {
-        
-    } catch (error) {
-        
+router.post("/add", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send("No file uploaded or Invalid file type");
+    } else {
+      const workbook = xlsx.read(req.file.buffer, { type: "buffer" });
+      const sheetName = workbook.SheetNames[0];
+      const sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+      await dataModel.insertMany(sheetData);
+      res.status(200).send("File uploaded successfully");
     }
-})
+  } catch (error) {
+    res.status(500).send("File upload failed");
+  }
+});
+
+/*
+ * API: /api/admin/get
+ * METHOD: GET
+ * DESC: Data Adding in Backend
+ * Body: Excel File Data
+ * Access: Private
+ * Validations: so far none
+ */
+
+router.get("/get", async (req, res) => {
+    try {
+        const data = await dataModel.find();
+        res.status(200).json(data);
+    } catch (error) {
+      res.status(500).send("Error fetching data");
+    }
+  });
 
 export default router;
