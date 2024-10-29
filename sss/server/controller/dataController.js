@@ -36,8 +36,7 @@ router.post("/add", upload.single("file"), async (req, res) => {
 /*
  * API: /api/admin/get
  * METHOD: GET
- * DESC: Data Adding in Backend
- * Body: Excel File Data
+ * DESC: Data readin0 * Body: Excel File Data'[;pppp-o]
  * Access: Private
  * Validations: so far none
  */
