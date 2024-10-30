@@ -1,13 +1,17 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import "../styles/Admin.css"
 
 function Admin() {
   const [fileUpload, setFileUpload] = useState("");
   const [data, setData] = useState([]);
-  // const [errorMessage, setErrorMessage] = useState('');
+  const [query, setQuery] = useState("");
 
-  const onChangeHandler = (e) => {
+  const onChangehandler =(e)=>{
+    setQuery(e.target.value);
+  }
+
+  const onChangeHandler = (e) => {          
     let fileTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv', 'application/vnd.ms-excel']
     if (e.target.files[0] && fileTypes.includes(e.target.files[0].type)) {
       setFileUpload(e.target.files[0]);
@@ -17,55 +21,72 @@ function Admin() {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (!fileUpload) {
-      console.log("Invalid file type. Please upload .xlsx, .xls, or .csv file only.");
+      alert("Invalid file type. Please upload .xlsx, .xls, or .csv file only.");
       return;
     } else {
       const formData = new FormData();
       formData.append("file", fileUpload)
       try {
         const data = await axios.post(
-          "http://localhost:5000/api/admin/add",
+          "http://localhost:5000/api/admin/data/add",
           formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           }
         }
         );
-        console.log(data);
-        alert("File uploaded and saved!");
-        
+        alert(data.success);
       } catch (error) {
-        console.log(error);
-        alert("Error uploading file!");
-
+        alert(error.response.data.error);
       }
     }
   }
 
-useEffect(() => {
-  const fetchData = async ()=>{
-    try {
-      const {data} = await axios.get("http://localhost:5000/api/admin/get");
-      setData(data);
-    } catch (error) {
-      console.log(error.response.data.error)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:5000/api/admin/data/get");
+        setData(data);
+      } catch (error) {
+        console.log(error.response.data.error)
+      }
     }
-  }
-  fetchData();
-}, [])
+    fetchData();
+  }, [])
 
+  const filteredData = data.filter(
+    (element) =>
+      element.companyName.toLowerCase().includes(query.toLowerCase()) ||
+      element.nseorbseSymbol.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <>
       <div className='stock-container' >
-      <div className='form-container' >
-        <form onSubmit={onSubmitHandler}>
-          <input onChange={onChangeHandler} type="file" placeholder="select a file a upload" required />
-          <button> Upload</button>
-        </form>
+        <div className='form-container' >
+          <form onSubmit={onSubmitHandler}>
+            <input onChange={onChangeHandler} type="file" placeholder="select a file a upload" required />
+            <button> Upload</button>
+          </form>
         </div>
-      <div className='data-container'>
-          {data.length > 0 ? (
+        <center>
+        <div
+          className="search-container"
+          style={{ padding: "1rem", width: "50%" }}
+        >
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search By Stock Name or NSE/BSE Symbol"
+            onChange={onChangehandler}
+            value={query}
+            style={{ borderRadius: "1rem", padding: "0.8rem" }}
+            required
+          />
+        </div>
+      </center>  
+        <div className='data-container'>
+          {filteredData.length > 0 ? (
             <table style={{ justifyContent: "space-around" }}>
               <thead>
                 <tr>
@@ -83,18 +104,18 @@ useEffect(() => {
 
               </thead>
               <tbody>
-                {data.map((element, index) => (
+                {filteredData.map((element, index) => (
                   <tr key={index}>
                     <td>{element.companyName}</td>
                     <td>{element.nseorbseSymbol}</td>
                     <td>{element.exchange}</td>
                     <td>{element.debtsMarketCap}</td>
-                    <td>{element.compliantStatusDebts}</td>
+                    <td data-status={element.compliantStatusDebts}>{element.compliantStatusDebts}</td>
                     <td>{element.interestBearingSecuritiesMarketCap}</td>
-                    <td>{element.compliantStatusInterestBearing}</td>
+                    <td data-status={element.compliantStatusInterestBearing}>{element.compliantStatusInterestBearing}</td>
                     <td>{element.interestIncomeTotalIncome}</td>
-                    <td>{element.compliantStatusInterestIncome}</td>
-                    <td>{element.financialScreeningStatus}</td>
+                    <td data-status={element.compliantStatusInterestIncome}>{element.compliantStatusInterestIncome}</td>
+                    <td data-status={element.financialScreeningStatus}>{element.financialScreeningStatus}</td>
                   </tr>
                 ))}
               </tbody>

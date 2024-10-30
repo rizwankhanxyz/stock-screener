@@ -37,6 +37,11 @@
   } */
   
   /* Stock Data Container */
+
+  /* .data-container{
+    border-radius: 1rem;
+  } */
+
   .data-container h2 {
     font-size: 24px;
     color: #ffffff;
@@ -85,12 +90,12 @@
   }
   
   /* Status Indicators */
-  td[data-status="pass"] {
+  td[data-status="PASS"] {
     color: #1c8d1c;
     font-weight: bold;
   }
   
-  td[data-status="fail"] {
+  td[data-status="FAIL"] {
     color: #d9534f;
     font-weight: bold;
   }

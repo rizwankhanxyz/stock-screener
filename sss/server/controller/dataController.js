@@ -17,7 +17,7 @@ const upload = multer({ storage });
  * Validations: so far none
  */
 
-router.post("/add", upload.single("file"), async (req, res) => {
+router.post("/data/add", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).send("No file uploaded or Invalid file type");
@@ -26,10 +26,10 @@ router.post("/add", upload.single("file"), async (req, res) => {
       const sheetName = workbook.SheetNames[0];
       const sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
       await dataModel.insertMany(sheetData);
-      res.status(200).send("File uploaded successfully");
+      res.status(200).send({success:"File uploaded successfully"});
     }
   } catch (error) {
-    res.status(500).send("File upload failed");
+    res.status(500).send({error:"File upload failed"});
   }
 });
 
@@ -41,12 +41,12 @@ router.post("/add", upload.single("file"), async (req, res) => {
  * Validations: so far none
  */
 
-router.get("/get", async (req, res) => {
+router.get("/data/get", async (req, res) => {
     try {
         const data = await dataModel.find();
         res.status(200).json(data);
     } catch (error) {
-      res.status(500).send("Error fetching data");
+      res.status(500).send({error:"Error fetching data"});
     }
   });
 
