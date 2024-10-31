@@ -27,10 +27,6 @@ function Login({ alert, showAlert, setAuth,setUserRole }) {
   const onSubmithandler = async (e) => {
     e.preventDefault();
     try {
-      // const { data } = await axios.post(
-      //   "http://localhost:5000/api/customer/login",
-      //   userLogin
-      // );
       const { data } = await axios.post("http://localhost:5000/api/customer/login", userLogin, {
         withCredentials: true, // important for cookies
       });
@@ -39,9 +35,7 @@ function Login({ alert, showAlert, setAuth,setUserRole }) {
           type: "success",
           msg: data.success,
         });
-        // localStorage.setItem("token", data.accessToken);
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`; // Set Authorization header
-        localStorage.setItem("role", data.role);
         setAuth(true);
         setUserRole(data.role);
         setTimeout(() => {

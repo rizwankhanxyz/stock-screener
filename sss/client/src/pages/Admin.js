@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import "../styles/Admin.css"
 import Loader from '../components/Loader';
+import Navbar from '../components/Navbar';
 
 function Admin({ setLoading, loading }) {
   const [fileUpload, setFileUpload] = useState("");
@@ -70,6 +71,7 @@ function Admin({ setLoading, loading }) {
         <Loader /> // Show loader while data is loading
       ) : (
         <div className='stock-container' >
+          <Navbar/>
           <div className='form-container' >
             <form onSubmit={onSubmitHandler}>
               <input onChange={onChangeHandler} type="file" placeholder="select a file a upload" required />

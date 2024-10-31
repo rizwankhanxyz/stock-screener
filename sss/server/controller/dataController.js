@@ -2,6 +2,7 @@ import express from "express";
 import dataModel from "../models/dataModel.js";
 import multer from "multer";
 import xlsx from "xlsx";
+import authMiddleware from "../middleware/authMiddleware.js"
 
 const router = express.Router();
 // Setup multer storage

@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect, Navigate } from "react";
+import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { setupAxiosInterceptors } from "./api/axiosInterceptor";
 
@@ -17,7 +17,7 @@ function App() {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    setupAxiosInterceptors(setAuth, setUserRole);
+    setupAxiosInterceptors(setAuth,setUserRole);
     const checkAuth = async () => {
       try {
         const { data } = await axios.get(
@@ -26,15 +26,15 @@ function App() {
             withCredentials: true,
           }
         );
-        setAuth(data.token);
-        setUserRole(localStorage.getItem("role"));
+        setAuth(true);
+        setUserRole(data.role);
       } catch (error) {
         console.log("Authentication check failed", error);
         setAuth(false);
         setUserRole(null);
       }
     };
-    checkAuth();
+    checkAuth()
   }, []);
 
   const showAlert = (alert) => {
@@ -69,10 +69,25 @@ function App() {
               )
             }
           />
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              auth && userRole === "customer" ? (
+                <Home
+                  setAuth={setAuth}
+                  alert={alert}
+                  setUserRole={setUserRole}
+                  loading={loading}
+                  setLoading={setLoading}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
           <Route
             path="/admin"
-            element={<Admin setLoading={setLoading} loading={loading} />}
+            element={auth && userRole === "admin" ?<Admin setLoading={setLoading} loading={loading} />:<Navigate to="/login" />}
           />
         </Routes>
       </BrowserRouter>

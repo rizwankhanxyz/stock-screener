@@ -105,7 +105,7 @@ router.post("/login", async (req, res) => {
       (await customerModel.findOne({ email }));
     if (!userData) {
       return res.status(401).json({
-        error: "Email is not found, please enter correct email.",
+        error: "Email not found, please enter correct email.",
       });
     }
     const compareHash = await bcrypt.compare(password, userData.password);

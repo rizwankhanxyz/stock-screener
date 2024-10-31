@@ -7,7 +7,10 @@ import cookieParser from 'cookie-parser';
 
 const server = express()
 server.use(express.json());
-server.use(cors());
+server.use(cors({
+    origin: 'http://localhost:3000',  // Allow only your frontend origin
+    credentials: true                 // Enable cookies to be sent across origins
+  }));
 server.use(cookieParser()); // Use cookie-parser middleware
 
 
