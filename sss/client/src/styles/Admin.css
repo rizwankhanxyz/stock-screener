@@ -38,9 +38,10 @@
   
   /* Stock Data Container */
 
-  /* .data-container{
-    border-radius: 1rem;
-  } */
+  .data-container, .search-container{
+    animation: fadeIn 1s ease-out;
+    transition: transform 0.3s ease-in-out;
+  }
 
   .data-container h2 {
     font-size: 24px;
@@ -49,12 +50,12 @@
     margin-bottom: 10px;
   }
   
-  .dashboard-hr {
+  /* .dashboard-hr {
     width: 60%;
     margin: 0 auto 20px;
     border: none;
-    border-top: 2px solid #dcdcdc;
-  }
+    border-top: 2px solid #dcdcdc
+  } */
   
   .table-container {
     overflow-x: auto;
@@ -102,9 +103,21 @@
   
   /* No Data Message */
   .no-tasks {
-    font-size: 18px;
-    color: #777;
+    font-size: 2rem;
+    color: #f0e5e5;
     text-align: center;
     margin-top: 20px;
   }
+
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
   

@@ -1,6 +1,7 @@
 import express from 'express';
 import "./dbConnect.js";
 import dataRouter from "./controller/dataController.js"
+import customerRouter from "./controller/customerController.js"
 import cors from "cors";
 
 const server = express()
@@ -10,6 +11,8 @@ server.use(cors());
 
 const PORT = 5000 || 5001;
 server.use("/api/admin",dataRouter)
+server.use("/api/customer",customerRouter)
+
 
 //Listen: It listens or gets data from the port or host.
 server.listen(PORT,()=>{

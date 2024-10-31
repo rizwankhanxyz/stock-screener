@@ -52,7 +52,7 @@ function Login({ alert, showAlert }) {
             />
           </div>
           <div className="input-group">
-            <i class="bi bi-shield-lock other-icons"></i>
+            <i className="bi bi-shield-lock other-icons"></i>
             <input
               type={showPassword ? "password": "text"}
               placeholder="Password"
