@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
-//Component, styles, pages
+import { Link, useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 import "../styles/Register.css";
+import axios from "axios";
 
-function Login({ alert, showAlert }) {
-  const [registeredData, setRegistereddata] = useState({
+
+function Login({ alert, showAlert, setAuth,setUserRole }) {
+  const navigate = useNavigate();
+  const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
   });
@@ -14,8 +15,8 @@ function Login({ alert, showAlert }) {
 
   const onChangehanlder = (e) => {
     try {
-      setRegistereddata({
-        ...registeredData,
+      setUserLogin({
+        ...userLogin,
         [e.target.name]: e.target.value,
       });
     } catch (error) {
@@ -23,11 +24,36 @@ function Login({ alert, showAlert }) {
     }
   };
 
-  const onSubmithandler = (e) => {
+  const onSubmithandler = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
+      // const { data } = await axios.post(
+      //   "http://localhost:5000/api/customer/login",
+      //   userLogin
+      // );
+      const { data } = await axios.post("http://localhost:5000/api/customer/login", userLogin, {
+        withCredentials: true, // important for cookies
+      });
+      if (data.success) {
+        showAlert({
+          type: "success",
+          msg: data.success,
+        });
+        // localStorage.setItem("token", data.accessToken);
+        axios.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`; // Set Authorization header
+        localStorage.setItem("role", data.role);
+        setAuth(true);
+        setUserRole(data.role);
+        setTimeout(() => {
+          navigate(data.role === "admin" ? "/admin" : "/");
+        }, 3500);
+      }
     } catch (error) {
       console.log(error);
+      showAlert({
+        type: "danger",
+        msg: error.response.data.error
+      });
     }
   };
   const togglePasswordVisibility = () => {
@@ -38,7 +64,9 @@ function Login({ alert, showAlert }) {
       <div className="form-container">
         <form onSubmit={onSubmithandler}>
           <img src="./se-logo.png" alt="se-logo" />
-          <h1><strong>Assalamu Alaikum</strong></h1>
+          <h1>
+            <strong>Assalamu Alaikum</strong>
+          </h1>
           <h6>Welcome to Shariah Equities!</h6>
           {/* <hr /> */}
           <div className="input-group">
@@ -54,14 +82,16 @@ function Login({ alert, showAlert }) {
           <div className="input-group">
             <i className="bi bi-shield-lock other-icons"></i>
             <input
-              type={showPassword ? "password": "text"}
+              type={showPassword ? "password" : "text"}
               placeholder="Password"
               name="password"
               onChange={onChangehanlder}
               required
             />
             <i
-              className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"} show-password`}
+              className={`bi ${
+                showPassword ? "bi-eye-slash" : "bi-eye"
+              } show-password`}
               onClick={togglePasswordVisibility}
             ></i>
           </div>
@@ -74,7 +104,8 @@ function Login({ alert, showAlert }) {
           </div>
           <div>
             <h6>
-              Don't have an account with us? <Link to="/register">Register</Link> here.
+              Don't have an account with us?{" "}
+              <Link to="/register">Register</Link> here.
             </h6>
           </div>
         </form>

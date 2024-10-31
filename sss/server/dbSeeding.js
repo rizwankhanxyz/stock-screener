@@ -12,7 +12,7 @@ const adminSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  psw: {
+  password: {
     type: String,
     required: true,
   },
@@ -30,7 +30,7 @@ async function insertNewAdmin() {
     const admin = new Admin({
       fullname: "Admin Rizwan",
       email: "rizwan@rizwankhan.xyz",
-      psw: password,
+      password: password,
     });
     await admin.save();
     console.log("new Admin is created");
@@ -39,6 +39,6 @@ async function insertNewAdmin() {
   }
 }
 
-await insertNewAdmin();
+// await insertNewAdmin();
 
 export default Admin;
