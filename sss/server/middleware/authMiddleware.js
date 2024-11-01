@@ -5,13 +5,11 @@ import customerModel from "../models/customerModel.js";
 async function authMiddleware(req, res, next) {
   try {
     // const token = req.headers["auth-token"];
-    // console.log("Cookies:", req.cookies); 
     // Log cookies to see what is being sent
     const token = req.cookies.token;
     if (!token) {
       return res.status(401).json({ error: "No token provided" });
     }
-    // console.log("Token:", token); 
     // Log the token being verified
     let decoded = jwt.verify(token, "stockscreener@shariahequities"); //a
 
@@ -20,6 +18,7 @@ async function authMiddleware(req, res, next) {
       return res.status(404).json({ error: "User not found" });
     }
     req.user = user;
+    req.decoded=decoded;
     next();
   } catch (error) {
     console.log(error);

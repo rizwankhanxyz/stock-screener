@@ -1,7 +1,6 @@
-import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { setupAxiosInterceptors } from "./api/axiosInterceptor";
 
 //Styles, Pages, Components
 import "./App.css";
@@ -15,9 +14,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [auth, setAuth] = useState(false);
   const [userRole, setUserRole] = useState(null);
+  const [alias, setAlias] = useState("");
 
   useEffect(() => {
-    setupAxiosInterceptors(setAuth,setUserRole);
     const checkAuth = async () => {
       try {
         const { data } = await axios.get(
@@ -34,7 +33,7 @@ function App() {
         setUserRole(null);
       }
     };
-    checkAuth()
+    checkAuth();
   }, []);
 
   const showAlert = (alert) => {
@@ -43,6 +42,7 @@ function App() {
       setAlert(null);
     }, 3500);
   };
+
   return (
     <>
       <BrowserRouter>
@@ -51,7 +51,6 @@ function App() {
             path="/register"
             element={<Register alert={alert} showAlert={showAlert} />}
           />
-          {/* <Route path="/login" element={<Login alert={alert} showAlert={showAlert} />} /> */}
           <Route
             path="/login"
             element={
@@ -65,6 +64,8 @@ function App() {
                   loading={loading}
                   setLoading={setLoading}
                   alert={alert}
+                  setAlias={setAlias}
+                  alias={alias}
                 />
               )
             }
@@ -79,6 +80,8 @@ function App() {
                   setUserRole={setUserRole}
                   loading={loading}
                   setLoading={setLoading}
+                  setAlias={setAlias}
+                  alias={alias}
                 />
               ) : (
                 <Navigate to="/login" />
@@ -87,7 +90,17 @@ function App() {
           />
           <Route
             path="/admin"
-            element={auth && userRole === "admin" ?<Admin setLoading={setLoading} loading={loading} />:<Navigate to="/login" />}
+            element={
+              auth && userRole === "admin" ? (
+                <Admin
+                  setAuth={setAuth}
+                  setLoading={setLoading}
+                  loading={loading}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
         </Routes>
       </BrowserRouter>

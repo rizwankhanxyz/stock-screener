@@ -103,6 +103,7 @@ router.post("/login", async (req, res) => {
     let userData =
       (await Admin.findOne({ email })) ||
       (await customerModel.findOne({ email }));
+
     if (!userData) {
       return res.status(401).json({
         error: "Email not found, please enter correct email.",
@@ -123,55 +124,27 @@ router.post("/login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    let refreshToken = jwt.sign(payload, "stockscreenerrefresh@shariahequities", {
-      expiresIn: "7d",
-    });
+    let refreshToken = jwt.sign(
+      payload,
+      "stockscreenerrefresh@shariahequities",
+      {
+        expiresIn: "7d",
+      }
+    );
     res.cookie("token", accessToken, {
-      httpOnly: true,  // prevents access from JavaScript
+      httpOnly: true, // prevents access from JavaScript
       secure: process.env.NODE_ENV === "production", // only sends over HTTPS in production
       sameSite: "Strict", // CSRF protection
-      maxAge: 60 * 60 * 1000 // 1 hour expiration
+      maxAge: 60 * 60 * 1000, // 1 hour expiration
     });
     res.status(200).json({
       success: "Login Sucessful",
       role: userData.role,
-      refreshToken: refreshToken
+      refreshToken: refreshToken,
+      alias: userData.fullname,
     });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error, Try Again" });
-  }
-});
-
-
-/*
- * API: /api/customer/refresh-token
- * METHOD: POST
- * DESC: Refresh access token using refresh token
- * Body: refreshToken
- * Access: Public
- */
-router.post("/refresh-token", async (req, res) => {
-  const { refreshToken } = req.body;
-  if (!refreshToken) return res.status(403).json({ error: "Refresh token is required" });
-
-  try {
-    const decoded = jwt.verify(refreshToken, "stockscreenerrefresh@shariahequities");
-
-    // Issue a new access token
-    const newAccessToken = jwt.sign(
-      { user_id: decoded.user_id, email: decoded.email, role: decoded.role },
-      "stockscreener@shariahquities",
-      { expiresIn: "1h" }
-    );
-    res.cookie("token", newAccessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
-      maxAge: 60 * 60 * 1000, // 1 hour
-    });
-    res.status(200).json({ message: "Token refreshed successfully" });
-  } catch (error) {
-    res.status(403).json({ error: "Invalid or expired refresh token" });
   }
 });
 
@@ -187,14 +160,30 @@ router.post("/refresh-token", async (req, res) => {
 router.get("/auth", authMiddleware, async (req, res) => {
   try {
     const token = req.cookies.token; // Retrieve token from cookies
-    let decoded = jwt.verify(
-      token,
-      "stockscreener@shariahequities"
-    );
+    let decoded = jwt.verify(token, "stockscreener@shariahequities");
     res.status(200).send({ token: true, role: decoded.role });
   } catch (error) {
     res.status(401).json({ error: "Unauth Token or token expired" });
   }
+});
+
+/*
+ * API: /api/customer/logout
+ * METHOD: POST
+ * DESC: User Logoout
+ * Body: token
+ * Access: Public
+ * Validations:
+ */
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Strict",
+  });
+  res.clearCookie("token");
+  res.end();
 });
 
 export default router;

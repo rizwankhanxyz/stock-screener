@@ -4,8 +4,7 @@ import Alert from "../components/Alert";
 import "../styles/Register.css";
 import axios from "axios";
 
-
-function Login({ alert, showAlert, setAuth,setUserRole }) {
+function Login({ alert, setAlias, alias, showAlert, setAuth, setUserRole }) {
   const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -27,15 +26,23 @@ function Login({ alert, showAlert, setAuth,setUserRole }) {
   const onSubmithandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/api/customer/login", userLogin, {
-        withCredentials: true, // important for cookies
-      });
+      const { data } = await axios.post(
+        "http://localhost:5000/api/customer/login",
+        userLogin,
+        {
+          withCredentials: true, // important for cookies
+        }
+      );
       if (data.success) {
         showAlert({
           type: "success",
           msg: data.success,
         });
-        axios.defaults.headers.common["Authorization"] = `Bearer ${data.accessToken}`; // Set Authorization header
+        setAlias(data.alias);
+        console.log(alias);
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${data.accessToken}`; // Set Authorization header
         setAuth(true);
         setUserRole(data.role);
         setTimeout(() => {
@@ -46,7 +53,7 @@ function Login({ alert, showAlert, setAuth,setUserRole }) {
       console.log(error);
       showAlert({
         type: "danger",
-        msg: error.response.data.error
+        msg: error.response.data.error,
       });
     }
   };
