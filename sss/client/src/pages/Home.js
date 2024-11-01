@@ -1,9 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Stocks from "../components/Stocks";
 
-function Home({loading,setLoading,setUserRole,setAuth,setAlias,alias}) {
-
-  console.log(alias);
+function Home({ loading, setLoading, setUserRole, setAuth, setAlias, alias }) {
   return (
     <div>
       <Navbar
@@ -14,6 +13,7 @@ function Home({loading,setLoading,setUserRole,setAuth,setAlias,alias}) {
         setAlias={setAlias}
         alias={alias}
       />
+      <Stocks />
     </div>
   );
 }

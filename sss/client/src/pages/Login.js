@@ -4,7 +4,7 @@ import Alert from "../components/Alert";
 import "../styles/Register.css";
 import axios from "axios";
 
-function Login({ alert, setAlias, alias, showAlert, setAuth, setUserRole }) {
+function Login({ alert, showAlert, setAuth, setUserRole }) {
   const navigate = useNavigate();
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -38,8 +38,6 @@ function Login({ alert, setAlias, alias, showAlert, setAuth, setUserRole }) {
           type: "success",
           msg: data.success,
         });
-        setAlias(data.alias);
-        console.log(alias);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${data.accessToken}`; // Set Authorization header

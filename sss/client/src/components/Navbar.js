@@ -12,7 +12,6 @@ function Navbar({
   setLoading,
 }) {
   const navigate = useNavigate();
-  console.log(alias);
   const onClickHandler = async (e) => {
     e.preventDefault();
     // setLoading(true);

@@ -27,6 +27,8 @@ function App() {
         );
         setAuth(true);
         setUserRole(data.role);
+        setAlias(data.alias);
+        console.log(data.alias);    
       } catch (error) {
         console.log("Authentication check failed", error);
         setAuth(false);
@@ -64,8 +66,6 @@ function App() {
                   loading={loading}
                   setLoading={setLoading}
                   alert={alert}
-                  setAlias={setAlias}
-                  alias={alias}
                 />
               )
             }

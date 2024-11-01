@@ -118,6 +118,7 @@ router.post("/login", async (req, res) => {
       user_id: userData._id,
       email: userData.email,
       role: userData.role,
+      // alias:userData.fullname
     };
 
     let accessToken = jwt.sign(payload, "stockscreener@shariahequities", {
@@ -141,7 +142,7 @@ router.post("/login", async (req, res) => {
       success: "Login Sucessful",
       role: userData.role,
       refreshToken: refreshToken,
-      alias: userData.fullname,
+      // alias: userData.fullname,
     });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error, Try Again" });
@@ -161,7 +162,9 @@ router.get("/auth", authMiddleware, async (req, res) => {
   try {
     const token = req.cookies.token; // Retrieve token from cookies
     let decoded = jwt.verify(token, "stockscreener@shariahequities");
-    res.status(200).send({ token: true, role: decoded.role });
+    res
+      .status(200)
+      .send({ token: true, role: decoded.role});//alias: decoded.alias 
   } catch (error) {
     res.status(401).json({ error: "Unauth Token or token expired" });
   }
