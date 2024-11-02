@@ -1,7 +1,0 @@
-{
-    "DB_URL": "mongodb+srv://iconrizwankhan:iconrizwan123@cfi-b24.nxo1n.mongodb.net/sss",
-    "SECRET_KEYS": {
-        "JWT": "stockscreener@shariahquities",
-        "REFRESH": "stockscreenerrefresh@shariahquities"
-    }
-}

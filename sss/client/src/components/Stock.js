@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Stock.css"
 function Stock({ stock }) {
   return (
-    <div>
+    <>
     <div className="stock-container">
       <div className="stock-namesymbol">
         <h5>{stock.nseorbseSymbol}</h5>
@@ -17,7 +17,7 @@ function Stock({ stock }) {
         </p>
       </div>
     </div>
-    </div>
+    </>
   );
 }
 
