@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Stock from "./Stock";
 import Loader from "./Loader";
 
@@ -8,27 +8,52 @@ function Stocks({
   loading,
   setUsers,
   resetUsers,
-  setIsLoading,
+  setLoading,
 }) {
   const styles = {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", // Responsive grid
-    gridGap: "1rem",
     margin: "auto",
+    gridGap: "1rem",
     padding: "auto",
   };
+  const [query, setQuery] = useState("");
+  const onChangehandler = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const filteredData = stocks.filter(
+    (element) =>
+      element.companyName.toLowerCase().includes(query.toLowerCase()) ||
+      element.nseorbseSymbol.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <div>
-      {/* <Navbar setUsers={setUsers} searchUsers={searchUsers} setIsLoading={setIsLoading} resetUsers={resetUsers}></Navbar> */}
+      <center>
+        <div
+          className="search-container"
+          style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
+        >
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search By Stock Name or NSE/BSE Symbol"
+            onChange={onChangehandler}
+            value={query}
+            style={{
+              textAlign: "center",
+              borderRadius: "1rem",
+              padding: "0.8rem",
+            }}
+            required
+          />
+        </div>
+      </center>
       <div className="stocks-container" style={styles}>
         {loading && <Loader />}
-        {
-          // u.map((ele)=><Useritems ui={ele}/>)
-          stocks.map((stock, index) => (
-            <Stock key={index} stock={stock} />
-          ))
-        }
+        {filteredData.map((stock, index) => (
+          <Stock key={index} stock={stock} />
+        ))}
       </div>
     </div>
   );

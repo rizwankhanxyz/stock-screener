@@ -15,6 +15,7 @@ function App() {
   const [auth, setAuth] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [alias, setAlias] = useState("");
+  const [stocks, setStocks] = useState([]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -28,7 +29,7 @@ function App() {
         setAuth(true);
         setUserRole(data.role);
         setAlias(data.alias);
-        console.log(data.alias);    
+        console.log(data.alias);
       } catch (error) {
         console.log("Authentication check failed", error);
         setAuth(false);
@@ -36,6 +37,21 @@ function App() {
       }
     };
     checkAuth();
+
+    const getStocks = async () => {
+      setLoading(true);
+      try {
+        const { data } = await axios.get(
+          "http://localhost:5000/api/admin/data/get"
+        );
+        setStocks(data);
+      } catch (error) {
+        console.log(error.response.data.error);
+      } finally {
+        setTimeout(() => setLoading(false), 2000);
+      }
+    };
+    getStocks();
   }, []);
 
   const showAlert = (alert) => {
@@ -82,6 +98,7 @@ function App() {
                   setLoading={setLoading}
                   setAlias={setAlias}
                   alias={alias}
+                  stocks={stocks}
                 />
               ) : (
                 <Navigate to="/login" />
@@ -96,6 +113,8 @@ function App() {
                   setAuth={setAuth}
                   setLoading={setLoading}
                   loading={loading}
+                  stocks={stocks}
+                  setStocks={setStocks}
                 />
               ) : (
                 <Navigate to="/login" />

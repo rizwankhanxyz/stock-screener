@@ -1,0 +1,82 @@
+/* Container styling */
+.stock-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+    /* padding: 1rem; */
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+  }
+  
+  .stock-container:hover {
+    transform: translateY(-3px); /* Optional hover effect */
+  }
+  
+  /* Left section styling */
+  .stock-namesymbol {
+    text-align: left;
+    width: 70%;
+  }
+  
+  .stock-namesymbol h5 {
+    margin: 0;
+  }
+  
+  .company-name {
+    color: #666;
+    font-size: 1rem;
+    margin: 0.3rem 0;
+  }
+  
+  /* Right section styling */
+  .stock-exchangestatus {
+    width: 30%;
+    text-align: right;
+  }
+  
+  .stock-exchangestatus h5 {
+    margin: 0;
+  }
+  
+  /* Badge styling */
+  .status-badge {
+    display: inline-block;
+    width: 100%;
+    border-radius: 5px;
+    color: #fff;
+    /* padding: 0.2rem 0.2rem; */
+    text-align: center;
+    margin: 0.3rem 0;
+  }
+  
+  /* Conditional badge colors */
+  .compliant {
+    background-color: #008080;
+  }
+  
+  .non-compliant {
+    background-color: #4f4f4f;
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .stock-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .stock-namesymbol,
+    .stock-exchangestatus {
+      width: 100%;
+      text-align: left;
+    }
+    .status-badge {
+      width: 100%;
+      text-align: center;
+    }
+  }  

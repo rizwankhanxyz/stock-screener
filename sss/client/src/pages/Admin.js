@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "../styles/Admin.css";
 import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 
-function Admin({ setAuth, setUserRole, loading, setLoading }) {
+function Admin({ stocks,setStocks, setAuth, setUserRole, loading, setLoading }) {
   const [fileUpload, setFileUpload] = useState("");
-  const [data, setData] = useState([]);
   const [query, setQuery] = useState("");
 
   const onChangehandler = (e) => {
@@ -49,24 +48,7 @@ function Admin({ setAuth, setUserRole, loading, setLoading }) {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const { data } = await axios.get(
-          "http://localhost:5000/api/admin/data/get"
-        );
-        setData(data);
-      } catch (error) {
-        console.log(error.response.data.error);
-      } finally {
-        setTimeout(() => setLoading(false), 2000);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const filteredData = data.filter(
+  const filteredData = stocks.filter(
     (element) =>
       element.companyName.toLowerCase().includes(query.toLowerCase()) ||
       element.nseorbseSymbol.toLowerCase().includes(query.toLowerCase())
@@ -83,7 +65,7 @@ function Admin({ setAuth, setUserRole, loading, setLoading }) {
       {loading ? (
         <Loader /> // Show loader while data is loading
       ) : (
-        <div className="stock-container">
+        <div className="stocks-container">
           <div className="form-container">
             <form onSubmit={onSubmitHandler}>
               <input
