@@ -8,13 +8,10 @@ function Navbar({
   setUserRole,
   setAlias,
   alias,
-  loading,
-  setLoading,
 }) {
   const navigate = useNavigate();
   const onClickHandler = async (e) => {
     e.preventDefault();
-    // setLoading(true);
     try {
       await axios.post(
         "http://localhost:5000/api/customer/logout",
@@ -27,8 +24,6 @@ function Navbar({
     } catch (error) {
       console.log(error);
     }
-
-    // setLoading(false);
   };
   return (
     <>
@@ -38,7 +33,6 @@ function Navbar({
         <div
           className="navbar navbar-dark bg-white"
           style={{
-            borderRadius: "1rem",
             paddingTop: "0.2rem",
             paddingBottom: "0.2rem",
           }}

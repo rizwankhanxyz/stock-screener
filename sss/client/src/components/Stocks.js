@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import Stock from "./Stock";
 import Loader from "./Loader";
 
-function Stocks({
-  stocks,
-  loading,
-  setLoading,
-}) {
+function Stocks({ stocks, loading }) {
   const styles = {
     display: "grid",
     margin: "auto",
@@ -50,28 +46,33 @@ function Stocks({
   });
 
   return (
-    <div>
-      <center>
-        <div
-          className="search-container"
-          style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
-        >
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search By Stock Name or NSE/BSE Symbol"
-            onChange={onChangehandler}
-            value={query}
-            style={{
-              textAlign: "center",
-              borderRadius: "1rem",
-              padding: "0.8rem",
-            }}
-            required
-          />
-        </div>
-      </center>
-      <div className="filter-container">
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div>
+          <center>
+            <div
+              className="search-container"
+              style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
+            >
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search By Stock Name or NSE/BSE Symbol"
+                onChange={onChangehandler}
+                value={query}
+                style={{
+                  textAlign: "center",
+                  borderRadius: "1rem",
+                  padding: "0.8rem",
+                }}
+                required
+              />
+            </div>
+          </center>
+
+          <div className="filter-container">
             <select
               className="filter-select"
               value={complianceFilter}
@@ -91,13 +92,18 @@ function Stocks({
               <option value="BSE">BSE</option>
             </select>
           </div>
-      <div className="stocks-container" style={styles}>
-        {loading && <Loader />}
-        {filteredData.map((stock, index) => (
-          <Stock key={index}   setLoading={setLoading}          stock={stock} />
-        ))}
-      </div>
-    </div>
+          {loading ? (
+            <Loader />
+          ) : (
+            <div className="stocks-container" style={styles}>
+              {filteredData.map((stock, index) => (
+                <Stock key={index} stock={stock} />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 

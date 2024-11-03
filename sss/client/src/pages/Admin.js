@@ -6,11 +6,9 @@ import Navbar from "../components/Navbar";
 
 function Admin({
   stocks,
-  setStocks,
   setAuth,
   setUserRole,
   loading,
-  setLoading,
 }) {
   const [fileUpload, setFileUpload] = useState("");
   const [query, setQuery] = useState("");
@@ -92,11 +90,9 @@ function Admin({
       <Navbar
         setAuth={setAuth}
         setUserRole={setUserRole}
-        loading={loading}
-        setLoading={setLoading}
       />
       {loading ? (
-        <Loader /> // Show loader while data is loading
+        <Loader />
       ) : (
         <div className="stockstable-container">
           <div className="form-container">
@@ -107,7 +103,7 @@ function Admin({
                 placeholder="select a file to upload"
                 required
               />
-              <button> Upload</button>
+              <button type="submit" className="signupbtn"> Upload</button>
             </form>
           </div>
           <center>

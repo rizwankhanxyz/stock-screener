@@ -25,10 +25,11 @@
   
   .stock-namesymbol h5 {
     margin: 0;
+    color: #234110;
   }
   
   .company-name {
-    color: #666;
+    color: #84BC62;
     font-size: 1rem;
     margin: 0.3rem 0;
   }
@@ -41,6 +42,7 @@
   
   .stock-exchangestatus h5 {
     margin: 0;
+    color: #234110;
   }
   
   /* Badge styling */

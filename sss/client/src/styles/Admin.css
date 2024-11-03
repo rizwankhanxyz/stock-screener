@@ -4,7 +4,7 @@
     width: 100%;
     margin: 0 auto;
     padding: 10px;
-    color: #333;
+    color: #234110;
   }
 
   /* Container for filters */
@@ -20,24 +20,23 @@
 .filter-select {
   padding: 0.8rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  color: #333;
+  border: none;
+  border-radius: 1rem;
+  color: #234110;
   outline: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
 }
 
-.filter-select:hover {
+/* .filter-select:hover {
   border-color: #bbb;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
+} */
 
-.filter-select:focus {
+/* .filter-select:focus {
   border-color: #84BC62;
   box-shadow: 0 0 5px #84BC62;
-}
+} */
 
 /* Responsive behavior */
 @media (max-width: 768px) {

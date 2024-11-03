@@ -29,8 +29,7 @@ img {
 }
 
 h6,
-h1,
-button {
+h1,.signupbtn {
     margin: 0.5rem 0;
     border: none;
 }
@@ -73,7 +72,7 @@ input:focus {
     outline: 1px solid rgba(132, 188, 98, 0.3);
 }
 
-button {
+.signupbtn {
     background-color: #84BC62;
     width: 100%;
     padding: 0.75rem;
@@ -84,7 +83,7 @@ button {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button:hover {
+.signupbtn:hover {
     background-color: #6da450;
     transform: scale(1.05);
 }
