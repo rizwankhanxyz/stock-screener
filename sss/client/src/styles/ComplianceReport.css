@@ -15,8 +15,8 @@
     background-color: #fff;
     padding: 2rem;
     border-radius: 8px;
-    width: 90%;
-    height: 90%;
+    width: 95%;
+    height: 95%;
     overflow-y: auto;
     position: relative;
   }
@@ -38,5 +38,4 @@
   
   p {
     margin: 0.5rem 0;
-  }
-  
+  }  

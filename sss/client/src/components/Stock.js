@@ -1,32 +1,3 @@
-// import React from "react";
-// import "../styles/Stock.css"
-// import ComplianceReport from "./ComplianceReport";
-// function Stock({ stock }) {
-
-//   const onClickHandler= (e)=>{
-//     e.preventDefault();
-//   }
-//   return (
-//     <>
-//     <div className="stock-container">
-//       <div className="stock-namesymbol">
-//         <h5>{stock.nseorbseSymbol}</h5>
-//         <p className="company-name">{stock.companyName}</p>
-//       </div>
-//       <div className="stock-exchangestatus">
-//         <h5>{stock.exchange}</h5>
-//         <p onClick={onClickHandler}
-//           className={`status-badge ${stock.financialScreeningStatus === "PASS" ? "compliant" : "non-compliant"}`}
-//         >
-//           {stock.financialScreeningStatus === "PASS" ? "COMPLIANT" : "NON-COMPLIANT"}
-//         </p>
-//       </div>
-//     </div>
-//     </>
-//   );
-// }
-
-// export default Stock;
 import React, { useState } from "react";
 import "../styles/Stock.css";
 import ComplianceReport from "./ComplianceReport";
@@ -72,17 +43,10 @@ function Stock({ stock }) {
         </div>
       </div>
 
-      {/* Conditionally render ComplianceReport */}
-      {/* {showComplianceReport && (
-        <div className="modal-overlay" onClick={closeComplianceReport}> 
-        <ComplianceReport stock={stock} onClose={closeComplianceReport} />
-        </div>
-        
-      )} */}
-
       {showComplianceReport && (
         <ComplianceReport stock={stock} onClose={closeComplianceReport} />
       )}
+
     </>
   );
 }
