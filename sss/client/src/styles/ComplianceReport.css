@@ -13,12 +13,17 @@
   
   .compliance-report-content {
     background-color: #fff;
-    padding: 2rem;
+    /* padding: 2rem; */
     border-radius: 8px;
     width: 95%;
     height: 95%;
     overflow-y: auto;
     position: relative;
+  }
+
+  .compliance-header{
+   background-color: #84BC62;
+   padding: 0.5rem;
   }
   
   .close-button {
@@ -29,11 +34,14 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+    color: #ffffff;
+
   }
   
   h2 {
-    margin-top: 0;
-    color: #333;
+    /* margin-top: 1rem; */
+    color: #ffffff;
+    font-size: 1.5rem;
   }
   
   p {
