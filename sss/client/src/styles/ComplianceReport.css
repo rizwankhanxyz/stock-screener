@@ -1,49 +1,71 @@
 .compliance-report-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .compliance-report-content {
-    background-color: #fff;
-    /* padding: 2rem; */
-    border-radius: 8px;
-    width: 95%;
-    height: 95%;
-    overflow-y: auto;
-    position: relative;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
 
-  .compliance-header{
-   background-color: #84BC62;
-   padding: 0.5rem;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #ffffff;
+.compliance-report-content {
+  background-color: #fff;
+  /* padding: 2rem; */
+  border-radius: 8px;
+  width: 95%;
+  height: 95%;
+  overflow-y: auto;
+  position: relative;
+}
 
-  }
-  
-  h2 {
-    /* margin-top: 1rem; */
-    color: #ffffff;
-    font-size: 1.5rem;
-  }
-  
-  p {
-    margin: 0.5rem 0;
-  }  
+.compliance-report-header {
+  background-color: #84BC62;
+  padding: 0.5rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ffffff;
+
+}
+
+h2 {
+  margin-top: 0.5rem;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.compliance-report-body {
+  margin: 1rem;
+  line-height: 1rem;
+  /* padding: 1rem; */
+}
+
+.compliance-report-update {
+  color: cadetblue
+}
+
+.compliance-report-p {}
+
+h6 {
+  color: #59a02d;
+}
+.compliance-report-financial-list{
+  /* display: flex;
+  justify-content: space-around;
+  align-items: flex-start; */
+}
+.compliance-report-list{
+  /* margin-top: 0.5rem; */
+  /* color: #59a02d; */
+}
