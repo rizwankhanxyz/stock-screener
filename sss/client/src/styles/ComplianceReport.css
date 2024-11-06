@@ -61,11 +61,11 @@ h6 {
   color: #59a02d;
 }
 .compliance-report-financial-list{
-  /* display: flex;
+  display: flex;
   justify-content: space-around;
-  align-items: flex-start; */
+  align-items: flex-start;
 }
 .compliance-report-list{
   /* margin-top: 0.5rem; */
-  /* color: #59a02d; */
+  color: #59a02d;
 }

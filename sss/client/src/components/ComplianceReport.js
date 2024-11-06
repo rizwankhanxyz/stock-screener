@@ -1,26 +1,141 @@
 import React from "react";
 import "../styles/ComplianceReport.css";
-import { Chart } from "react-google-charts";
+import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const drawNeedlePlugin = {
+  id: "drawNeedle",
+  afterDraw(chart) {
+    const { ctx, chartArea: { width, height } } = chart;
+    const debtsMarketCap = chart.config.options.pointerValue;
+
+    const pointerRotation = debtsMarketCap * 1.8;  // const pointerRotation = debtsMarketCap <= 30
+    // ? debtsMarketCap *1.8  // Scale 0-30% to 0-54 degrees
+    // : 54 + ((debtsMarketCap - 30) * (126/170)); // Scale 31-100% to 55-180 degrees
+
+    console.log(pointerRotation);
+  
+    const centerX = width / 2;
+    const centerY = height / 1.05; // Adjust for semi-circle center
+
+    // Draw the needle
+    const angle =pointerRotation; // Convert rotation to radians
+    const needleLength = centerY - 10; // Length of the needle
+
+    ctx.save();
+    ctx.translate(centerX, centerY);
+    ctx.rotate(angle);
+
+    // Draw the needle line
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -needleLength);
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#000000"; // Black color for the needle
+    ctx.stroke();
+
+    // Draw the needle base circle
+    ctx.beginPath();
+    ctx.arc(0, 0, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "#000000"; // Black color for the base
+    ctx.fill();
+
+    ctx.restore();
+
+    // Draw the debtsMarketCap value at the bottom center
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#000000";
+    ctx.textAlign = "center";
+    ctx.fillText(`${debtsMarketCap}%`, centerX, height - 20);
+  },
+};
+
+// Register the custom plugin
+ChartJS.register(drawNeedlePlugin);
 
 function ComplianceReport({ stock, onClose }) {
-  // const debtsMarketCap = stock.debtsMarketCap || 0; // Replace with the actual value from your database
-  const options = {
-    // pieHole: 0.6,
-    pieStartAngle: -90,
-    // pieSliceText: "none",
-    // tooltip: { trigger: "none" },
-    // legend: "none",
-    slices: {
-      0: { color: stock.debtsMarketCap <= 30 ? "#84BC62" : "#84BC62" },
-      1: { color: stock.debtsMarketCap > 30 ? "#FF4C4C" : "#FF4C4C" },
-    },
+  const debtsMarketCap = stock.debtsMarketCap;
+
+  const gaugeData = {
+    labels: ["Compliance", "Non-Compliance"],
+    datasets: [
+      {
+        // These two values represent the green and red sections
+        data: [30, 70],
+        backgroundColor: ["#84BC62", "#FF4C4C"], // Green for 0-30%, Red for 31-100%
+        borderWidth: 0,
+        cutout: "70%",
+      },
+    ],
   };
-  const data = [
-    ["Label", "Value"],
-    ["Debt-MarketCap", stock.debtsMarketCap], // Only a single data point is used to place the arrow
-  ];
-  console.log(stock.debtsMarketCap);
-  
+
+  const gaugeOptions = {
+    rotation: -90, // Start at the bottom
+    circumference: 180, // Semi-circle
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+    },
+    pointerValue: debtsMarketCap, // Pass the pointer value to the plugin
+  };
+
+  // const gaugeOptions = {
+  //   rotation: -90, // Start at the bottom
+  //   circumference: 180, // Semi-circle
+  //   plugins: {
+  //     legend: {
+  //       display: false,
+  //     },
+  //     tooltip: {
+  //       enabled: false,
+  //     },
+  //     // Custom plugin for drawing the pointer
+  //     afterDraw(chart) {
+  //       const ctx = chart.ctx;
+  //       const width = chart.width;
+  //       const height = chart.height;
+  //       const centerX = width / 2;
+  //       const centerY = height / 1.05; // Adjust for semi-circle center
+
+  //       // Draw the needle
+  //       const angle = (Math.PI / 180) * pointerRotation; // Convert rotation to radians
+  //       console.log(angle);
+  //       const needleLength = centerY - 10; // Length of the needle
+
+  //       ctx.save();
+  //       ctx.translate(centerX, centerY);
+  //       ctx.rotate(angle);
+
+  //       // Draw the needle line
+  //       ctx.beginPath();
+  //       ctx.moveTo(0, 0);
+  //       ctx.lineTo(0, -needleLength);
+  //       ctx.lineWidth = 3;
+  //       ctx.strokeStyle = "#000000"; // Black color for the needle
+  //       ctx.stroke();
+
+  //       // Draw the needle base circle
+  //       ctx.beginPath();
+  //       ctx.arc(0, 0, 5, 0, Math.PI * 2);
+  //       ctx.fillStyle = "#000000"; // Black color for the base
+  //       ctx.fill();
+
+  //       ctx.restore();
+
+  //       // Draw the debtsMarketCap value at the bottom center
+  //       ctx.font = "16px Arial";
+  //       ctx.fillStyle = "#000000";
+  //       ctx.textAlign = "center";
+  //       ctx.fillText(`${debtsMarketCap}%`, centerX, height - 20);
+  //     },
+  //   },
+  // };
   return (
     <div className="compliance-report-modal">
       <div className="compliance-report-content">
@@ -61,7 +176,9 @@ function ComplianceReport({ stock, onClose }) {
             <div className="compliance-report-list">
               <i className="bi bi-check-circle-fill"></i> Debt-to-Market Capital
               Ratio
-              <p>{stock.debtsMarketCap}</p>
+              <div style={{ width: "100%", maxWidth: "300px"}}>
+              <Doughnut data={gaugeData} options={gaugeOptions} />
+            </div>
             </div>
             <div className="compliance-report-list">
               <i className="bi bi-check-circle-fill"></i> Interest-Bearing
@@ -72,21 +189,8 @@ function ComplianceReport({ stock, onClose }) {
               <i className="bi bi-check-circle-fill"></i> Non-Permissble Income
               <p>{stock.interestIncomeTotalIncome}</p>
             </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "1rem",
-              }}
-            >
-              <Chart
-                chartType="PieChart"
-                width={"100%"}
-                height={"400px"}
-                data={data}
-                options={options}
-              />
-            </div>
+            {/* Gauge Chart */}
+
           </div>
         </div>
       </div>
