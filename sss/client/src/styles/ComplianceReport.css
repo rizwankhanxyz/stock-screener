@@ -25,6 +25,7 @@
 .compliance-report-header {
   background-color: #84BC62;
   padding: 0.5rem;
+  position: sticky;
 }
 
 .close-button {
