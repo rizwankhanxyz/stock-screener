@@ -56,8 +56,11 @@ function Admin({
             },
           }
         );
-        alert(data.success);
+        // alert(data.success);
+        alert(data.data.success);
+
       } catch (error) {
+        console.log(error);
         alert(error.response.data.error);
       }
     }
@@ -154,8 +157,9 @@ function Admin({
                     <th>Company name</th>
                     <th>NSE Symbol/BSE Scrip ID</th>
                     <th>Exchange</th>
+                    <th>Compliant Status(Business Screening)</th>
                     <th>Debts/Market Cap Ratio</th>
-                    <th>Compliant Status (Debts/Market Cap)</th>
+                    <th>Compliant Status(Debts/Market Cap)</th>
                     <th>Interest-Bearing Securities/ Market Cap Ratio</th>
                     <th>
                       Compliant Status(Interest-Bearing Securities/ Market Cap)
@@ -171,6 +175,7 @@ function Admin({
                       <td>{element.companyName}</td>
                       <td>{element.nseorbseSymbol}</td>
                       <td>{element.exchange}</td>
+                      <td data-status={element.compliantStatusBusinessScreening}>{element.compliantStatusBusinessScreening}</td>
                       <td>{element.debtsMarketCap}</td>
                       <td data-status={element.compliantStatusDebts}>
                         {element.compliantStatusDebts}

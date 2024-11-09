@@ -13,7 +13,7 @@ const dataSchema = new mongoose.Schema({
   interestIncomeTotalIncome: { type: Number, required: true },
   compliantStatusInterestIncome: { type: String, required: true },
   financialScreeningStatus: { type: String, required: true },
-  dataUpdateDate: { type: Date, default: Date.now },
+  dataUpdateDate: { type: Date, default: Date.now},
 });
 
 const dataModel = mongoose.model("excelData", dataSchema, "stock-data");

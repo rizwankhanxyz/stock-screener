@@ -205,342 +205,392 @@ function ComplianceReport({ stock, onClose }) {
         </div>
         <div className="compliance-report-body">
           <center>
-            <p className="compliance-report-update">Updated on 03, Nov 2024</p>
+            <p className="compliance-report-update">
+              Updated on {new Date(stock.dataUpdateDate).toISOString().slice(0, 10)}{" "}
+            </p>
           </center>
           <center>
-            <strong>
-              <h6>
-                Based on AAOIFI Standards <i className="bi bi-info-circle"></i>
-              </h6>
-            </strong>
+            <a
+              href="/Shariah-Equities-Screening-Methodology.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{textDecorationLine:"unset"}}
+            >
+              <strong>
+                <h6>
+                  Based on AAOIFI Standards{" "}
+                  <i className="bi bi-info-circle"></i>
+                </h6>
+              </strong>
+            </a>
           </center>
           <div className="business-screening">
+            <h5>1. BUSINESS SCREENING</h5>
+            <center>
+              {stock.compliantStatusBusinessScreening === "PASS" ? (
+                <p style={{ color: "#59a02d" }}>
+                  <i className="bi bi-check-circle-fill"></i>&nbsp;
+                  {stock.industryGroup} ({stock.mainProductServiceGroup})
+                </p>
+              ) : (
+                <p style={{ color: "#FF4C4C" }}>
+                  <i className="bi bi-x-circle-fill"></i>&nbsp;
+                  {stock.industryGroup} ({stock.mainProductServiceGroup})
+                </p>
+              )}
+            </center>
+
+            <center>
+              <p
+                style={{
+                  color: "#555",
+                  cursor: "pointer",
+                  marginTop: "0.1rem",
+                  textAlign: "justify", // Aligns the paragraph content on both sides
+                  lineHeight: "1.5", // Adjusts the space between lines
+                }}
+              >
+                <b>Business Activity Screening:</b>
+                <br />A Company/Stock pass business screening if they avoid
+                prohibited sectors like banking, alcohol, gambling etc. Failure
+                occurs when involved in non-permissible business sectors.
+              </p>
+            </center>
           </div>
-          <div className="financial-screening">
-            <h5>FINANCIAL SCREENING</h5>
-            <div className="compliance-report-financial-list">
-              <div className="compliance-report-list">
-                <center>
-                  {debtsMarketCapRatio <= 30 ? (
-                    <p style={{ color: "#59a02d" }}>
-                      <i className="bi bi-check-circle-fill"></i> Interest
-                      Bearing Debt Ratio
-                    </p>
-                  ) : (
-                    <p style={{ color: "#FF4C4C" }}>
-                      <i className="bi bi-x-circle-fill"></i> Interest Bearing
-                      Debt Ratio
-                    </p>
-                  )}
-                </center>
-                <div style={{ width: "100%", maxWidth: "300px" }}>
-                  <Doughnut data={gaugeData} options={gaugeOptions1} />
-                </div>
-                <div
-                  style={{
-                    textAlign: "center",
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <p
+
+          {stock.compliantStatusBusinessScreening === "PASS" ? (
+            <div className="financial-screening">
+              <h5>2. FINANCIAL SCREENING</h5>
+              <div className="compliance-report-financial-list">
+                <div className="compliance-report-list">
+                  <center>
+                    {debtsMarketCapRatio <= 30 ? (
+                      <p style={{ color: "#59a02d" }}>
+                        <i className="bi bi-check-circle-fill"></i> Interest
+                        Bearing Debt Ratio
+                      </p>
+                    ) : (
+                      <p style={{ color: "#FF4C4C" }}>
+                        <i className="bi bi-x-circle-fill"></i> Interest Bearing
+                        Debt Ratio
+                      </p>
+                    )}
+                  </center>
+                  <div style={{ width: "100%", maxWidth: "300px" }}>
+                    <Doughnut data={gaugeData} options={gaugeOptions1} />
+                  </div>
+                  <div
                     style={{
-                      color: "#555",
+                      textAlign: "center",
+                      fontSize: "16px",
+                      fontWeight: "bold",
                     }}
                   >
-                    {debtsMarketCapRatio <= 30 ? "Compliant" : "Non-Compliant"}:
-                    {debtsMarketCapRatio.toFixed(2)}%
-                  </p>
-                </div>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: "#84BC62",
-                      width: "20px",
-                      height: "50px",
-                    }}
-                  ></div>
-                  <div style={{ color: "#555" }}>
-                    <p>Compliant</p>
-                    <p>Less than 30%</p>
+                    <p
+                      style={{
+                        color: "#555",
+                      }}
+                    >
+                      {debtsMarketCapRatio <= 30
+                        ? "Compliant"
+                        : "Non-Compliant"}
+                      :{debtsMarketCapRatio.toFixed(2)}%
+                    </p>
                   </div>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: "#84BC62",
+                        width: "20px",
+                        height: "50px",
+                      }}
+                    ></div>
+                    <div style={{ color: "#555" }}>
+                      <p>Compliant</p>
+                      <p>Less than 30%</p>
+                    </div>
 
-                  <div
-                    style={{
-                      backgroundColor: "#FF4C4C",
-                      width: "20px",
-                      height: "50px",
-                    }}
-                  ></div>
-                  <div style={{ color: "#555" }}>
-                    <p>Non-Compliant</p>
-                    <p>Greater than 30%</p>
-                  </div>
-                </div>
-                <p
-                  onClick={onClickHandler1}
-                  style={{
-                    color: "#555",
-                    cursor: "pointer",
-                    marginTop: "0.1rem",
-                    textAlign: "justify", // Aligns the paragraph content on both sides
-                    lineHeight: "1.5", // Adjusts the space between lines
-                  }}
-                >
-                  <b>Interest Bearing Debt Ratio:</b>
-                  <br />A company’s total debt should not exceed 30% of its
-                  market capitalisation.
-                </p>
-                {showModal1 && (
-                  <div style={modalStyles.overlay}>
-                    <div style={modalStyles.modal}>
-                      <h6 style={{ color: "black" }}>
-                        <b>CALCULATION</b>
-                      </h6>
-                      <p style={{ marginTop: "1rem" }}>
-                        Total Debt
-                        <center>
-                          <hr
-                            style={{
-                              width: "100%",
-                              maxWidth: "200px",
-                              border: "2px solid black",
-                            }}
-                          />
-                        </center>
-                        Market Cap
-                      </p>
-                      <button
-                        onClick={onCloseModal1}
-                        style={modalStyles.closeButton}
-                      >
-                        Close
-                      </button>
+                    <div
+                      style={{
+                        backgroundColor: "#FF4C4C",
+                        width: "20px",
+                        height: "50px",
+                      }}
+                    ></div>
+                    <div style={{ color: "#555" }}>
+                      <p>Non-Compliant</p>
+                      <p>Greater than 30%</p>
                     </div>
                   </div>
-                )}
-              </div>
-
-              <div className="compliance-report-list">
-                <center>
-                  {debtsMarketCapRatio <= 30 ? (
-                    <p style={{ color: "#59a02d" }}>
-                      <i className="bi bi-check-circle-fill"></i> Interest
-                      Bearing Securities
-                    </p>
-                  ) : (
-                    <p style={{ color: "#FF4C4C" }}>
-                      <i className="bi bi-x-circle-fill"></i> Interest Bearing
-                      Securities
-                    </p>
-                  )}
-                </center>
-                <div style={{ width: "100%", maxWidth: "300px" }}>
-                  <Doughnut data={gaugeData} options={gaugeOptions2} />
-                </div>
-                <div
-                  style={{
-                    textAlign: "center",
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                  }}
-                >
                   <p
+                    onClick={onClickHandler1}
                     style={{
                       color: "#555",
+                      cursor: "pointer",
+                      marginTop: "0.1rem",
+                      textAlign: "justify", // Aligns the paragraph content on both sides
+                      lineHeight: "1.5", // Adjusts the space between lines
                     }}
                   >
-                    {interestBearingSecuritiesMarketCapRatio <= 30
-                      ? "Compliant"
-                      : "Non-Compliant"}
-                    :{interestBearingSecuritiesMarketCapRatio.toFixed(2)}%
+                    <b>Interest Bearing Debt Ratio:</b>
+                    <br />A company’s total debt should not exceed 30% of its
+                    market capitalisation.
                   </p>
+                  {showModal1 && (
+                    <div style={modalStyles.overlay}>
+                      <div style={modalStyles.modal}>
+                        <h6 style={{ color: "black" }}>
+                          <b>CALCULATION</b>
+                        </h6>
+                        <p style={{ marginTop: "1rem" }}>
+                          Total Debt
+                          <center>
+                            <hr
+                              style={{
+                                width: "100%",
+                                maxWidth: "200px",
+                                border: "2px solid black",
+                              }}
+                            />
+                          </center>
+                          Market Cap
+                        </p>
+                        <button
+                          onClick={onCloseModal1}
+                          style={modalStyles.closeButton}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: "#84BC62",
-                      width: "20px",
-                      height: "50px",
-                    }}
-                  ></div>
-                  <div style={{ color: "#555" }}>
-                    <p>Compliant</p>
-                    <p>Less than 30%</p>
-                  </div>
 
+                <div className="compliance-report-list">
+                  <center>
+                    {debtsMarketCapRatio <= 30 ? (
+                      <p style={{ color: "#59a02d" }}>
+                        <i className="bi bi-check-circle-fill"></i> Interest
+                        Bearing Securities
+                      </p>
+                    ) : (
+                      <p style={{ color: "#FF4C4C" }}>
+                        <i className="bi bi-x-circle-fill"></i> Interest Bearing
+                        Securities
+                      </p>
+                    )}
+                  </center>
+                  <div style={{ width: "100%", maxWidth: "300px" }}>
+                    <Doughnut data={gaugeData} options={gaugeOptions2} />
+                  </div>
                   <div
                     style={{
-                      backgroundColor: "#FF4C4C",
-                      width: "20px",
-                      height: "50px",
+                      textAlign: "center",
+                      fontSize: "16px",
+                      fontWeight: "bold",
                     }}
-                  ></div>
-                  <div style={{ color: "#555" }}>
-                    <p>Non-Compliant</p>
-                    <p>Greater than 30%</p>
+                  >
+                    <p
+                      style={{
+                        color: "#555",
+                      }}
+                    >
+                      {interestBearingSecuritiesMarketCapRatio <= 30
+                        ? "Compliant"
+                        : "Non-Compliant"}
+                      :{interestBearingSecuritiesMarketCapRatio.toFixed(2)}%
+                    </p>
                   </div>
-                </div>
-                <p
-                  className="paratext"
-                  onClick={onClickHandler2}
-                  style={{
-                    color: "#555",
-                    cursor: "pointer",
-                    marginTop: "0.1rem",
-                    textAlign: "justify", // Aligns the paragraph content on both sides
-                    lineHeight: "1.5", // Adjusts the space between lines
-                  }}
-                >
-                  <b>Interest-Bearing Securities:</b>
-                  <br />A company’s investments in interest-bearing securities,
-                  such as bonds or other debt instruments that generate
-                  interest, should not exceed 30% of its market capitalisation.
-                </p>
-                {showModal2 && (
-                  <div style={modalStyles.overlay}>
-                    <div style={modalStyles.modal}>
-                      <h6 style={{ color: "black" }}>
-                        <b>CALCULATION</b>
-                      </h6>
-                      <p style={{ marginTop: "1rem" }}>
-                        Cash + Cash Equivalents + Deposits
-                        <center>
-                          <hr
-                            style={{
-                              width: "100%",
-                              maxWidth: "200px",
-                              border: "2px solid black",
-                            }}
-                          />
-                        </center>
-                        Market Cap
-                      </p>
-                      <button
-                        onClick={onCloseModal2}
-                        style={modalStyles.closeButton}
-                      >
-                        Close
-                      </button>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: "#84BC62",
+                        width: "20px",
+                        height: "50px",
+                      }}
+                    ></div>
+                    <div style={{ color: "#555" }}>
+                      <p>Compliant</p>
+                      <p>Less than 30%</p>
+                    </div>
+
+                    <div
+                      style={{
+                        backgroundColor: "#FF4C4C",
+                        width: "20px",
+                        height: "50px",
+                      }}
+                    ></div>
+                    <div style={{ color: "#555" }}>
+                      <p>Non-Compliant</p>
+                      <p>Greater than 30%</p>
                     </div>
                   </div>
-                )}
-              </div>
-
-              <div className="compliance-report-list">
-                <center>
-                  {debtsMarketCapRatio <= 30 ? (
-                    <p style={{ color: "#59a02d" }}>
-                      <i className="bi bi-check-circle-fill"></i>{" "}
-                      Non-Permissible Income
-                    </p>
-                  ) : (
-                    <p style={{ color: "#FF4C4C" }}>
-                      <i className="bi bi-x-circle-fill"></i> Non-Permissible
-                      Income
-                    </p>
-                  )}
-                </center>
-                <div style={{ width: "100%", maxWidth: "300px" }}>
-                  <Doughnut data={gaugeDataOther} options={gaugeOptions3} />
-                </div>
-                <div
-                  style={{
-                    textAlign: "center",
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                  }}
-                >
                   <p
+                    className="paratext"
+                    onClick={onClickHandler2}
                     style={{
                       color: "#555",
+                      cursor: "pointer",
+                      marginTop: "0.1rem",
+                      textAlign: "justify", // Aligns the paragraph content on both sides
+                      lineHeight: "1.5", // Adjusts the space between lines
                     }}
                   >
-                    {interestIncomeTotalIncomeRatio <= 5
-                      ? "Compliant"
-                      : "Non-Compliant"}
-                    :{interestIncomeTotalIncomeRatio.toFixed(2)}%
+                    <b>Interest-Bearing Securities:</b>
+                    <br />A company’s investments in interest-bearing
+                    securities, such as bonds or other debt instruments that
+                    generate interest, should not exceed 30% of its market
+                    capitalisation.
                   </p>
+                  {showModal2 && (
+                    <div style={modalStyles.overlay}>
+                      <div style={modalStyles.modal}>
+                        <h6 style={{ color: "black" }}>
+                          <b>CALCULATION</b>
+                        </h6>
+                        <p style={{ marginTop: "1rem" }}>
+                          Cash + Cash Equivalents + Deposits
+                          <center>
+                            <hr
+                              style={{
+                                width: "100%",
+                                maxWidth: "200px",
+                                border: "2px solid black",
+                              }}
+                            />
+                          </center>
+                          Market Cap
+                        </p>
+                        <button
+                          onClick={onCloseModal2}
+                          style={modalStyles.closeButton}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: "#84BC62",
-                      width: "20px",
-                      height: "50px",
-                    }}
-                  ></div>
-                  <div style={{ color: "#555" }}>
-                    <p>Compliant</p>
-                    <p>Less than 5%</p>
-                  </div>
 
+                <div className="compliance-report-list">
+                  <center>
+                    {debtsMarketCapRatio <= 30 ? (
+                      <p style={{ color: "#59a02d" }}>
+                        <i className="bi bi-check-circle-fill"></i>{" "}
+                        Non-Permissible Income
+                      </p>
+                    ) : (
+                      <p style={{ color: "#FF4C4C" }}>
+                        <i className="bi bi-x-circle-fill"></i> Non-Permissible
+                        Income
+                      </p>
+                    )}
+                  </center>
+                  <div style={{ width: "100%", maxWidth: "300px" }}>
+                    <Doughnut data={gaugeDataOther} options={gaugeOptions3} />
+                  </div>
                   <div
                     style={{
-                      backgroundColor: "#FF4C4C",
-                      width: "20px",
-                      height: "50px",
+                      textAlign: "center",
+                      fontSize: "16px",
+                      fontWeight: "bold",
                     }}
-                  ></div>
-                  <div style={{ color: "#555" }}>
-                    <p>Non-Compliant</p>
-                    <p>Greater than 5%</p>
+                  >
+                    <p
+                      style={{
+                        color: "#555",
+                      }}
+                    >
+                      {interestIncomeTotalIncomeRatio <= 5
+                        ? "Compliant"
+                        : "Non-Compliant"}
+                      :{interestIncomeTotalIncomeRatio.toFixed(2)}%
+                    </p>
                   </div>
-                </div>
-                <p
-                  className="paratext"
-                  onClick={onClickHandler3}
-                  style={{
-                    color: "#555",
-                    cursor: "pointer",
-                    marginTop: "0.1rem",
-                    textAlign: "justify", // Aligns the paragraph content on both sides
-                    lineHeight: "1.5", // Adjusts the space between lines
-                  }}
-                >
-                  <b>Non-Permissible Income:</b>
-                  <br />
-                  The percentage of income generated from non-permissible
-                  activities, such as interest or other impermissible sources,
-                  should not exceed 5% of the company’s total income.
-                </p>
-                {showModal3 && (
-                  <div style={modalStyles.overlay}>
-                    <div style={modalStyles.modal}>
-                      <h6 style={{ color: "black" }}>
-                        <b>CALCULATION</b>
-                      </h6>
-                      <p style={{ marginTop: "1rem" }}>
-                        Income from Non-Permissible Activites
-                        <center>
-                          <hr
-                            style={{
-                              width: "100%",
-                              maxWidth: "200px",
-                              border: "2px solid black",
-                            }}
-                          />
-                        </center>
-                        Total Income
-                      </p>
-                      <button
-                        onClick={onCloseModal3}
-                        style={modalStyles.closeButton}
-                      >
-                        Close
-                      </button>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: "#84BC62",
+                        width: "20px",
+                        height: "50px",
+                      }}
+                    ></div>
+                    <div style={{ color: "#555" }}>
+                      <p>Compliant</p>
+                      <p>Less than 5%</p>
+                    </div>
+
+                    <div
+                      style={{
+                        backgroundColor: "#FF4C4C",
+                        width: "20px",
+                        height: "50px",
+                      }}
+                    ></div>
+                    <div style={{ color: "#555" }}>
+                      <p>Non-Compliant</p>
+                      <p>Greater than 5%</p>
                     </div>
                   </div>
-                )}
+                  <p
+                    className="paratext"
+                    onClick={onClickHandler3}
+                    style={{
+                      color: "#555",
+                      cursor: "pointer",
+                      marginTop: "0.1rem",
+                      textAlign: "justify", // Aligns the paragraph content on both sides
+                      lineHeight: "1.5", // Adjusts the space between lines
+                    }}
+                  >
+                    <b>Non-Permissible Income:</b>
+                    <br />
+                    The percentage of income generated from non-permissible
+                    activities, such as interest or other impermissible sources,
+                    should not exceed 5% of the company’s total income.
+                  </p>
+                  {showModal3 && (
+                    <div style={modalStyles.overlay}>
+                      <div style={modalStyles.modal}>
+                        <h6 style={{ color: "black" }}>
+                          <b>CALCULATION</b>
+                        </h6>
+                        <p style={{ marginTop: "1rem" }}>
+                          Income from Non-Permissible Activites
+                          <center>
+                            <hr
+                              style={{
+                                width: "100%",
+                                maxWidth: "200px",
+                                border: "2px solid black",
+                              }}
+                            />
+                          </center>
+                          Total Income
+                        </p>
+                        <button
+                          onClick={onCloseModal3}
+                          style={modalStyles.closeButton}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
+
           <center>
             <p style={{ color: "rgb(160, 95, 104)", marginBottom: "2rem" }}>
               <b>Disclaimer:</b>

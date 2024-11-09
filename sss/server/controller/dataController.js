@@ -2,7 +2,7 @@ import express from "express";
 import dataModel from "../models/dataModel.js";
 import multer from "multer";
 import xlsx from "xlsx";
-import authMiddleware from "../middleware/authMiddleware.js"
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 // Setup multer storage
@@ -10,7 +10,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 /*
- * API: /api/admin/add
+ * API: /api/admin/data/add
  * METHOD: POST
  * DESC: Data Adding in Backend
  * Body: Excel File Data
@@ -27,10 +27,11 @@ router.post("/data/add", upload.single("file"), async (req, res) => {
       const sheetName = workbook.SheetNames[0];
       const sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
       await dataModel.insertMany(sheetData);
-      res.status(200).send({success:"File uploaded successfully"});
+      res.status(200).send({ success: "File uploaded successfully" });
     }
   } catch (error) {
-    res.status(500).send({error:"File upload failed"});
+    console.error("File upload error:", error);  // This will show the actual error in your terminal
+    res.status(500).send({ error: "File upload failed" });
   }
 });
 
@@ -43,12 +44,12 @@ router.post("/data/add", upload.single("file"), async (req, res) => {
  */
 
 router.get("/data/get", async (req, res) => {
-    try {
-        const data = await dataModel.find();
-        res.status(200).json(data);
-    } catch (error) {
-      res.status(500).send({error:"Error fetching data"});
-    }
-  });
+  try {
+    const data = await dataModel.find();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).send({ error: "Error fetching data" });
+  }
+});
 
 export default router;
