@@ -29,7 +29,6 @@ function App() {
         setAuth(true);
         setUserRole(data.role);
         setAlias(data.alias);
-        console.log(data.alias);
       } catch (error) {
         console.log("Authentication check failed", error);
         setAuth(false);

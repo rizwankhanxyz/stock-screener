@@ -42,7 +42,7 @@ function Navbar({
             src="./se-logo.png"
             alt="se-logo"
           />
-          <h1 style={{ marginLeft: "15px" }}>Assalamu Alaikum {alias}</h1>
+          <h1 style={{ marginLeft: "15px" }}>{alias}</h1>
           <h1
             onClick={onClickHandler}
             style={{ marginRight: "15px", cursor: "pointer" }}
