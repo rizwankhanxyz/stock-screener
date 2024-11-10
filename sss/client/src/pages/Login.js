@@ -63,10 +63,10 @@ function Login({ alert, showAlert, setAuth, setUserRole }) {
       <div className="form-container">
         <form onSubmit={onSubmithandler}>
           <img src="./se-logo.png" alt="se-logo" />
-          <h1>
+          {/* <h1>
             <strong>Assalamu Alaikum</strong>
-          </h1>
-          <h6>Welcome to Shariah Equities!</h6>
+          </h1> */}
+          <h3 style={{marginTop:"1rem"}}>Welcome to Shariah Equities!</h3>
           {/* <hr /> */}
           <div className="input-group">
             <i className="bi bi-envelope-at other-icons"></i>
