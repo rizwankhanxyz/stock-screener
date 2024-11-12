@@ -23,20 +23,20 @@ function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
           className={activeTab === "Stocks" ? "tab active-tab" : "tab"}
           onClick={() => setActiveTab("Stocks")}
         >
-          Stocks
+          Screened Stocks
         </div>
-        {/* <div
+        <div
           className={activeTab === "Funds" ? "tab active-tab" : "tab"}
           onClick={() => setActiveTab("Funds")}
         >
           Funds
-        </div> */}
-        {/* <div
+        </div>
+        <div
           className={activeTab === "Basket" ? "tab active-tab" : "tab"}
           onClick={() => setActiveTab("Basket")}
         >
           Basket
-        </div> */}
+        </div>
       </div>
 
       {/* Tab Content */}
