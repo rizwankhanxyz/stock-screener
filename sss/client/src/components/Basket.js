@@ -5,6 +5,8 @@ function Basket({loading}) {
     <div>Basket
       wishlist will go here
 
+      In Basket, user can wishlist their favoruite Stocks
+
     </div>
   )
 }
