@@ -30,7 +30,7 @@ function App() {
         setUserRole(data.role);
         setAlias(data.alias);
       } catch (error) {
-        console.log("Authentication check failed", error);
+        console.log(error.response.data.error);
         setAuth(false);
         setUserRole(null);
       }
@@ -41,7 +41,10 @@ function App() {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/admin/data/get"
+          "http://localhost:5000/api/admin/data/get",
+          {
+            withCredentials: true,
+          }
         );
         setStocks(data);
       } catch (error) {

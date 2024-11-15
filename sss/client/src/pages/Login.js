@@ -48,7 +48,6 @@ function Login({ alert, showAlert, setAuth, setUserRole }) {
         }, 3500);
       }
     } catch (error) {
-      console.log(error);
       showAlert({
         type: "danger",
         msg: error.response.data.error,

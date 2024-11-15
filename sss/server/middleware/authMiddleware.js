@@ -8,7 +8,7 @@ async function authMiddleware(req, res, next) {
     // Log cookies to see what is being sent
     const token = req.cookies.token;
     if (!token) {
-      return res.status(401).json({ error: "No token provided" });
+      return res.status(401).json({ error: "No token available/Login required." });
     }
     // Log the token being verified
     let decoded = jwt.verify(token, "stockscreener@shariahequities"); //a
