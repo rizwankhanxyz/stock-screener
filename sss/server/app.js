@@ -2,6 +2,8 @@ import express from 'express';
 import "./dbConnect.js";
 import dataRouter from "./controller/dataController.js"
 import customerRouter from "./controller/customerController.js"
+import basketRouter from "./controller/basketController.js"
+
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 
@@ -17,6 +19,8 @@ server.use(cookieParser()); // Use cookie-parser middleware
 const PORT = 5000 || 5001;
 server.use("/api/admin",dataRouter)
 server.use("/api/customer",customerRouter)
+server.use("/api/baskets/",basketRouter)
+
 
 
 //Listen: It listens or gets data from the port or host.

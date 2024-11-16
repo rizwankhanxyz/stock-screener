@@ -11,7 +11,7 @@ async function authMiddleware(req, res, next) {
       return res.status(401).json({ error: "No token available/Login required." });
     }
     // Log the token being verified
-    let decoded = jwt.verify(token, "stockscreener@shariahequities"); //a
+    let decoded = jwt.verify(token, "stockscreener@shariahequities");
 
     const user = await Admin.findById(decoded.user_id) ||await customerModel.findById(decoded.user_id);
     if (!user) {
@@ -22,7 +22,7 @@ async function authMiddleware(req, res, next) {
     next();
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: "Unauth Token or token expired" });
+    res.status(401).json({ error: "Unauth/ Expired token." });
   }
 }
 

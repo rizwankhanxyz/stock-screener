@@ -43,7 +43,7 @@ function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
       <div className="tab-content">
         {activeTab === "Stocks" && <Stocks loading={loading} stocks={stocks} />}
         {activeTab === "Funds" && <Funds loading={loading} />}
-        {activeTab === "Basket" && <Basket loading={loading} />}
+        {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} />}
       </div>
     </>
   );

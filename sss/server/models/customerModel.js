@@ -48,8 +48,8 @@ const customerSchema = new mongoose.Schema({
   },
   subscription: {
     plan: { type: String, enum: ["basic", "premium", "none"], default: "none" },
-    startDate: { type: Date }, 
-    endDate: { type: Date }, 
+    startDate: { type: Date },
+    endDate: { type: Date },
     status: { type: String, enum: ["active", "expired"], default: "expired" },
   },
   createdAt: { type: Date, default: Date.now },
