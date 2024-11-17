@@ -6,8 +6,9 @@ function Basket({ loading, stocks }) {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/baskets/customer/basket", // API endpoint
-        { stockId }, // Send the stockId in the request body
-        { withCredentials: true } // Include cookies in the request
+        { stockId }, 
+        { withCredentials: true } // Enable cookies
+        // Send the stockId in the request body
       );
       alert("Stock added to basket:", response.data)
       console.log("Stock added to basket:", response.data);

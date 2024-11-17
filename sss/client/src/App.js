@@ -41,10 +41,7 @@ function App() {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/admin/data/get",
-          {
-            withCredentials: true,
-          }
+          "http://localhost:5000/api/admin/data/get"
         );
         setStocks(data);
       } catch (error) {

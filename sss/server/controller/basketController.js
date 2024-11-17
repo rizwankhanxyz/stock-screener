@@ -1,6 +1,7 @@
 import authMiddleware from "../middleware/authMiddleware.js";
 import basketModel from "../models/basketModel.js";
 import express from "express";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
@@ -9,8 +10,15 @@ api/customer/basket
 */
 router.post("/customer/basket/", async (req, res) => {
   try {
+    const token = req.cookies.token; // Assuming token is stored in cookies    
+    if (!token) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized. No token provided." });
+    }
+    const decoded = jwt.verify(token, "stockscreener@shariahequities");
     const { stockId } = req.body; // Extract stockId from the request body
-    const userId = req.user_id; // Extract userId from the decoded JWT in the auth middleware
+    const userId = decoded.user_id; // Extract userId from the decoded JWT in the auth middleware
 
     // Check if the stock is already in the user's basket
     let existingBasketItem = await basketModel.findOne({ userId, stockId });

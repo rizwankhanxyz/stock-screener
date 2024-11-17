@@ -3,9 +3,8 @@ import "./dbConnect.js";
 import dataRouter from "./controller/dataController.js"
 import customerRouter from "./controller/customerController.js"
 import basketRouter from "./controller/basketController.js"
-
+import cookieParser from "cookie-parser";
 import cors from "cors";
-import cookieParser from 'cookie-parser';
 
 const server = express()
 server.use(express.json());

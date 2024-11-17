@@ -46,9 +46,8 @@ router.post(
  * DESC: Data readin0 * Body: Excel File Data'[;pppp-o]
  * Access: Private
  * Validations: so far none
- */
-
-router.get("/data/get", authMiddleware, async (req, res) => {
+ */ 
+router.get("/data/get", async (req, res) => {
   try {
     const data = await dataModel.find();
     res.status(200).json(data);
