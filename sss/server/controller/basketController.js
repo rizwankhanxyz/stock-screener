@@ -6,9 +6,10 @@ import jwt from "jsonwebtoken";
 const router = express.Router();
 
 /*
-api/customer/basket
+post
+api/customer/basket/add
 */
-router.post("/customer/basket/", async (req, res) => {
+router.post("/customer/basket/add", async (req, res) => {
   try {
     const token = req.cookies.token; // Assuming token is stored in cookies    
     if (!token) {
@@ -40,4 +41,15 @@ router.post("/customer/basket/", async (req, res) => {
   }
 });
 
+/*
+get
+api/customer/basket
+*/
+
+// Get user's basket
+router.get("/customer/basket/get", async (req, res) => {
+  const userId = req.user.id; // Assuming userId is extracted from the JWT
+  const basket = await basketModel.findOne({ userId });
+  res.json(basket || { stocks: [] });
+});
 export default router;
