@@ -1,4 +1,3 @@
-import authMiddleware from "../middleware/authMiddleware.js";
 import basketModel from "../models/basketModel.js";
 import express from "express";
 import jwt from "jsonwebtoken";
@@ -7,11 +6,11 @@ const router = express.Router();
 
 /*
 post
-api/customer/basket/add
+api/baskets/customer/basket/add
 */
 router.post("/customer/basket/add", async (req, res) => {
   try {
-    const token = req.cookies.token; // Assuming token is stored in cookies    
+    const token = req.cookies.token; // Assuming token is stored in cookies
     if (!token) {
       return res
         .status(401)
@@ -43,13 +42,31 @@ router.post("/customer/basket/add", async (req, res) => {
 
 /*
 get
-api/customer/basket
+api/baskets/customer/basket/get
 */
 
 // Get user's basket
 router.get("/customer/basket/get", async (req, res) => {
-  const userId = req.user.id; // Assuming userId is extracted from the JWT
-  const basket = await basketModel.findOne({ userId });
-  res.json(basket || { stocks: [] });
+  try {
+    const token = req.cookies.token; // Assuming token is stored in cookies
+    if (!token) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized. No token provided." });
+    }
+    const decoded = jwt.verify(token, "stockscreener@shariahequities");
+    const userId = decoded.user_id;
+    const basketItems = await basketModel.find({ userId }).populate("stockId");
+    if (!basketItems.length) {
+      return res.status(404).json({ error: "No items found in the basket. " });
+    }
+    res.status(200).json({
+      success: "Basket items retrieved successfully.",
+      basketItems,
+    });
+  } catch (error) {
+    console.error("Error fetching basket items:", error);
+    res.status(500).json({ error: "Internal Server Error." });
+  }
 });
 export default router;

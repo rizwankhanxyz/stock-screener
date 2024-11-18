@@ -8,7 +8,7 @@ const basketSchema = new mongoose.Schema(
     },
     stockId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Stock", // Reference to the Stock model
+      ref: "excelData", // Reference to the Stock model
     },
   },
   {
