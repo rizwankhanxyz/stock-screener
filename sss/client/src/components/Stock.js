@@ -42,7 +42,7 @@ function Stock({ stock }) {
           </p>
         </div>
         <div className="stock-wishlist">
-        <i class="bi bi-journal-plus" style={{cursor:"pointer"}}></i>
+        <i class="bi bi-bookmark"></i>
         </div>
       </div>
 
