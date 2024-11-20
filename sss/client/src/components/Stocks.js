@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Stock from "./Stock";
 import Loader from "./Loader";
 
-function Stocks({ stocks, loading }) {
+function Stocks({ stocks, handleAddToBasket, loading }) {
   const styles = {
     display: "grid",
     margin: "auto",
@@ -97,7 +97,11 @@ function Stocks({ stocks, loading }) {
           ) : (
             <div className="stocks-container" style={styles}>
               {filteredData.map((stock, index) => (
-                <Stock key={index} stock={stock} />
+                <Stock
+                  key={index}
+                  handleAddToBasket={handleAddToBasket}
+                  stock={stock}
+                />
               ))}
             </div>
           )}

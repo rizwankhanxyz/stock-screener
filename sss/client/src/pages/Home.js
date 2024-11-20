@@ -3,9 +3,17 @@ import Navbar from "../components/Navbar";
 import Stocks from "../components/Stocks";
 import Funds from "../components/Funds";
 import Basket from "../components/Basket";
-import "../styles/Home.css"
+import "../styles/Home.css";
 
-function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
+function Home({
+  handleAddToBasket,
+  stocks,
+  loading,
+  setUserRole,
+  setAuth,
+  setAlias,
+  alias,
+}) {
   const [activeTab, setActiveTab] = useState("Stocks");
 
   return (
@@ -41,9 +49,15 @@ function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
 
       {/* Tab Content */}
       <div className="tab-content">
-        {activeTab === "Stocks" && <Stocks loading={loading} stocks={stocks} />}
+        {activeTab === "Stocks" && (
+          <Stocks
+            loading={loading}
+            handleAddToBasket={handleAddToBasket}
+            stocks={stocks}
+          />
+        )}
         {activeTab === "Funds" && <Funds loading={loading} />}
-        {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} />}
+        {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} handleAddToBasket={handleAddToBasket} />}
       </div>
     </>
   );

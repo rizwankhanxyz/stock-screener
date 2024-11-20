@@ -1,25 +1,31 @@
 import React from "react";
-import axios from "axios";
 
-function Basket({ loading, stocks }) {
-  const handleAddToBasket = async (stockId) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/baskets/customer/basket/add", // API endpoint
-        { stockId }, 
-        { withCredentials: true } // Enable cookies
-        // Send the stockId in the request body
-      );
-      alert("Stock added to basket:", response.data)
-      console.log("Stock added to basket:", response.data);
-    } catch (error) {
-      console.error("Error adding stock to basket:", error.response.data.error);
-    }
-  };
+function Basket({ loading, stocks, handleAddToBasket }) {
+  // const [query, setQuery] = useState("");
+
   return (
     <>
-      Basket
       <div>
+        <center>
+          <div
+            className="search-container"
+            style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
+          >
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search By Stock Name or NSE/BSE Symbol"
+              // onChange={onChangehandler}
+              // value={query}
+              style={{
+                textAlign: "center",
+                borderRadius: "1rem",
+                padding: "0.8rem",
+              }}
+              required
+            />
+          </div>
+        </center>
         {stocks.map((stock) => (
           <div key={stock._id}>
             <h4>{stock.companyName}</h4>
