@@ -30,7 +30,7 @@ function App() {
         setUserRole(data.role);
         setAlias(data.alias);
       } catch (error) {
-        console.log(error.response.data.error);
+        //Alert required here
         setAuth(false);
         setUserRole(null);
       }
