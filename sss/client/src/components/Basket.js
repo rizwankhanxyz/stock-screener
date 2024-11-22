@@ -1,12 +1,32 @@
-import React from "react";
+import React,{useState} from "react";
+import "../styles/Basket.css";
+import BasketItem from "./BasketItem";
+
 
 function Basket({ loading, stocks, handleAddToBasket }) {
   // const [query, setQuery] = useState("");
+  const [showBasket, setShowBasket] = useState(false);
 
+  // Function to handle click and show ComplianceReport component
+  const openCreateBasket = (e) => {
+    e.preventDefault();
+    setShowBasket(true); // Set to true to show ComplianceReport
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+  };
+
+  // Function to close the ComplianceReport component
+  const closeCreateBasket = () => {
+    setShowBasket(false); // Set to false to hide ComplianceReport
+    document.body.style.overflow = "auto"; // Re-enable background scroll
+  };
+
+  // const createBasketHandler = () =>{
+
+  // }
   return (
     <>
       <div>
-        <center>
+        {/* <center>
           <div
             className="search-container"
             style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
@@ -25,13 +45,18 @@ function Basket({ loading, stocks, handleAddToBasket }) {
               required
             />
           </div>
-        </center>
-        {stocks.map((stock) => (
+        </center> */}
+        {/* {stocks.map((stock) => (
           <div key={stock._id}>
             <h4>{stock.companyName}</h4>
             <button onClick={() => handleAddToBasket(stock._id)}>Add</button>
           </div>
-        ))}
+        ))} */}
+
+        <button  data-bs-toggle="popover" className="create-basket" onClick={openCreateBasket}>Create a new Basket</button>
+        {showBasket && (
+        <BasketItem onClose={closeCreateBasket} />
+      )}
       </div>
     </>
   );
