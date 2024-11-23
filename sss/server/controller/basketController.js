@@ -20,6 +20,8 @@ router.post("/customer/basket/add", async (req, res) => {
     const { stockId } = req.body; // Extract stockId from the request body
     const userId = decoded.user_id; // Extract userId from the decoded JWT in the auth middleware
 
+    const { basketName, basketDescription, stockIds } = req.body; // Extract data from request body
+
     // Check if the stock is already in the user's basket
     let existingBasketItem = await basketModel.findOne({ userId, stockId });
 
@@ -28,7 +30,13 @@ router.post("/customer/basket/add", async (req, res) => {
     }
 
     // Add the stock to the user's basket
-    const basketItem = new basketModel({ userId, stockId });
+    // const basketItem = new basketModel({ userId, stockId });
+    const basketItem = new basketModel({
+      userId,
+      basketName,
+      basketDescription,
+      stockIds,
+    });
     await basketItem.save();
     res.status(201).json({
       success: "Stock added to basket successfully.",

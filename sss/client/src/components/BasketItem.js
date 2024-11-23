@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import "../styles/BasketItem.css";
 
-function BasketItem() {
+function BasketItem({onClose, stocks}) {
   return (
-    <div>BasketItem</div>
-  )
+    <>
+      <div className="">BasketItem
+      <button className="" onClick={onClose}>
+            <i className="bi bi-x"></i>
+          </button>
+      </div>
+    </>
+  );
 }
 
-export default BasketItem
+export default BasketItem;

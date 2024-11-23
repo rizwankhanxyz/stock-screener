@@ -6,13 +6,22 @@ const basketSchema = new mongoose.Schema(
       ref: "User", // Reference to the User model
       required: true,
     },
-    stockId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "excelData", // Reference to the Stock model
+    basketName: {
+      type: String,
+      required: true,
     },
+    basketDescription: {
+      type: String,
+    },
+    stockIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "excelData", // Reference to the Stock model
+      },
+    ],
   },
   {
-    timestamps: true, // Adds `createdAt` and `updatedAt` fields
+    timestamps: true, // Automatically add createdAt and updatedAt
   }
 );
 

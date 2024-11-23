@@ -1,10 +1,8 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "../styles/Basket.css";
 import BasketItem from "./BasketItem";
 
-
 function Basket({ loading, stocks, handleAddToBasket }) {
-  // const [query, setQuery] = useState("");
   const [showBasket, setShowBasket] = useState(false);
 
   // Function to handle click and show ComplianceReport component
@@ -19,10 +17,6 @@ function Basket({ loading, stocks, handleAddToBasket }) {
     setShowBasket(false); // Set to false to hide ComplianceReport
     document.body.style.overflow = "auto"; // Re-enable background scroll
   };
-
-  // const createBasketHandler = () =>{
-
-  // }
   return (
     <>
       <div>
@@ -53,10 +47,14 @@ function Basket({ loading, stocks, handleAddToBasket }) {
           </div>
         ))} */}
 
-        <button  data-bs-toggle="popover" className="create-basket" onClick={openCreateBasket}>Create a new Basket</button>
-        {showBasket && (
-        <BasketItem onClose={closeCreateBasket} />
-      )}
+        <button
+          data-bs-toggle="popover"
+          className="create-basket"
+          onClick={openCreateBasket}
+        >
+          Create a new Basket
+        </button>
+        {showBasket && <BasketItem onClose={closeCreateBasket} stocks={stocks} />}
       </div>
     </>
   );
