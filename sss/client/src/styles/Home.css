@@ -42,8 +42,8 @@
   /* Tab Content Styling */
   .tab-content {
     padding: 1.5rem;
-    background-color: #c1dba3;
-    border-radius: 8px;
+    background-color: beige;
+    /* border-radius: 8px; */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   

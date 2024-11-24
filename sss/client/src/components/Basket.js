@@ -54,7 +54,9 @@ function Basket({ loading, stocks, handleAddToBasket }) {
         >
           Create a new Basket
         </button>
-        {showBasket && <BasketItem onClose={closeCreateBasket} stocks={stocks} />}
+        {showBasket && (
+          <BasketItem onClose={closeCreateBasket} stocks={stocks} />
+        )}
       </div>
     </>
   );

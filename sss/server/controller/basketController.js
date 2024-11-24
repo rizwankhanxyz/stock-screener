@@ -10,6 +10,8 @@ api/baskets/customer/basket/add
 */
 router.post("/customer/basket/add", async (req, res) => {
   try {
+    const { basketId } = req.params;
+
     const token = req.cookies.token; // Assuming token is stored in cookies
     if (!token) {
       return res
