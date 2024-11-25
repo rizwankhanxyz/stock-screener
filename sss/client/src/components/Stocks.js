@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Stock from "./Stock";
 import Loader from "./Loader";
+import "../styles/Stocks.css";
 
 function Stocks({ stocks, handleAddToBasket, loading }) {
   const styles = {
@@ -12,6 +13,9 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
   const [query, setQuery] = useState("");
   const [complianceFilter, setComplianceFilter] = useState("All");
   const [exchangeFilter, setExchangeFilter] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1); // Track the current page
+  const itemsPerPage = 20; // Number of items per page
+
   const onChangehandler = (e) => {
     setQuery(e.target.value);
   };
@@ -44,6 +48,104 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
 
     return matchesQuery && matchesCompliance && matchesExchange;
   });
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const renderPagination = () => {
+    const pageButtons = [];
+    const maxButtonsToShow = 5;
+
+    if (totalPages < maxButtonsToShow) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageButtons.push(
+          <button
+            key={i}
+            onClick={() => handlePageChange(i)}
+            className={`pagination-btn ${currentPage === i ? "active" : ""}`}
+          >
+            {i}
+          </button>
+        );
+      }
+    } else {
+      pageButtons.push(
+        <button
+          key="prev"
+          onClick={() => handlePageChange(currentPage - 1)}
+          className="pagination-btn"
+          disabled={currentPage === 1}
+        >
+          {"<<"}
+        </button>
+      );
+
+      if (currentPage > 2) {
+        pageButtons.push(
+          <button
+            key="1"
+            onClick={() => handlePageChange(1)}
+            className="pagination-btn"
+          >
+            1
+          </button>
+        );
+        if (currentPage > 3) {
+          pageButtons.push(<span key="dots-left">...</span>);
+        }
+      }
+
+      const startPage = Math.max(2, currentPage - 1);
+      const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+      for (let i = startPage; i <= endPage; i++) {
+        pageButtons.push(
+          <button
+            key={i}
+            onClick={() => handlePageChange(i)}
+            className={`pagination-btn ${currentPage === i ? "active" : ""}`}
+          >
+            {i}
+          </button>
+        );
+      }
+
+      if (currentPage < totalPages - 2) {
+        if (currentPage < totalPages - 3) {
+          pageButtons.push(<span key="dots-right">...</span>);
+        }
+        pageButtons.push(
+          <button
+            key={totalPages}
+            onClick={() => handlePageChange(totalPages)}
+            className="pagination-btn"
+          >
+            {totalPages}
+          </button>
+        );
+      }
+
+      pageButtons.push(
+        <button
+          key="next"
+          onClick={() => handlePageChange(currentPage+1)}
+          className="pagination-btn"
+          disabled={currentPage === totalPages}
+        >
+          {">>"}
+        </button>
+      );
+    }
+
+    return pageButtons;
+  };
 
   return (
     <>
@@ -92,19 +194,21 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
               <option value="BSE">BSE</option>
             </select>
           </div>
-          {loading ? (
+          {/* {loading ? (
             <Loader />
-          ) : (
-            <div className="stocks-container" style={styles}>
-              {filteredData.map((stock, index) => (
-                <Stock
-                  key={index}
-                  handleAddToBasket={handleAddToBasket}
-                  stock={stock}
-                />
-              ))}
-            </div>
-          )}
+          ) : ( */}
+          <div className="stocks-container" style={styles}>
+            {currentData.map((stock, index) => (
+              <Stock
+                key={index}
+                handleAddToBasket={handleAddToBasket}
+                stock={stock}
+              />
+            ))}
+          </div>
+          {/* Pagination */}
+          <div className="pagination">{renderPagination()}</div>
+          {/* )} */}
         </div>
       )}
     </>
