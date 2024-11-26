@@ -2,7 +2,7 @@
 .tab-container {
     display: flex;
     justify-content: center;
-    background-color: #ffffff;
+    background-color: #3c574c;
     /* border-bottom: 1px solid #e0e0e0; */
     margin-top: 1rem;
   }
@@ -13,7 +13,7 @@
     margin: 0 1rem;
     font-size: 1.1rem;
     font-weight: 600;
-    color: #234110;
+    color: #c3d3cd;
     cursor: pointer;
     position: relative;
     transition: color 0.3s;
@@ -25,7 +25,7 @@
   
   /* Active Tab Styling with Underline */
   .active-tab {
-    color: #84BC62;
+    color: #ffffff;
   }
   
   .active-tab::after {
@@ -35,7 +35,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background-color: #234110;
+    background-color: #61a733;
     border-radius: 3px;
   }
   

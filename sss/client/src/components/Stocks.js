@@ -14,7 +14,7 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
   const [complianceFilter, setComplianceFilter] = useState("All");
   const [exchangeFilter, setExchangeFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
-  const itemsPerPage = 20; // Number of items per page
+  const itemsPerPage = 15; // Number of items per page
 
   const onChangehandler = (e) => {
     setQuery(e.target.value);
