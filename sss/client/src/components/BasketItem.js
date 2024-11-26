@@ -159,7 +159,7 @@ function BasketItem({ onClose, stocks }) {
           <i className="bi bi-x"></i>
         </button>
         <center>
-          <div>
+          <div className="input-bar">
             <input
               type="text"
               value={basketName}
@@ -167,6 +167,7 @@ function BasketItem({ onClose, stocks }) {
               placeholder="Enter Basket Name"
             />
             <input
+              type="text"
               value={basketDescription}
               onChange={(e) => setBasketDescription(e.target.value)}
               placeholder="Enter Basket Description"
@@ -197,7 +198,7 @@ function BasketItem({ onClose, stocks }) {
           </div>
         </center>
         <div>
-          <h4>Select Stocks now to Add</h4>
+          {/* <h4>Select Stocks now to Add</h4> */}
           {currentData.map((stock, index) => (
             <Stock
               key={index}
