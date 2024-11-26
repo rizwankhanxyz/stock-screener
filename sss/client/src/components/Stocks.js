@@ -102,8 +102,8 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
         }
       }
 
-      const startPage = Math.max(2, currentPage - 1);
-      const endPage = Math.min(totalPages - 1, currentPage + 1);
+      const startPage = Math.max(1, currentPage - 1);
+      const endPage = Math.min(totalPages, currentPage + 1);
 
       for (let i = startPage; i <= endPage; i++) {
         pageButtons.push(
@@ -135,7 +135,7 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
       pageButtons.push(
         <button
           key="next"
-          onClick={() => handlePageChange(currentPage+1)}
+          onClick={() => handlePageChange(currentPage + 1)}
           className="pagination-btn"
           disabled={currentPage === totalPages}
         >
