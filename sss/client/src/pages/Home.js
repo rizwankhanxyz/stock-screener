@@ -5,15 +5,7 @@ import Funds from "../components/Funds";
 import Basket from "../components/Basket";
 import "../styles/Home.css";
 
-function Home({
-  handleAddToBasket,
-  stocks,
-  loading,
-  setUserRole,
-  setAuth,
-  setAlias,
-  alias,
-}) {
+function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
   const [activeTab, setActiveTab] = useState("Stocks");
 
   return (
@@ -49,21 +41,9 @@ function Home({
 
       {/* Tab Content */}
       <div className="tab-content">
-        {activeTab === "Stocks" && (
-          <Stocks
-            loading={loading}
-            handleAddToBasket={handleAddToBasket}
-            stocks={stocks}
-          />
-        )}
+        {activeTab === "Stocks" && <Stocks loading={loading} stocks={stocks} />}
         {activeTab === "Funds" && <Funds loading={loading} />}
-        {activeTab === "Basket" && (
-          <Basket
-            loading={loading}
-            stocks={stocks}
-            handleAddToBasket={handleAddToBasket}
-          />
-        )}
+        {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} />}
       </div>
     </>
   );

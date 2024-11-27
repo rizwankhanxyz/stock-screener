@@ -194,9 +194,7 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
               <option value="BSE">BSE</option>
             </select>
           </div>
-          {/* {loading ? (
-            <Loader />
-          ) : ( */}
+
           <div className="stocks-container" style={styles}>
             {currentData.map((stock, index) => (
               <Stock
@@ -208,7 +206,7 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
           </div>
           {/* Pagination */}
           <div className="pagination">{renderPagination()}</div>
-          {/* )} */}
+
         </div>
       )}
     </>

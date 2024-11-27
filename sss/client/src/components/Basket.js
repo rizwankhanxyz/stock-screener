@@ -1,9 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Basket.css";
+import axios from "axios";
 import BasketItem from "./BasketItem";
+import Loader from "./Loader";
 
-function Basket({ loading, stocks, handleAddToBasket }) {
+function Basket({ loading, stocks }) {
+  const [query, setQuery] = useState("");
   const [showBasket, setShowBasket] = useState(false);
+  const [baskets, setBaskets] = useState([]);
+
+  const onChangehandler = (e) => {
+    setQuery(e.target.value);
+  };
+
+  useEffect(() => {
+    const getBaskets = async () => {
+      // setLoading(true);
+      try {
+        const { data } = await axios.get(
+          "http://localhost:5000/api/baskets/customer/basket/get",
+          {
+            withCredentials: true,
+          }
+        );
+        setBaskets(data.basketItems);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+      //  finally {
+      //   setTimeout(() => setLoading(false), 2000);
+      // }
+    };
+    getBaskets();
+  }, []);
+
+  const filteredData = baskets.filter((element) => {
+    const matchesQuery =
+      element.basketName.toLowerCase().includes(query.toLowerCase()) ||
+      element.basketDescription.toLowerCase().includes(query.toLowerCase());
+
+    return matchesQuery;
+  });
 
   // Function to handle click and show ComplianceReport component
   const openCreateBasket = (e) => {
@@ -18,45 +55,58 @@ function Basket({ loading, stocks, handleAddToBasket }) {
   };
   return (
     <>
-      <div>
-        {/* <center>
-          <div
-            className="search-container"
-            style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
+      {loading ? (
+        <Loader />
+      ) : (
+        <div>
+          <button
+            data-bs-toggle="popover"
+            className="create-basket"
+            onClick={openCreateBasket}
           >
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search By Stock Name or NSE/BSE Symbol"
-              // onChange={onChangehandler}
-              // value={query}
-              style={{
-                textAlign: "center",
-                borderRadius: "1rem",
-                padding: "0.8rem",
-              }}
-              required
-            />
-          </div>
-        </center> */}
-        {/* {stocks.map((stock) => (
-          <div key={stock._id}>
-            <h4>{stock.companyName}</h4>
-            <button onClick={() => handleAddToBasket(stock._id)}>Add</button>
-          </div>
-        ))} */}
+            Create a new Basket
+          </button>
+          {showBasket && (
+            <BasketItem onClose={closeCreateBasket} stocks={stocks} />
+          )}
 
-        <button
-          data-bs-toggle="popover"
-          className="create-basket"
-          onClick={openCreateBasket}
-        >
-          Create a new Basket
-        </button>
-        {showBasket && (
-          <BasketItem onClose={closeCreateBasket} handleAddToBasket={handleAddToBasket} stocks={stocks} />
-        )}
-      </div>
+          <center>
+            <div
+              className="search-container"
+              style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
+            >
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search By Basket Name or Description"
+                onChange={onChangehandler}
+                value={query}
+                style={{
+                  textAlign: "center",
+                  borderRadius: "1rem",
+                  padding: "0.8rem",
+                }}
+                required
+              />
+            </div>
+          </center>
+
+          <div>
+            {filteredData.map((element, index) => (
+              <div key={index}>
+                <h3>{element.basketName}</h3>
+                <h6>Stock Qty: {element.stockIds.length}</h6>
+                <h7>{element.basketDescription}</h7>
+                {/* <h4>
+                  {element.stockIds.map(
+                    (childelement) => childelement.companyName
+                  )}
+                </h4> */}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 }

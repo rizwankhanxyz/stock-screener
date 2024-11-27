@@ -3,7 +3,7 @@ import "../styles/BasketItem.css";
 import Stock from "./Stock";
 import axios from "axios";
 
-function BasketItem({ onClose, handleAddToBasket, stocks }) {
+function BasketItem({ onClose, stocks }) {
   const [query, setQuery] = useState("");
   const [basketName, setBasketName] = useState("");
   const [basketDescription, setBasketDescription] = useState("");
@@ -23,10 +23,6 @@ function BasketItem({ onClose, handleAddToBasket, stocks }) {
   });
 
   const handleStockSelect = (stockId) => {
-    // if (selectedStocks.length === 0) {
-    //   alert("Please select at least one stock.");
-    //   return;
-    // }
     setSelectedStocks((prev) =>
       prev.includes(stockId)
         ? prev.filter((id) => id !== stockId)
@@ -206,7 +202,6 @@ function BasketItem({ onClose, handleAddToBasket, stocks }) {
           {currentData.map((stock, index) => (
             <Stock
               key={index}
-              // handleAddToBasket={handleAddToBasket}
               handleStockSelect={handleStockSelect}
               stock={stock}
             />

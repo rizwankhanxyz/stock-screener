@@ -60,8 +60,6 @@ function App() {
     }, 3500);
   };
 
-  //what I am doing in BasketItem.js I have to do it here. start from there tomorrow
-
   return (
     <>
       <BrowserRouter>
@@ -100,7 +98,6 @@ function App() {
                   setAlias={setAlias}
                   alias={alias}
                   stocks={stocks}
-                  // handleAddToBasket={handleAddToBasket}
                 />
               ) : (
                 <Navigate to="/login" />
