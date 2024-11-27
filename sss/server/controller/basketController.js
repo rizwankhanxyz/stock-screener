@@ -17,20 +17,10 @@ router.post("/customer/basket/create", async (req, res) => {
         .json({ error: "Unauthorized. No token provided." });
     }
     const decoded = jwt.verify(token, "stockscreener@shariahequities");
-    const { stockId } = req.body; // Extract stockId from the request body
     const userId = decoded.user_id; // Extract userId from the decoded JWT in the auth middleware
 
     const { basketName, basketDescription, stockIds } = req.body; // Extract data from request body
 
-    // Check if the stock is already in the user's basket
-    let existingBasketItem = await basketModel.findOne({ userId, stockId });
-
-    if (existingBasketItem) {
-      return res.status(400).json({ error: "Stock is already in the basket." });
-    }
-
-    // Add the stock to the user's basket
-    // const basketItem = new basketModel({ userId, stockId });
     const basketItem = new basketModel({
       userId,
       basketName,
@@ -64,12 +54,13 @@ router.get("/customer/basket/get", async (req, res) => {
     }
     const decoded = jwt.verify(token, "stockscreener@shariahequities");
     const userId = decoded.user_id;
-    const basketItems = await basketModel.find({ userId }).populate("stockId");
+    const basketItems = await basketModel.find({ userId }).populate("stockIds");
     if (!basketItems.length) {
       return res.status(404).json({ error: "No items found in the basket. " });
     }
     res.status(200).json({
       success: "Basket items retrieved successfully.",
+      count: basketItems.length,
       basketItems,
     });
   } catch (error) {
