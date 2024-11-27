@@ -11,7 +11,6 @@ function Basket({ loading, stocks, handleAddToBasket }) {
     setShowBasket(true); // Set to true to show ComplianceReport
     document.body.style.overflow = "hidden"; // Prevent background scroll
   };
-
   // Function to close the ComplianceReport component
   const closeCreateBasket = () => {
     setShowBasket(false); // Set to false to hide ComplianceReport
@@ -55,7 +54,7 @@ function Basket({ loading, stocks, handleAddToBasket }) {
           Create a new Basket
         </button>
         {showBasket && (
-          <BasketItem onClose={closeCreateBasket} stocks={stocks} />
+          <BasketItem onClose={closeCreateBasket} handleAddToBasket={handleAddToBasket} stocks={stocks} />
         )}
       </div>
     </>

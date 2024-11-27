@@ -60,18 +60,7 @@ function App() {
     }, 3500);
   };
 
-  const handleAddToBasket = async (stockId) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/baskets/customer/basket/add", // API endpoint
-        { stockId },
-        { withCredentials: true } // Enable cookies
-      );
-      console.log("Stock added to basket:", response.data);//Add alert here
-    } catch (error) {
-      console.log("Error adding stock to basket:", error);//Add alert here
-    }
-  };
+  //what I am doing in BasketItem.js I have to do it here. start from there tomorrow
 
   return (
     <>
@@ -111,7 +100,7 @@ function App() {
                   setAlias={setAlias}
                   alias={alias}
                   stocks={stocks}
-                  handleAddToBasket={handleAddToBasket}
+                  // handleAddToBasket={handleAddToBasket}
                 />
               ) : (
                 <Navigate to="/login" />

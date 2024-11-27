@@ -57,7 +57,13 @@ function Home({
           />
         )}
         {activeTab === "Funds" && <Funds loading={loading} />}
-        {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} handleAddToBasket={handleAddToBasket} />}
+        {activeTab === "Basket" && (
+          <Basket
+            loading={loading}
+            stocks={stocks}
+            handleAddToBasket={handleAddToBasket}
+          />
+        )}
       </div>
     </>
   );

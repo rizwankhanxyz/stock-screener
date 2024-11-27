@@ -3,7 +3,7 @@ import "../styles/BasketItem.css";
 import Stock from "./Stock";
 import axios from "axios";
 
-function BasketItem({ onClose, stocks }) {
+function BasketItem({ onClose, handleAddToBasket, stocks }) {
   const [query, setQuery] = useState("");
   const [basketName, setBasketName] = useState("");
   const [basketDescription, setBasketDescription] = useState("");
@@ -22,13 +22,17 @@ function BasketItem({ onClose, stocks }) {
     return matchesQuery;
   });
 
-  // const handleStockSelect = (stockId) => {
-  //   setSelectedStocks((prev) =>
-  //     prev.includes(stockId)
-  //       ? prev.filter((id) => id !== stockId)
-  //       : [...prev, stockId]
-  //   );
-  // };
+  const handleStockSelect = (stockId) => {
+    // if (selectedStocks.length === 0) {
+    //   alert("Please select at least one stock.");
+    //   return;
+    // }
+    setSelectedStocks((prev) =>
+      prev.includes(stockId)
+        ? prev.filter((id) => id !== stockId)
+        : [...prev, stockId]
+    );
+  };
 
   const handleSubmit = async () => {
     if (!basketName.trim()) {
@@ -203,6 +207,7 @@ function BasketItem({ onClose, stocks }) {
             <Stock
               key={index}
               // handleAddToBasket={handleAddToBasket}
+              handleStockSelect={handleStockSelect}
               stock={stock}
             />
           ))}
