@@ -13,6 +13,11 @@ function Basket({ loading, stocks }) {
     setQuery(e.target.value);
   };
 
+  const onClickOpenBasketStock = (e) => {
+
+  }
+  //start from here tomorrow basket.js
+
   useEffect(() => {
     const getBaskets = async () => {
       // setLoading(true);
@@ -89,22 +94,22 @@ function Basket({ loading, stocks }) {
                 required
               />
             </div>
-          </center>
 
-          <div>
-            {filteredData.map((element, index) => (
-              <div key={index}>
-                <h3>{element.basketName}</h3>
-                <h6>Stock Qty: {element.stockIds.length}</h6>
-                <h7>{element.basketDescription}</h7>
-                {/* <h4>
+            <div>
+              {filteredData.map((element, index) => (
+                <div onClick={onClickOpenBasketStock} key={index}>
+                  <h3>{element.basketName}</h3>
+                  <h6>Stock Qty: {element.stockIds.length}</h6>
+                  <h7>{element.basketDescription}</h7>
+                  {/* <h4>
                   {element.stockIds.map(
                     (childelement) => childelement.companyName
                   )}
                 </h4> */}
-              </div>
-            ))}
-          </div>
+                </div>
+              ))}
+            </div>
+          </center>
         </div>
       )}
     </>
