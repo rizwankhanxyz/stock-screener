@@ -7,6 +7,8 @@ import Loader from "./Loader";
 function Basket({ loading, stocks }) {
   const [query, setQuery] = useState("");
   const [showBasket, setShowBasket] = useState(false);
+  const [showBasketWithStocks, setShowBasketWithStocks] = useState(false);
+
   const [baskets, setBaskets] = useState([]);
 
   const onChangehandler = (e) => {
@@ -14,9 +16,16 @@ function Basket({ loading, stocks }) {
   };
 
   const onClickOpenBasketStock = (e) => {
+    e.preventDefault();
+    setShowBasketWithStocks(true); // Set to true to show ComplianceReport
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+  };
 
-  }
-  //start from here tomorrow basket.js
+  const onClickCloseBasketStock = () => {
+    setShowBasketWithStocks(false); // Set to false to hide ComplianceReport
+    document.body.style.overflow = "auto"; // Re-enable background scroll
+  };
+  //start from here tomorrow basket.jsu
 
   useEffect(() => {
     const getBaskets = async () => {
@@ -75,6 +84,10 @@ function Basket({ loading, stocks }) {
             <BasketItem onClose={closeCreateBasket} stocks={stocks} />
           )}
 
+          {/* {showBasketWithStocks && (
+            <BasketItem onClose={onClickCloseBasketStock} />
+          )} */}
+
           <center>
             <div
               className="search-container"
@@ -100,12 +113,18 @@ function Basket({ loading, stocks }) {
                 <div onClick={onClickOpenBasketStock} key={index}>
                   <h3>{element.basketName}</h3>
                   <h6>Stock Qty: {element.stockIds.length}</h6>
-                  <h7>{element.basketDescription}</h7>
+                  <p>{element.basketDescription}</p>
                   {/* <h4>
                   {element.stockIds.map(
                     (childelement) => childelement.companyName
                   )}
                 </h4> */}
+                  {showBasketWithStocks && (
+                    <BasketItem
+                      stockIds={element.stockIds} // Pass stockIds to BasketItem
+                      onClose={onClickCloseBasketStock}
+                    />
+                  )}
                 </div>
               ))}
             </div>
