@@ -2,30 +2,28 @@ import React, { useState, useEffect } from "react";
 import "../styles/Basket.css";
 import axios from "axios";
 import BasketItem from "./BasketItem";
+import BasketStocks from "./BasketStocks";
 import Loader from "./Loader";
 
 function Basket({ loading, stocks }) {
   const [query, setQuery] = useState("");
   const [showBasket, setShowBasket] = useState(false);
-  const [showBasketWithStocks, setShowBasketWithStocks] = useState(false);
-
+  const [selectedBasket, setSelectedBasket] = useState(null); // Track the currently selected basket
   const [baskets, setBaskets] = useState([]);
 
   const onChangehandler = (e) => {
     setQuery(e.target.value);
   };
 
-  const onClickOpenBasketStock = (e) => {
-    e.preventDefault();
-    setShowBasketWithStocks(true); // Set to true to show ComplianceReport
+  const onClickOpenBasketStock = (basket) => {
+    setSelectedBasket(basket);
     document.body.style.overflow = "hidden"; // Prevent background scroll
   };
 
   const onClickCloseBasketStock = () => {
-    setShowBasketWithStocks(false); // Set to false to hide ComplianceReport
+    setSelectedBasket(null); // Clear the selected basket
     document.body.style.overflow = "auto"; // Re-enable background scroll
   };
-  //start from here tomorrow basket.jsu
 
   useEffect(() => {
     const getBaskets = async () => {
@@ -84,10 +82,6 @@ function Basket({ loading, stocks }) {
             <BasketItem onClose={closeCreateBasket} stocks={stocks} />
           )}
 
-          {/* {showBasketWithStocks && (
-            <BasketItem onClose={onClickCloseBasketStock} />
-          )} */}
-
           <center>
             <div
               className="search-container"
@@ -110,25 +104,26 @@ function Basket({ loading, stocks }) {
 
             <div>
               {filteredData.map((element, index) => (
-                <div onClick={onClickOpenBasketStock} key={index}>
+                <div
+                  onClick={() => onClickOpenBasketStock(element)}
+                  key={index}
+                >
                   <h3>{element.basketName}</h3>
                   <h6>Stock Qty: {element.stockIds.length}</h6>
                   <p>{element.basketDescription}</p>
-                  {/* <h4>
-                  {element.stockIds.map(
-                    (childelement) => childelement.companyName
-                  )}
-                </h4> */}
-                  {showBasketWithStocks && (
-                    <BasketItem
-                      stockIds={element.stockIds} // Pass stockIds to BasketItem
-                      onClose={onClickCloseBasketStock}
-                    />
-                  )}
                 </div>
               ))}
             </div>
           </center>
+
+          {selectedBasket && (
+            <BasketStocks
+              basketName={selectedBasket.basketName}
+              basketDescription={selectedBasket.basketDescription}
+              stockIds={selectedBasket.stockIds} // Pass stockIds to BasketItem
+              onClose={onClickCloseBasketStock}
+            />
+          )}
         </div>
       )}
     </>

@@ -1,0 +1,61 @@
+.basket-item-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* Dimmed background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.basket-item-content {
+    position: relative;
+    /* For positioning the close button */
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    /* Relative width for responsiveness */
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    /* Stack content vertically */
+    gap: 0.5rem;
+    /* Space between elements */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Optional: Add a shadow for better visibility */
+}
+
+.close-button {
+    position: absolute;
+    /* Position relative to .basket-item-content */
+    top: 10px;
+    right: 10px;
+    background: none;
+    color: rgb(255, 0, 0);
+    /* Red color */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: darkred;
+    /* Change color on hover/focus */
+    transform: scale(1.1);
+    /* Slight zoom for interactivity */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul>li {
+    margin-bottom: 0.5rem;
+}

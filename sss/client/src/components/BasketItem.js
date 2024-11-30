@@ -205,7 +205,7 @@ function BasketItem({ onClose, stocks }) {
               handleStockSelect={handleStockSelect}
               stock={stock}
             />
-          ))}
+          ))}{" "}
         </div>
         {/* Pagination */}
         <div className="pagination">{renderPagination()}</div>
