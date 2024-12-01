@@ -42,7 +42,6 @@ router.post("/customer/basket/create", async (req, res) => {
 get
 api/baskets/customer/basket/get
 */
-
 // Get user's basket
 router.get("/customer/basket/get", async (req, res) => {
   try {
@@ -68,4 +67,43 @@ router.get("/customer/basket/get", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error." });
   }
 });
+
+//Delete User's Basket
+/*
+delete
+api/baskets/customer/basket/get
+*/
+
+// Delete a basket and associated stocks
+router.delete("/customer/basket/:basketId", async (req, res) => {
+  try {
+    const token = req.cookies.token; // Assuming token is stored in cookies
+    if (!token) {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized. No token provided." });
+    }
+    const decoded = jwt.verify(token, "stockscreener@shariahequities");
+    const userId = decoded.user_id;
+    const { basketId } = req.params;
+
+    const basket = await basketModel.findOne({ _id: basketId, userId });
+
+    if (!basket) {
+      console.log("Basket not found");
+      return res.status(404).json({ error: "Basket not found." });
+    }
+
+    // Delete the basket
+    await basketModel.findByIdAndDelete(basketId);
+
+    res
+      .status(200)
+      .json({ success: "Basket and associated stocks deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting basket:", error);
+    res.status(500).json({ error: "Internal Server Error." });
+  }
+});
+
 export default router;

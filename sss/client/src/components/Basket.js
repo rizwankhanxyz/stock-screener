@@ -25,6 +25,22 @@ function Basket({ loading, stocks }) {
     document.body.style.overflow = "auto"; // Re-enable background scroll
   };
 
+  const onClickDeleteBasket = async (basketId) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:5000/api/baskets/customer/basket/${basketId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (data.success) {
+        setBaskets(baskets.filter((basket) => basket._id !== basketId));
+      }
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
+  };
+
   useEffect(() => {
     const getBaskets = async () => {
       // setLoading(true);
@@ -37,7 +53,7 @@ function Basket({ loading, stocks }) {
         );
         setBaskets(data.basketItems);
       } catch (error) {
-        console.log(error.response.data.error);
+        console.log(error);
       }
       //  finally {
       //   setTimeout(() => setLoading(false), 2000);
@@ -79,7 +95,7 @@ function Basket({ loading, stocks }) {
             Create a new Basket
           </button>
           {showBasket && (
-            <BasketItem onClose={closeCreateBasket} stocks={stocks} />
+            <BasketItem onClose={closeCreateBasket} baskets={baskets} setBaskets={setBaskets}  stocks={stocks} />
           )}
 
           <center>
@@ -101,22 +117,28 @@ function Basket({ loading, stocks }) {
                 required
               />
             </div>
-              {filteredData.map((element, index) => (
-                <div className="basket-portion" key={index}>
-                  <div className="basket-portionleft">
-                    <h3>{element.basketName}</h3>
-                    <p>{element.basketDescription}</p>
-                  </div>
-                  <div className="basket-portionright">
-                    <h6 className="basket-stocks" onClick={() => onClickOpenBasketStock(element)}>
-                     See Stocks: {element.stockIds.length}
-                      </h6>
-                    <button className="basket-delete">
-                      <i class="bi bi-trash3-fill"></i>
-                    </button>
-                  </div>
+            {filteredData.map((element, index) => (
+              <div className="basket-portion" key={index}>
+                <div className="basket-portionleft">
+                  <h3>{element.basketName}</h3>
+                  <p>{element.basketDescription}</p>
                 </div>
-              ))}
+                <div className="basket-portionright">
+                  <h6
+                    className="basket-stocks"
+                    onClick={() => onClickOpenBasketStock(element)}
+                  >
+                    See Stocks: {element.stockIds.length}
+                  </h6>
+                  <button
+                    className="basket-delete"
+                    onClick={() => onClickDeleteBasket(element._id)} // Change to a function reference
+                  >
+                    <i className="bi bi-trash3-fill"></i>
+                  </button>
+                </div>
+              </div>
+            ))}
           </center>
 
           {selectedBasket && (

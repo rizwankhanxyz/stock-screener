@@ -3,7 +3,7 @@ import "../styles/BasketItem.css";
 import Stock from "./Stock";
 import axios from "axios";
 
-function BasketItem({ onClose, stocks }) {
+function BasketItem({ onClose, stocks, setBaskets, baskets }) {
   const [query, setQuery] = useState("");
   const [basketName, setBasketName] = useState("");
   const [basketDescription, setBasketDescription] = useState("");
@@ -37,7 +37,7 @@ function BasketItem({ onClose, stocks }) {
     }
 
     try {
-      const response = await axios.post(
+      const {data} = await axios.post(
         "http://localhost:5000/api/baskets/customer/basket/create",
         {
           basketName,
@@ -47,6 +47,7 @@ function BasketItem({ onClose, stocks }) {
         { withCredentials: true }
       );
       alert("Basket created successfully.");
+      setBaskets([...baskets, data.basketItem]); // Update baskets in parent
       onClose();
     } catch (error) {
       console.error("Error creating basket:", error.response.data.error);
