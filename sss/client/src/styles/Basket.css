@@ -3,3 +3,34 @@
     background-color: rgb(4, 190, 4);
     border: none;
 }
+.basket-portion{
+    display: flex;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    justify-content: space-between;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    max-width: 400px;
+    border-radius: 0.5rem;
+    border: none;
+}
+.basket-delete{
+    background: none;
+    border: none;
+    color:rgb(250, 94, 94);
+}
+.basket-portionleft{
+    /* padding-right: 2rem; */
+    text-align: left;
+}
+.basket-portionright{
+    /* padding-left: 2rem; */
+    text-align: right;
+
+
+}
+.basket-stocks{
+    cursor: pointer;
+}

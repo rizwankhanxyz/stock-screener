@@ -101,19 +101,22 @@ function Basket({ loading, stocks }) {
                 required
               />
             </div>
-
-            <div>
               {filteredData.map((element, index) => (
-                <div
-                  onClick={() => onClickOpenBasketStock(element)}
-                  key={index}
-                >
-                  <h3>{element.basketName}</h3>
-                  <h6>Stock Qty: {element.stockIds.length}</h6>
-                  <p>{element.basketDescription}</p>
+                <div className="basket-portion" key={index}>
+                  <div className="basket-portionleft">
+                    <h3>{element.basketName}</h3>
+                    <p>{element.basketDescription}</p>
+                  </div>
+                  <div className="basket-portionright">
+                    <h6 className="basket-stocks" onClick={() => onClickOpenBasketStock(element)}>
+                     See Stocks: {element.stockIds.length}
+                      </h6>
+                    <button className="basket-delete">
+                      <i class="bi bi-trash3-fill"></i>
+                    </button>
+                  </div>
                 </div>
               ))}
-            </div>
           </center>
 
           {selectedBasket && (
