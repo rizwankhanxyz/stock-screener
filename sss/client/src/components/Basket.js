@@ -87,18 +87,23 @@ function Basket({ loading, stocks }) {
         <Loader />
       ) : (
         <div>
-          <button
-            data-bs-toggle="popover"
-            className="create-basket"
-            onClick={openCreateBasket}
-          >
-            Create a new Basket
-          </button>
-          {showBasket && (
-            <BasketItem onClose={closeCreateBasket} baskets={baskets} setBaskets={setBaskets}  stocks={stocks} />
-          )}
-
           <center>
+            <button
+              data-bs-toggle="popover"
+              className="create-basket"
+              onClick={openCreateBasket}
+            >
+              <i className="bi bi-plus-circle-dotted"></i> Create a new Basket
+            </button>
+            {showBasket && (
+              <BasketItem
+                onClose={closeCreateBasket}
+                baskets={baskets}
+                setBaskets={setBaskets}
+                stocks={stocks}
+              />
+            )}
+
             <div
               className="search-container"
               style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}

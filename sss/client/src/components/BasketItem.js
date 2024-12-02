@@ -37,7 +37,7 @@ function BasketItem({ onClose, stocks, setBaskets, baskets }) {
     }
 
     try {
-      const {data} = await axios.post(
+      const { data } = await axios.post(
         "http://localhost:5000/api/baskets/customer/basket/create",
         {
           basketName,
@@ -163,18 +163,20 @@ function BasketItem({ onClose, stocks, setBaskets, baskets }) {
           <div className="input-bar">
             <input
               type="text"
+              className="input-text"
               value={basketName}
               onChange={(e) => setBasketName(e.target.value)}
               placeholder="Enter Basket Name"
             />
             <input
               type="text"
+              className="input-text"
               value={basketDescription}
               onChange={(e) => setBasketDescription(e.target.value)}
               placeholder="Enter Basket Description"
             />
             <button onClick={handleSubmit} className="submit-btn">
-              Create Basket
+            <i className="bi bi-plus-circle-dotted"></i> Create Basket
             </button>
           </div>
         </center>
