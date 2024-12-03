@@ -104,46 +104,59 @@ function Basket({ loading, stocks }) {
               />
             )}
 
-            <div
-              className="search-container"
-              style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
-            >
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search By Basket Name or Description"
-                onChange={onChangehandler}
-                value={query}
-                style={{
-                  textAlign: "center",
-                  borderRadius: "1rem",
-                  padding: "0.8rem",
-                }}
-                required
-              />
-            </div>
-            {filteredData.map((element, index) => (
-              <div className="basket-portion" key={index}>
-                <div className="basket-portionleft">
-                  <h3>{element.basketName}</h3>
-                  <p>{element.basketDescription}</p>
+            {baskets.length > 0 ? (
+              <>
+                <div
+                  className="search-container"
+                  style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
+                >
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search By Basket Name or Description"
+                    onChange={onChangehandler}
+                    value={query}
+                    style={{
+                      textAlign: "center",
+                      borderRadius: "1rem",
+                      padding: "0.8rem",
+                    }}
+                    required
+                  />
                 </div>
-                <div className="basket-portionright">
-                  <h6
-                    className="basket-stocks"
-                    onClick={() => onClickOpenBasketStock(element)}
-                  >
-                    See Stocks: {element.stockIds.length}
-                  </h6>
-                  <button
-                    className="basket-delete"
-                    onClick={() => onClickDeleteBasket(element._id)} // Change to a function reference
-                  >
-                    <i className="bi bi-trash3-fill"></i>
-                  </button>
-                </div>
-              </div>
-            ))}
+                {filteredData.map((element, index) => (
+                  <div className="basket-portion" key={index}>
+                    <div className="basket-portionleft">
+                      <h3>{element.basketName}</h3>
+                      <p>{element.basketDescription}</p>
+                    </div>
+                    <div className="basket-portionright">
+                      <h6
+                        className="basket-stocks"
+                        onClick={() => onClickOpenBasketStock(element)}
+                      >
+                        See Stocks:{" "}
+                        {element.stockIds.map((stock,index) => (
+                          <p key={index}>{stock.companyName}</p>
+                        ))}
+                      </h6>
+                      <button
+                        className="basket-delete"
+                        onClick={() => onClickDeleteBasket(element._id)} // Change to a function reference
+                      >
+                        <i className="bi bi-trash3-fill"></i>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <p
+                style={{ marginTop: "1rem", fontSize: "1.2rem", color: "#666" }}
+              >
+                No basket created yet.
+              </p>
+            )}
           </center>
 
           {selectedBasket && (

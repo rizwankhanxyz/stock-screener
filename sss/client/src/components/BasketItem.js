@@ -24,7 +24,7 @@ function BasketItem({ onClose, stocks, setBaskets, baskets }) {
 
   const handleStockSelect = (stockId) => {
     setSelectedStocks((prev) =>
-      prev.includes(stockId)
+      prev.includes(stockId)  
         ? prev.filter((id) => id !== stockId)
         : [...prev, stockId]
     );
@@ -176,7 +176,7 @@ function BasketItem({ onClose, stocks, setBaskets, baskets }) {
               placeholder="Enter Basket Description"
             />
             <button onClick={handleSubmit} className="submit-btn">
-            <i className="bi bi-plus-circle-dotted"></i> Create Basket
+              <i className="bi bi-plus-circle-dotted"></i> Create Basket
             </button>
           </div>
         </center>
@@ -207,6 +207,7 @@ function BasketItem({ onClose, stocks, setBaskets, baskets }) {
               key={index}
               handleStockSelect={handleStockSelect}
               stock={stock}
+              isSelected={selectedStocks.includes(stock._id)} // Pass the selection status
             />
           ))}{" "}
         </div>

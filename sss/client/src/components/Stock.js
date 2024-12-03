@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/Stock.css";
 import ComplianceReport from "./ComplianceReport";
 
-function Stock({ stock, handleAddToBasket, handleStockSelect }) {
+function Stock({ stock, handleStockSelect, isSelected }) {
   const [showComplianceReport, setShowComplianceReport] = useState(false);
 
   // Function to handle click and show ComplianceReport component
@@ -45,7 +45,11 @@ function Stock({ stock, handleAddToBasket, handleStockSelect }) {
           className="stock-wishlist"
           onClick={() => handleStockSelect(stock._id)} // Call function here
         >
-          <i className="bi bi-bookmark"></i>
+          {isSelected ? (
+            <i className="bi bi-bookmark-check-fill"></i>
+          ) : (
+            <i className="bi bi-bookmark"></i>
+          )}
         </div>
       </div>
 
