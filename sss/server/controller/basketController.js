@@ -54,9 +54,6 @@ router.get("/customer/basket/get", async (req, res) => {
     const decoded = jwt.verify(token, "stockscreener@shariahequities");
     const userId = decoded.user_id;
     const basketItems = await basketModel.find({ userId }).populate("stockIds");
-    if (!basketItems.length) {
-      return res.status(404).json({ error: "No items found in the basket. " });
-    }
     res.status(200).json({
       success: "Basket items retrieved successfully.",
       count: basketItems.length,

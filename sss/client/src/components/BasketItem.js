@@ -3,7 +3,7 @@ import "../styles/BasketItem.css";
 import Stock from "./Stock";
 import axios from "axios";
 
-function BasketItem({ onClose, stocks, setBaskets, baskets }) {
+function BasketItem({ onClose, stocks, getBaskets }) {
   const [query, setQuery] = useState("");
   const [basketName, setBasketName] = useState("");
   const [basketDescription, setBasketDescription] = useState("");
@@ -24,20 +24,23 @@ function BasketItem({ onClose, stocks, setBaskets, baskets }) {
 
   const handleStockSelect = (stockId) => {
     setSelectedStocks((prev) =>
-      prev.includes(stockId)  
+      prev.includes(stockId)
         ? prev.filter((id) => id !== stockId)
         : [...prev, stockId]
     );
   };
 
   const handleSubmit = async () => {
-    if (!basketName.trim()) {
-      alert("Basket name is required.");
+    if (!basketName.trim() || !basketDescription.trim()) {
+      alert("Basket name/description is required.");
+      return;
+    } else if (selectedStocks.length === 0) {
+      alert("Atleast one stock should be selected.");
       return;
     }
 
     try {
-      const { data } = await axios.post(
+      await axios.post(
         "http://localhost:5000/api/baskets/customer/basket/create",
         {
           basketName,
@@ -47,8 +50,10 @@ function BasketItem({ onClose, stocks, setBaskets, baskets }) {
         { withCredentials: true }
       );
       alert("Basket created successfully.");
-      setBaskets([...baskets, data.basketItem]); // Update baskets in parent
       onClose();
+      if (getBaskets) {
+        getBaskets();
+      }
     } catch (error) {
       console.error("Error creating basket:", error.response.data.error);
       alert(error.response.data.error || "Error creating basket.");

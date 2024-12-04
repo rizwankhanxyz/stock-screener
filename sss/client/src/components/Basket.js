@@ -41,24 +41,21 @@ function Basket({ loading, stocks }) {
     }
   };
 
+  const getBaskets = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/api/baskets/customer/basket/get",
+        {
+          withCredentials: true,
+        }
+      );
+      setBaskets(data.basketItems);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const getBaskets = async () => {
-      // setLoading(true);
-      try {
-        const { data } = await axios.get(
-          "http://localhost:5000/api/baskets/customer/basket/get",
-          {
-            withCredentials: true,
-          }
-        );
-        setBaskets(data.basketItems);
-      } catch (error) {
-        console.log(error);
-      }
-      //  finally {
-      //   setTimeout(() => setLoading(false), 2000);
-      // }
-    };
     getBaskets();
   }, []);
 
@@ -101,6 +98,7 @@ function Basket({ loading, stocks }) {
                 baskets={baskets}
                 setBaskets={setBaskets}
                 stocks={stocks}
+                getBaskets={getBaskets}
               />
             )}
 
@@ -135,10 +133,8 @@ function Basket({ loading, stocks }) {
                         className="basket-stocks"
                         onClick={() => onClickOpenBasketStock(element)}
                       >
-                        See Stocks:{" "}
-                        {element.stockIds.map((stock,index) => (
-                          <p key={index}>{stock.companyName}</p>
-                        ))}
+                        See Stocks:
+                        {element.stockIds.length}
                       </h6>
                       <button
                         className="basket-delete"
