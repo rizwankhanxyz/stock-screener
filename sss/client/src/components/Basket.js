@@ -157,10 +157,12 @@ function Basket({ loading, stocks }) {
 
           {selectedBasket && (
             <BasketStocks
+              basketId={selectedBasket._id}
               basketName={selectedBasket.basketName}
               basketDescription={selectedBasket.basketDescription}
               stockIds={selectedBasket.stockIds} // Pass stockIds to BasketItem
               onClose={onClickCloseBasketStock}
+              getBaskets={getBaskets}
             />
           )}
         </div>

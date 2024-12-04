@@ -51,11 +51,8 @@
     /* Slight zoom for interactivity */
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul>li {
-    margin-bottom: 0.5rem;
+.stock-delete{
+    background: none;
+    border: none;
+    color:rgb(250, 94, 94);
 }
