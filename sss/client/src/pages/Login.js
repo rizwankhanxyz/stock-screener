@@ -43,6 +43,7 @@ function Login({ alert, showAlert, setAuth, setUserRole }) {
         ] = `Bearer ${data.accessToken}`; // Set Authorization header
         setAuth(true);
         setUserRole(data.role);
+        localStorage.setItem("alias", data.alias); // Save alias to localStorage
         setTimeout(() => {
           navigate(data.role === "admin" ? "/admin" : "/");
         }, 3500);
@@ -65,7 +66,7 @@ function Login({ alert, showAlert, setAuth, setUserRole }) {
           {/* <h1>
             <strong>Assalamu Alaikum</strong>
           </h1> */}
-          <h3 style={{marginTop:"1rem"}}>Welcome to Shariah Equities!</h3>
+          <h3 style={{ marginTop: "1rem" }}>Welcome to Shariah Equities!</h3>
           {/* <hr /> */}
           <div className="input-group">
             <i className="bi bi-envelope-at other-icons"></i>

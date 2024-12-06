@@ -14,7 +14,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [auth, setAuth] = useState(false);
   const [userRole, setUserRole] = useState(null);
-  const [alias, setAlias] = useState("");
   const [stocks, setStocks] = useState([]);
 
   useEffect(() => {
@@ -28,7 +27,6 @@ function App() {
         );
         setAuth(true);
         setUserRole(data.role);
-        setAlias(data.alias);
       } catch (error) {
         //Alert required here
         setAuth(false);
@@ -95,8 +93,6 @@ function App() {
                   setUserRole={setUserRole}
                   loading={loading}
                   setLoading={setLoading}
-                  setAlias={setAlias}
-                  alias={alias}
                   stocks={stocks}
                 />
               ) : (

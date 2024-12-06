@@ -1,14 +1,16 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "../styles/Navbar.css";
+
 import { useNavigate } from "react-router-dom";
 // import Loader from "./Loader";
 
-function Navbar({
-  setAuth,
-  setUserRole,
-  setAlias,
-  alias,
-}) {
+function Navbar({ setAuth, setUserRole }) {
+  const [alias, setAlias] = useState("");
+  useEffect(() => {
+    const storedAlias = localStorage.getItem("alias");
+    setAlias(storedAlias || ""); // Set alias from localStorage
+  }, []);
   const navigate = useNavigate();
   const onClickHandler = async (e) => {
     e.preventDefault();
@@ -18,6 +20,7 @@ function Navbar({
         {},
         { withCredentials: true }
       );
+      localStorage.removeItem("alias");
       setAuth(false);
       setUserRole(null);
       navigate("/login");
@@ -38,19 +41,19 @@ function Navbar({
           }}
         >
           <img
-            style={{ marginLeft: "15px" }}
+            style={{ marginLeft: "10px" }}
             src="./se-logo.png"
             alt="se-logo"
           />
-          <h1 style={{ marginLeft: "15px" }}>{alias}</h1>
-          <h1
+          <h3 className="alias">
+            Welcome, {alias} <i class="bi bi-person-circle"></i>
+          </h3>
+          <h3 className="logout"
             onClick={onClickHandler}
-            style={{ marginRight: "15px", cursor: "pointer" }}
+            style={{ marginRight: "10px", cursor: "pointer" }}
           >
-            {/* <strong> */}
             <i className="bi bi-power"></i>
-            {/* </strong> */}
-          </h1>
+          </h3>
         </div>
       </div>
       {/* )} */}
