@@ -24,4 +24,28 @@
   .pagination-btn:hover {
     background-color: #eaeaea;
   }
-  
+  .search-container{
+    position: relative;
+    width: 100%;
+    max-width: 530px;
+  }
+  .search-container i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(64, 139, 34); /* Placeholder icon color */
+    pointer-events: none; /* Make the icon unclickable */
+  }
+
+  .search-container input {
+    width: 100%;
+    padding: 0.8rem 0.8rem 0.8rem 2.5rem; /* Add padding-left for the icon */
+    border-radius: 1rem;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  .search-container input::placeholder {
+    text-align: center;
+  }

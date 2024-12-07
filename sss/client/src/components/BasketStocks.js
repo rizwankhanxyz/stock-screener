@@ -53,7 +53,7 @@ function BasketStocks({
         {stocklist.length > 0 ? (
           <ul>
             {stocklist.map((stock, index) => (
-              <ul key={index}>
+              <ul style={{display:"flex",justifyContent:"space-between"}} key={index}>
                 <strong>{stock.companyName}</strong>
                 <button
                   className="stock-delete"

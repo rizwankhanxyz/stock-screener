@@ -186,21 +186,14 @@ function BasketItem({ onClose, stocks, getBaskets }) {
           </div>
         </center>
         <center>
-          <div
-            className="search-container"
-            style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
-          >
+          <div className="search-container" style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
+            <i className="bi bi-search"></i>
             <input
               type="text"
               className="form-control"
               placeholder="Search By Stock Name or NSE/BSE Symbol"
               onChange={onChangehandler}
               value={query}
-              style={{
-                textAlign: "center",
-                borderRadius: "1rem",
-                padding: "0.8rem",
-              }}
               required
             />
           </div>

@@ -43,7 +43,7 @@ function Stock({ stock, handleStockSelect, isSelected }) {
         </div>
         <div
           className="stock-wishlist"
-          onClick={() => handleStockSelect(stock._id)} // Call function here
+          onClick={() => handleStockSelect(stock._id)}
         >
           {isSelected ? (
             <i className="bi bi-bookmark-check-fill"></i>

@@ -3,7 +3,7 @@ import Stock from "./Stock";
 import Loader from "./Loader";
 import "../styles/Stocks.css";
 
-function Stocks({ stocks, handleAddToBasket, loading }) {
+function Stocks({ stocks, loading }) {
   const styles = {
     display: "grid",
     margin: "auto",
@@ -15,6 +15,11 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
   const [exchangeFilter, setExchangeFilter] = useState("All");
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 15; // Number of items per page
+
+
+  
+  const handleStockSelect = (stockId) => {
+  };
 
   const onChangehandler = (e) => {
     setQuery(e.target.value);
@@ -154,21 +159,14 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
       ) : (
         <div>
           <center>
-            <div
-              className="search-container"
-              style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
-            >
+            <div className="search-container">
+              <i className="bi bi-search"></i>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Search By Stock Name or NSE/BSE Symbol"
                 onChange={onChangehandler}
                 value={query}
-                style={{
-                  textAlign: "center",
-                  borderRadius: "1rem",
-                  padding: "0.8rem",
-                }}
                 required
               />
             </div>
@@ -199,14 +197,13 @@ function Stocks({ stocks, handleAddToBasket, loading }) {
             {currentData.map((stock, index) => (
               <Stock
                 key={index}
-                handleAddToBasket={handleAddToBasket}
+                handleStockSelect={handleStockSelect}
                 stock={stock}
               />
             ))}
           </div>
           {/* Pagination */}
           <div className="pagination">{renderPagination()}</div>
-
         </div>
       )}
     </>

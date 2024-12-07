@@ -45,12 +45,16 @@ function Navbar({ setAuth, setUserRole }) {
             src="./se-logo.png"
             alt="se-logo"
           />
-          <h3 className="alias">
-            Welcome, {alias} <i class="bi bi-person-circle"></i>
+          <h3
+            className="alias"
+            style={{ marginRight: "10px", cursor: "pointer" }}
+          >
+            Welcome, {alias} <i className="bi bi-person-circle"></i>
           </h3>
           <h3 className="logout"
             onClick={onClickHandler}
             style={{ marginRight: "10px", cursor: "pointer" }}
+
           >
             <i className="bi bi-power"></i>
           </h3>

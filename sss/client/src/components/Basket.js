@@ -105,20 +105,16 @@ function Basket({ loading, stocks }) {
             {baskets.length > 0 ? (
               <>
                 <div
-                  className="search-container"
-                  style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
+                  className="search-basket-container"
                 >
+                  {" "}
+                  <i className="bi bi-search"></i>
                   <input
                     type="text"
                     className="form-control"
                     placeholder="Search By Basket Name or Description"
                     onChange={onChangehandler}
                     value={query}
-                    style={{
-                      textAlign: "center",
-                      borderRadius: "1rem",
-                      padding: "0.8rem",
-                    }}
                     required
                   />
                 </div>

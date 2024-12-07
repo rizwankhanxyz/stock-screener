@@ -4,12 +4,7 @@ import "../styles/Admin.css";
 import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 
-function Admin({
-  stocks,
-  setAuth,
-  setUserRole,
-  loading,
-}) {
+function Admin({ stocks, setAuth, setUserRole, loading }) {
   const [fileUpload, setFileUpload] = useState("");
   const [query, setQuery] = useState("");
   const [complianceFilter, setComplianceFilter] = useState("All");
@@ -55,12 +50,10 @@ function Admin({
               "Content-Type": "multipart/form-data",
             },
             withCredentials: true,
-
           }
         );
         // alert(data.success);
         alert(data.data.success);
-
       } catch (error) {
         console.log(error);
         alert(error.response.data.error);
@@ -92,10 +85,7 @@ function Admin({
 
   return (
     <>
-      <Navbar
-        setAuth={setAuth}
-        setUserRole={setUserRole}
-      />
+      <Navbar setAuth={setAuth} setUserRole={setUserRole} />
       {loading ? (
         <Loader />
       ) : (
@@ -108,14 +98,14 @@ function Admin({
                 placeholder="select a file to upload"
                 required
               />
-              <button type="submit" className="signupbtn"> Upload</button>
+              <button type="submit" className="signupbtn">
+                {" "}
+                Upload
+              </button>
             </form>
           </div>
           <center>
-            <div
-              className="search-container"
-              style={{ padding: "1rem", width: "100%", maxWidth: "530px" }}
-            >
+            <div className="search-container">
               <input
                 type="text"
                 className="form-control"
@@ -177,7 +167,11 @@ function Admin({
                       <td>{element.companyName}</td>
                       <td>{element.nseorbseSymbol}</td>
                       <td>{element.exchange}</td>
-                      <td data-status={element.compliantStatusBusinessScreening}>{element.compliantStatusBusinessScreening}</td>
+                      <td
+                        data-status={element.compliantStatusBusinessScreening}
+                      >
+                        {element.compliantStatusBusinessScreening}
+                      </td>
                       <td>{element.debtsMarketCap}</td>
                       <td data-status={element.compliantStatusDebts}>
                         {element.compliantStatusDebts}
