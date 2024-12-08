@@ -20,7 +20,8 @@ function App() {
     const checkAuth = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/customer/auth",
+          // "http://localhost:5000/api/customer/auth",
+          "https://sss.rizwankhan.xyz/api/customer/auth",
           {
             withCredentials: true,
           }
@@ -39,7 +40,8 @@ function App() {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/admin/data/get"
+          // "http://localhost:5000/api/admin/data/get"
+          "https://sss.rizwankhan.xyz/api/admin/data/get"
         );
         setStocks(data);
       } catch (error) {

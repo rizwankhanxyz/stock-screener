@@ -38,7 +38,8 @@ function Register({ alert, showAlert }) {
         });
       } else {
         const { data } = await axios.post(
-          "http://localhost:5000/api/customer/register",
+          // "http://localhost:5000/api/customer/register",
+          "https://sss.rizwankhan.xyz/api/customer/register",
           registeredData
         );
         showAlert({

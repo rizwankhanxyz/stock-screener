@@ -27,7 +27,8 @@ function Login({ alert, showAlert, setAuth, setUserRole }) {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/customer/login",
+        // "http://localhost:5000/api/customer/login",
+        "https://sss.rizwankhan.xyz:5000/api/customer/login",
         userLogin,
         {
           withCredentials: true, // important for cookies
