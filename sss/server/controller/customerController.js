@@ -1,6 +1,8 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 //models
 import customerModel from "../models/customerModel.js";
@@ -120,17 +122,13 @@ router.post("/login", async (req, res) => {
       role: userData.role,
     };
 
-    let accessToken = jwt.sign(payload, "stockscreener@shariahequities", {
+    let accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
-    let refreshToken = jwt.sign(
-      payload,
-      "stockscreenerrefresh@shariahequities",
-      {
-        expiresIn: "7d",
-      }
-    );
+    let refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
+      expiresIn: "7d",
+    });
     res.cookie("token", accessToken, {
       httpOnly: true, // prevents access from JavaScript
       secure: process.env.NODE_ENV === "production", // only sends over HTTPS in production
@@ -160,7 +158,7 @@ router.post("/login", async (req, res) => {
 router.get("/auth", authMiddleware, async (req, res) => {
   try {
     const token = req.cookies.token; // Retrieve token from cookies
-    let decoded = jwt.verify(token, "stockscreener@shariahequities");
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
     res.status(200).send({ token: true, role: decoded.role }); //alias: decoded.alias
   } catch (error) {
     res.status(401).json({ error: "Unauth Token or token expired" });

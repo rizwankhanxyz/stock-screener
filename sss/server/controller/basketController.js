@@ -1,6 +1,9 @@
 import basketModel from "../models/basketModel.js";
 import express from "express";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const router = express.Router();
 
@@ -16,7 +19,7 @@ router.post("/customer/basket/create", async (req, res) => {
         .status(401)
         .json({ error: "Unauthorized. No token provided." });
     }
-    const decoded = jwt.verify(token, "stockscreener@shariahequities");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.user_id; // Extract userId from the decoded JWT in the auth middleware
 
     const { basketName, basketDescription, stockIds } = req.body; // Extract data from request body
@@ -51,7 +54,7 @@ router.get("/customer/basket/get", async (req, res) => {
         .status(401)
         .json({ error: "Unauthorized. No token provided." });
     }
-    const decoded = jwt.verify(token, "stockscreener@shariahequities");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.user_id;
     const basketItems = await basketModel.find({ userId }).populate("stockIds");
     res.status(200).json({
@@ -80,7 +83,7 @@ router.delete("/customer/basket/:basketId", async (req, res) => {
         .status(401)
         .json({ error: "Unauthorized. No token provided." });
     }
-    const decoded = jwt.verify(token, "stockscreener@shariahequities");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.user_id;
     const { basketId } = req.params;
 
@@ -109,29 +112,33 @@ method: delete
 api/baskets/customer/basket/:basketId/remove-stock/:stockId
 */
 // Delete stock from a basket
-router.delete("/customer/basket/:basketId/remove-stock/:stockId", async (req, res) => {
-  try {
-    const { basketId, stockId } = req.params;
+router.delete(
+  "/customer/basket/:basketId/remove-stock/:stockId",
+  async (req, res) => {
+    try {
+      const { basketId, stockId } = req.params;
 
-    const basket = await basketModel.findById(basketId);
+      const basket = await basketModel.findById(basketId);
 
-    if (!basket) {
-      return res.status(404).json({ error: "Basket not found." });
+      if (!basket) {
+        return res.status(404).json({ error: "Basket not found." });
+      }
+
+      // Remove the stock from the basket
+      basket.stockIds = basket.stockIds.filter(
+        (id) => id.toString() !== stockId
+      );
+      await basket.save();
+
+      res.status(200).json({
+        success: "Stock removed from basket successfully.",
+        basket,
+      });
+    } catch (error) {
+      console.error("Error removing stock from basket:", error);
+      res.status(500).json({ error: "Internal Server Error." });
     }
-
-    // Remove the stock from the basket
-    basket.stockIds = basket.stockIds.filter((id) => id.toString() !== stockId);
-    await basket.save();
-
-    res.status(200).json({
-      success: "Stock removed from basket successfully.",
-      basket,
-    });
-  } catch (error) {
-    console.error("Error removing stock from basket:", error);
-    res.status(500).json({ error: "Internal Server Error." });
   }
-});
-
+);
 
 export default router;
