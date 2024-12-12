@@ -9,8 +9,8 @@ import customerModel from "../models/customerModel.js";
 import Admin from "../dbSeeding.js";
 
 //Utilities
-// import sendEmail from "../utils/sendEmail.js";
-// import sendSMS from "../utils/sendMessage.js";
+import sendEmail from "../utils/sendEmail.js";
+import sendSMS from "../utils/sendMessage.js";
 
 import authMiddleware from "../middleware/authMiddleware.js";
 import {
