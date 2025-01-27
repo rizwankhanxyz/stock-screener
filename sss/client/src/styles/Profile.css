@@ -1,0 +1,8 @@
+.profile-content {
+    position: fixed;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 10rem;
+    height: 20rem;
+}
