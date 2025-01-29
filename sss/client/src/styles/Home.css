@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     background-color: #3c574c;
-    /* border-bottom: 1px solid #e0e0e0; */
     margin-top: 1rem;
   }
   
@@ -11,8 +10,7 @@
   .tab {
     padding: 0.8rem 2rem;
     margin: 0 1rem;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size:large;
     color: #c3d3cd;
     cursor: pointer;
     position: relative;
@@ -43,7 +41,6 @@
   .tab-content {
     padding: 1.5rem;
     background-color: beige;
-    /* border-radius: 8px; */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   

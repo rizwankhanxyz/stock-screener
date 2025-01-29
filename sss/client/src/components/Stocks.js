@@ -4,12 +4,7 @@ import Loader from "./Loader";
 import "../styles/Stocks.css";
 
 function Stocks({ stocks, loading }) {
-  const styles = {
-    display: "grid",
-    margin: "auto",
-    // gridGap: "1rem",
-    padding: "auto",
-  };
+
   const [query, setQuery] = useState("");
   const [complianceFilter, setComplianceFilter] = useState("All");
   const [exchangeFilter, setExchangeFilter] = useState("All");
@@ -17,7 +12,7 @@ function Stocks({ stocks, loading }) {
   const itemsPerPage = 15; // Number of items per page
 
 
-  
+
   const handleStockSelect = (stockId) => {
   };
 
@@ -193,7 +188,7 @@ function Stocks({ stocks, loading }) {
             </select>
           </div>
 
-          <div className="stocks-container" style={styles}>
+          <div className="stocks-container">
             {currentData.map((stock, index) => (
               <Stock
                 key={index}

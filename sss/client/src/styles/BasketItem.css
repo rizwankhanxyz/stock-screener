@@ -80,9 +80,10 @@ button {
 .search-container input {
   width: 100%;
   padding: 0.8rem 0.8rem 0.8rem 2.5rem; /* Add padding-left for the icon */
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   text-align: center;
   border: 1px solid #ccc;
+  box-shadow: 1px 2px 5px rgb(0 0 0 / 30%);
 }
 
 .search-container input::placeholder {

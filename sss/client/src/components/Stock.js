@@ -22,11 +22,11 @@ function Stock({ stock, handleStockSelect, isSelected }) {
     <>
       <div className="stock-container">
         <div className="stock-namesymbol">
-          <h5>{stock.nseorbseSymbol}</h5>
+          <h6>{stock.nseorbseSymbol}</h6>
           <p className="company-name">{stock.companyName}</p>
         </div>
         <div className="stock-exchangestatus">
-          <h5>{stock.exchange}</h5>
+          <h6>{stock.exchange}</h6>
           <p
             data-bs-toggle="popover"
             onClick={openComplianceReport}

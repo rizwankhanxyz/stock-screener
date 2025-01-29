@@ -1,51 +1,53 @@
 .pagination {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
 
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0;
-  }
-  
-  .pagination-btn {
-    margin: 0 5px;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: 0.3s;
-  }
-  
-  .pagination-btn.active {
-    background-color: teal;
-    color: white;
-    border: 1px solid teal;
-  }
-  
-  .pagination-btn:hover {
-    background-color: #eaeaea;
-  }
-  .search-container{
-    position: relative;
-    width: 100%;
-    max-width: 530px;
-  }
-  .search-container i {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgb(64, 139, 34); /* Placeholder icon color */
-    pointer-events: none; /* Make the icon unclickable */
-  }
+.pagination-btn {
+  margin: 0 5px;
+  padding: 8px 12px;
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
 
-  .search-container input {
-    width: 100%;
-    padding: 0.8rem 0.8rem 0.8rem 2.5rem; /* Add padding-left for the icon */
-    border-radius: 1rem;
-    text-align: center;
-    border: 1px solid #ccc;
-  }
+.pagination-btn.active {
+  background-color: teal;
+  color: white;
+}
 
-  .search-container input::placeholder {
-    text-align: center;
-  }
+.pagination-btn:hover {
+  background-color: teal;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 530px;
+}
+
+.search-container i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(64, 139, 34);
+  /* Placeholder icon color */
+  pointer-events: none;
+  /* Make the icon unclickable */
+}
+
+.search-container input {
+  width: 100%;
+  padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.search-container input::placeholder {
+  text-align: center;
+}

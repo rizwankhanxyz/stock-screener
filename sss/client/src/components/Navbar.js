@@ -1,9 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import "../styles/Navbar.css";
 import Profile from "./Profile";
 
-import { useNavigate } from "react-router-dom";
 // import Loader from "./Loader";
 
 function Navbar({ setAuth, setUserRole }) {
@@ -33,7 +31,6 @@ function Navbar({ setAuth, setUserRole }) {
     };
   }, [profileContainer]);
 
-  const navigate = useNavigate();
 
   //Open profile container
   const onClickHandlerProfile = (e) => {
@@ -44,22 +41,7 @@ function Navbar({ setAuth, setUserRole }) {
       return newState;
     });
   }
-  const onClickHandler = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(
-        "http://localhost:5000/api/customer/logout",
-        {},
-        { withCredentials: true }
-      );
-      localStorage.removeItem("alias");
-      setAuth(false);
-      setUserRole(null);
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   return (
     <>
       {/* {loading && <Loader />}
@@ -85,19 +67,12 @@ function Navbar({ setAuth, setUserRole }) {
             {alias} <i className="bi bi-person-circle" style={{ color: " #6a9e4a" }}></i>
           </h4>
           {/* </div> */}
-
-          {/* <h3 className="logout"
-            onClick={onClickHandler}
-            style={{ marginRight: "10px", cursor: "pointer" }}
-          >
-            <i className="bi bi-power"></i>
-          </h3> */}
         </div>
       </div>
 
       {profileContainer && (
         <div ref={profileRef}>
-          <Profile onClose={() => setProfileContainer(false)} />
+          <Profile setAuth={setAuth} setUserRole={setUserRole} onClose={() => setProfileContainer(false)} />
         </div>
       )}
     </>

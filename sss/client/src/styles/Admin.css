@@ -10,7 +10,7 @@
   /* Container for filters */
 .filter-container {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   gap: 1rem;
   justify-content: center;
   margin: 1rem 0;
@@ -18,13 +18,13 @@
 
 /* Styles for select elements */
 .filter-select {
-  padding: 0.8rem;
+  padding: 0.6rem;
   font-size: 1rem;
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   color: #234110;
   outline: none;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); */
+  box-shadow: 1px 2px 5px rgb(0 0 0 / 30%);
   transition: all 0.3s ease;
 }
 
