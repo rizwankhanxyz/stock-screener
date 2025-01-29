@@ -3,13 +3,11 @@
   width: 100%;
   max-width: 95%;
   background-color: #ffffff;
-  border-radius: 0.5rem;
   box-shadow: 1px 2px 5px rgb(0 0 0 / 30%);
-  margin: 0.6rem auto;
+  margin: 0 auto;
   display: flex;
-  text-align: left;
   align-items: center;
-  padding: 0.6rem;
+  padding: 0.3rem;
   box-sizing: border-box;
   transition: transform 0.3s ease;
 }
@@ -20,64 +18,64 @@
 }
 
 /* Left section styling */
-.stock-namesymbol {
+.stock-symbol{
   text-align: left;
-  width: 65%;
-}
-
-.stock-namesymbol h6 {
-  font-size: large;
-  margin: 0;
-  color: #234110;
-}
-
-.company-name {
-  color: #0f0a3f;
-  font-size: 1rem;
-  margin: 0.3rem 0;
-}
-
-/* Right section styling */
-.stock-exchangestatus {
-  width: 30%;
-  text-align: right;
-}
-
-.stock-exchangestatus h6 {
-  font-size:large;
-  margin: 0;
-  color: #234110;
-}
-
-.stock-wishlist {
-  width: 5%;
+  align-items: center;
+  width: 20%;
   padding-left: 1rem;
-  padding-right: 1rem;
+}
+.stock-name {
+  text-align: left;
+  align-self: center;
+  width: 45%;
+}
+.stock-exchange{
+  text-align: left;
+  align-items: center;
+  width: 10%;
+}
+.stock-status {
+  text-align: left;
+  align-items: center;
+  width: 20%;
   cursor: pointer;
-  color: #234110;
-  font-size: x-large;
 }
 
-/* Badge styling */
-.status-badge {
-  display: inline-block;
-  width: 100%;
-  max-width: 300px;
-  border-radius: 5px;
-  color: #fff;
-  text-align: right;
-  margin: 0.4rem 0;
-  cursor: pointer;
-  font-weight: bold
+.stock-symbol h6 {
+  font-size: large;
+  color: #234110;
+}
+
+.stock-name h6 {
+  color: #0f0a3f;
+}
+
+.stock-exchange h6 {
+  font-size: large;
+  color: #234110;
+}
+
+.status-badge h6 {
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 /* Conditional badge colors */
 .compliant {
-  color: #29a710;
+  color: #6fc44e;
 }
 
 .non-compliant {
-  color: #d30606;
+  color: #fc6060;
+}
+
+.stock-wishlist {
+  width: 5%;
+  text-align: right;
+  padding-right: 1rem;
+  cursor: pointer;
+  color: #234110;
+  font-size: large;
 }
 
 /* Responsive styling */
