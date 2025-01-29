@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Stocks from "../components/Stocks";
 import Funds from "../components/Funds";
 import Basket from "../components/Basket";
+import Footer from "../components/Footer";
 import "../styles/Home.css";
 
 function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
@@ -45,6 +46,8 @@ function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
         {activeTab === "Funds" && <Funds loading={loading} />}
         {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} />}
       </div>
+
+      <Footer/>
     </>
   );
 }

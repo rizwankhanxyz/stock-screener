@@ -21,26 +21,25 @@ function Stock({ stock, handleStockSelect, isSelected }) {
   return (
     <>
       <div className="stock-container">
-        <div className="stock-namesymbol">
+        {/* <div className="stock-namesymbol"> */}
           <h6>{stock.nseorbseSymbol}</h6>
           <p className="company-name">{stock.companyName}</p>
-        </div>
-        <div className="stock-exchangestatus">
+        {/* </div> */}
+        {/* <div className="stock-exchangestatus"> */}
           <h6>{stock.exchange}</h6>
           <p
             data-bs-toggle="popover"
             onClick={openComplianceReport}
-            className={`status-badge ${
-              stock.financialScreeningStatus === "PASS"
+            className={`status-badge ${stock.financialScreeningStatus === "PASS"
                 ? "compliant"
                 : "non-compliant"
-            }`}
+              }`}
           >
             {stock.financialScreeningStatus === "PASS"
               ? "COMPLIANT"
               : "NON-COMPLIANT"}
           </p>
-        </div>
+        {/* </div> */}
         <div
           className="stock-wishlist"
           onClick={() => handleStockSelect(stock._id)}

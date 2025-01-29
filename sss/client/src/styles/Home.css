@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     background-color: #3c574c;
-    margin-top: 1rem;
   }
   
   /* Individual Tab Styling */
@@ -33,15 +32,8 @@
     left: 0;
     right: 0;
     height: 3px;
-    background-color: #61a733;
+    background-color: #ffffff;
     border-radius: 3px;
-  }
-  
-  /* Tab Content Styling */
-  .tab-content {
-    padding: 1.5rem;
-    background-color: beige;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
   /* Responsive Tab Styling */
