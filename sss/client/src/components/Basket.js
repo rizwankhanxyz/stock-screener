@@ -83,7 +83,7 @@ function Basket({ loading, stocks }) {
       {loading ? (
         <Loader />
       ) : (
-        <div>
+        <div style={{padding:'1rem'}}>
           <center>
             <button
               data-bs-toggle="popover"
@@ -144,7 +144,7 @@ function Basket({ loading, stocks }) {
               </>
             ) : (
               <p
-                style={{ marginTop: "1rem", fontSize: "1.2rem", color: "#666" }}
+                style={{ marginTop: "1rem", fontSize: "1.2rem", color: "#ffff" }}
               >
                 No basket created yet.
               </p>

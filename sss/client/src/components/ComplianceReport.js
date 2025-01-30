@@ -70,12 +70,23 @@ function ComplianceReport({ stock, onClose }) {
   const [showModal3, setShowModal3] = useState(false);
 
   const debtsMarketCapRatio = stock.debtsMarketCap;
-  const interestBearingSecuritiesMarketCapRatio =
-    stock.interestBearingSecuritiesMarketCap;
-
+  const interestBearingSecuritiesMarketCapRatio = stock.interestBearingSecuritiesMarketCap;
   const interestIncomeTotalIncomeRatio = stock.interestIncomeTotalIncome;
 
-  const gaugeData = {
+  const gaugeData1 = {
+    labels: ["Compliance", "Non-Compliance"],
+    datasets: [
+      {
+        // These two values represent the green and red sections
+        data: [27, 73],
+        backgroundColor: ["#84BC62", "#FF4C4C"], // Green for 0-30%, Red for 31-100%
+        borderWidth: 0,
+        cutout: "60%", //70%
+      },
+    ],
+  };
+
+  const gaugeData2 = {
     labels: ["Compliance", "Non-Compliance"],
     datasets: [
       {
@@ -88,12 +99,12 @@ function ComplianceReport({ stock, onClose }) {
     ],
   };
 
-  const gaugeDataOther = {
+  const gaugeData3 = {
     labels: ["Compliance", "Non-Compliance"],
     datasets: [
       {
         // These two values represent the green and red sections
-        data: [5, 95],
+        data: [3, 97],
         backgroundColor: ["#84BC62", "#FF4C4C"], // Green for 0-30%, Red for 31-100%
         borderWidth: 0,
         cutout: "60%", //70%
@@ -140,6 +151,7 @@ function ComplianceReport({ stock, onClose }) {
     },
     pointerValue: interestIncomeTotalIncomeRatio, // Pass the pointer value to the plugin
   };
+
   const onClickHandler1 = (e) => {
     e.preventDefault();
     setShowModal1(!showModal1); // Toggle modal on click
@@ -196,7 +208,7 @@ function ComplianceReport({ stock, onClose }) {
     <div className="compliance-report-modal">
       <div className="compliance-report-content">
         <div className="compliance-report-header">
-          <button className="close-button" onClick={onClose}>
+          <button className="close-btn" onClick={onClose}>
             <i className="bi bi-x"></i>
           </button>
           <center>
@@ -214,11 +226,11 @@ function ComplianceReport({ stock, onClose }) {
               href="/Shariah-Equities-Screening-Methodology.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              style={{textDecorationLine:"unset"}}
+              style={{ textDecorationLine: "unset" }}
             >
               <strong>
                 <h6>
-                  Based on AAOIFI Standards{" "}
+                  Proprietary Norms{" "}
                   <i className="bi bi-info-circle"></i>
                 </h6>
               </strong>
@@ -262,22 +274,23 @@ function ComplianceReport({ stock, onClose }) {
             <div className="financial-screening">
               <h5>2. FINANCIAL SCREENING</h5>
               <div className="compliance-report-financial-list">
+
+
+                {/* ---------------Debt -to- Total Assets Ratio--------------------- */}
                 <div className="compliance-report-list">
                   <center>
-                    {debtsMarketCapRatio <= 30 ? (
+                    {debtsMarketCapRatio <= 27 ? (
                       <p style={{ color: "#59a02d" }}>
-                        <i className="bi bi-check-circle-fill"></i> Interest
-                        Bearing Debt Ratio
+                        <i className="bi bi-check-circle-fill"></i> Debt -to- Total Assets Ratio
                       </p>
                     ) : (
                       <p style={{ color: "#FF4C4C" }}>
-                        <i className="bi bi-x-circle-fill"></i> Interest Bearing
-                        Debt Ratio
+                        <i className="bi bi-x-circle-fill"></i> Debt -to- Total Assets Ratio
                       </p>
                     )}
                   </center>
                   <div style={{ width: "100%", maxWidth: "300px" }}>
-                    <Doughnut data={gaugeData} options={gaugeOptions1} />
+                    <Doughnut data={gaugeData1} options={gaugeOptions1} />
                   </div>
                   <div
                     style={{
@@ -291,7 +304,7 @@ function ComplianceReport({ stock, onClose }) {
                         color: "#555",
                       }}
                     >
-                      {debtsMarketCapRatio <= 30
+                      {debtsMarketCapRatio <= 27
                         ? "Compliant"
                         : "Non-Compliant"}
                       :{debtsMarketCapRatio.toFixed(2)}%
@@ -309,7 +322,7 @@ function ComplianceReport({ stock, onClose }) {
                     ></div>
                     <div style={{ color: "#555" }}>
                       <p>Compliant</p>
-                      <p>Less than 30%</p>
+                      <p>Less than 27%</p>
                     </div>
 
                     <div
@@ -321,7 +334,7 @@ function ComplianceReport({ stock, onClose }) {
                     ></div>
                     <div style={{ color: "#555" }}>
                       <p>Non-Compliant</p>
-                      <p>Greater than 30%</p>
+                      <p>Greater than 27%</p>
                     </div>
                   </div>
                   <p
@@ -334,9 +347,8 @@ function ComplianceReport({ stock, onClose }) {
                       lineHeight: "1.5", // Adjusts the space between lines
                     }}
                   >
-                    <b>Interest Bearing Debt Ratio:</b>
-                    <br />A company’s total debt should not exceed 30% of its
-                    market capitalisation.
+                    <b>Debt -to- Total Assets Ratio:</b>
+                    <br />A company’s total debt should not exceed 27% of its total assets.
                   </p>
                   {showModal1 && (
                     <div style={modalStyles.overlay}>
@@ -355,7 +367,7 @@ function ComplianceReport({ stock, onClose }) {
                               }}
                             />
                           </center>
-                          Market Cap
+                          Total Assets
                         </p>
                         <button
                           onClick={onCloseModal1}
@@ -368,22 +380,21 @@ function ComplianceReport({ stock, onClose }) {
                   )}
                 </div>
 
+                {/* ---------------Cash & IBS -to- Total Assets Ratio--------------------- */}
                 <div className="compliance-report-list">
                   <center>
-                    {debtsMarketCapRatio <= 30 ? (
+                    {interestBearingSecuritiesMarketCapRatio <= 30 ? (
                       <p style={{ color: "#59a02d" }}>
-                        <i className="bi bi-check-circle-fill"></i> Interest
-                        Bearing Securities
+                        <i className="bi bi-check-circle-fill"></i> Cash & IBS -to- Total Assets Ratio
                       </p>
                     ) : (
                       <p style={{ color: "#FF4C4C" }}>
-                        <i className="bi bi-x-circle-fill"></i> Interest Bearing
-                        Securities
+                        <i className="bi bi-x-circle-fill"></i> Cash & IBS -to- Total Assets Ratio
                       </p>
                     )}
                   </center>
                   <div style={{ width: "100%", maxWidth: "300px" }}>
-                    <Doughnut data={gaugeData} options={gaugeOptions2} />
+                    <Doughnut data={gaugeData2} options={gaugeOptions2} />
                   </div>
                   <div
                     style={{
@@ -441,11 +452,10 @@ function ComplianceReport({ stock, onClose }) {
                       lineHeight: "1.5", // Adjusts the space between lines
                     }}
                   >
-                    <b>Interest-Bearing Securities:</b>
+                    <b> Cash & IBS -to- Total Assets Ratio:</b>
                     <br />A company’s investments in interest-bearing
                     securities, such as bonds or other debt instruments that
-                    generate interest, should not exceed 30% of its market
-                    capitalisation.
+                    generate interest, should not exceed 30% of its total assets.
                   </p>
                   {showModal2 && (
                     <div style={modalStyles.overlay}>
@@ -454,7 +464,7 @@ function ComplianceReport({ stock, onClose }) {
                           <b>CALCULATION</b>
                         </h6>
                         <p style={{ marginTop: "1rem" }}>
-                          Cash + Cash Equivalents + Deposits
+                          Cash + Interest Bearing Securities
                           <center>
                             <hr
                               style={{
@@ -464,7 +474,7 @@ function ComplianceReport({ stock, onClose }) {
                               }}
                             />
                           </center>
-                          Market Cap
+                          Total Assets
                         </p>
                         <button
                           onClick={onCloseModal2}
@@ -477,22 +487,23 @@ function ComplianceReport({ stock, onClose }) {
                   )}
                 </div>
 
+                {/* ---------------Interest Income -to- Total Income--------------------- */}
                 <div className="compliance-report-list">
                   <center>
-                    {debtsMarketCapRatio <= 30 ? (
+                    {interestIncomeTotalIncomeRatio <= 3 ? (
                       <p style={{ color: "#59a02d" }}>
                         <i className="bi bi-check-circle-fill"></i>{" "}
-                        Non-Permissible Income
+                        Interest Income -to- Total Income
                       </p>
                     ) : (
                       <p style={{ color: "#FF4C4C" }}>
-                        <i className="bi bi-x-circle-fill"></i> Non-Permissible
-                        Income
+                        <i className="bi bi-x-circle-fill"></i>{" "}
+                        Interest Income -to- Total Income
                       </p>
                     )}
                   </center>
                   <div style={{ width: "100%", maxWidth: "300px" }}>
-                    <Doughnut data={gaugeDataOther} options={gaugeOptions3} />
+                    <Doughnut data={gaugeData3} options={gaugeOptions3} />
                   </div>
                   <div
                     style={{
@@ -506,7 +517,7 @@ function ComplianceReport({ stock, onClose }) {
                         color: "#555",
                       }}
                     >
-                      {interestIncomeTotalIncomeRatio <= 5
+                      {interestIncomeTotalIncomeRatio <= 3
                         ? "Compliant"
                         : "Non-Compliant"}
                       :{interestIncomeTotalIncomeRatio.toFixed(2)}%
@@ -524,7 +535,7 @@ function ComplianceReport({ stock, onClose }) {
                     ></div>
                     <div style={{ color: "#555" }}>
                       <p>Compliant</p>
-                      <p>Less than 5%</p>
+                      <p>Less than 3%</p>
                     </div>
 
                     <div
@@ -536,7 +547,7 @@ function ComplianceReport({ stock, onClose }) {
                     ></div>
                     <div style={{ color: "#555" }}>
                       <p>Non-Compliant</p>
-                      <p>Greater than 5%</p>
+                      <p>Greater than 3%</p>
                     </div>
                   </div>
                   <p
@@ -550,11 +561,11 @@ function ComplianceReport({ stock, onClose }) {
                       lineHeight: "1.5", // Adjusts the space between lines
                     }}
                   >
-                    <b>Non-Permissible Income:</b>
+                    <b>Interest Income -to- Total Income:</b>
                     <br />
-                    The percentage of income generated from non-permissible
+                    A company’s income generated from non-permissible
                     activities, such as interest or other impermissible sources,
-                    should not exceed 5% of the company’s total income.
+                    should not exceed 3% of its total income.
                   </p>
                   {showModal3 && (
                     <div style={modalStyles.overlay}>
@@ -563,7 +574,7 @@ function ComplianceReport({ stock, onClose }) {
                           <b>CALCULATION</b>
                         </h6>
                         <p style={{ marginTop: "1rem" }}>
-                          Income from Non-Permissible Activites
+                          Interest Income
                           <center>
                             <hr
                               style={{
@@ -594,9 +605,7 @@ function ComplianceReport({ stock, onClose }) {
           <center>
             <p style={{ color: "rgb(160, 95, 104)", marginBottom: "2rem" }}>
               <b>Disclaimer:</b>
-              This Shariah compliance report is based on AAOIFI standards and is
-              for Educational purposes only. Investors are encouraged to consult
-              their financial advisors for personalised guidance.
+              This Shariah Compliance report is based on our own proprietary norms and is for educational purpose only. Investors are encouraged to consult their financial advisors for personalised guidance.
             </p>
           </center>
         </div>

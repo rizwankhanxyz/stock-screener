@@ -153,42 +153,39 @@ function Stocks({ stocks, loading }) {
         <Loader />
       ) : (
         <div>
-          {/* <center> */}
-            <div style={{ display: "flex",justifyContent:"center", alignItems:"center",gap:"1rem" }}>
-              <div className="search-container">
-                <i className="bi bi-search"></i>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search By Stock Name or NSE/BSE Symbol"
-                  onChange={onChangehandler}
-                  value={query}
-                  required
-                />
-              </div>
-              <div className="filter-container">
-                <select
-                  className="filter-select"
-                  value={complianceFilter}
-                  onChange={handleComplianceFilterChange}
-                >
-                  <option value="All">All</option>
-                  <option value="Compliant">Compliant</option>
-                  <option value="Non-Compliant">Non-Compliant</option>
-                </select>
-                <select
-                  className="filter-select"
-                  value={exchangeFilter}
-                  onChange={handleExchangeFilterChange}
-                >
-                  <option value="All">All</option>
-                  <option value="NSE">NSE</option>
-                  <option value="BSE">BSE</option>
-                </select>
-              </div>
-              <div className="pagination">{renderPagination()}</div>
+          <div className="search-filter-container">
+            <div className="search-container">
+              <i className="bi bi-search"></i>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search By Stock Name or NSE/BSE Symbol"
+                onChange={onChangehandler}
+                value={query}
+                required
+              />
             </div>
-          {/* </center> */}
+            <div className="filter-container">
+              <select
+                className="filter-select"
+                value={complianceFilter}
+                onChange={handleComplianceFilterChange}
+              >
+                <option value="All">All</option>
+                <option value="Compliant">Compliant</option>
+                <option value="Non-Compliant">Non-Compliant</option>
+              </select>
+              <select
+                className="filter-select"
+                value={exchangeFilter}
+                onChange={handleExchangeFilterChange}
+              >
+                <option value="All">All</option>
+                <option value="NSE">NSE</option>
+                <option value="BSE">BSE</option>
+              </select>
+            </div>
+          </div>
           <div className="stocks-container">
             {currentData.map((stock, index) => (
               <Stock
@@ -198,6 +195,7 @@ function Stocks({ stocks, loading }) {
               />
             ))}
           </div>
+          <div className="pagination">{renderPagination()}</div>
         </div>
       )}
     </>

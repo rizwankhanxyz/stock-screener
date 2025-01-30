@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../styles/Navbar.css";
 import Profile from "./Profile";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import Loader from "./Loader";
 
 function Navbar({ setAuth, setUserRole }) {
+  const navigate = useNavigate();
   const [alias, setAlias] = useState("");
   const [profileContainer, setProfileContainer] = useState(false);
   const profileRef = useRef(null); // Reference to the profile container
@@ -30,6 +32,23 @@ function Navbar({ setAuth, setUserRole }) {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [profileContainer]);
+
+  const onClickHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "http://localhost:5000/api/customer/logout",
+        {},
+        { withCredentials: true }
+      );
+      localStorage.removeItem("alias");
+      setAuth(false);
+      setUserRole(null);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   //Open profile container
@@ -63,9 +82,15 @@ function Navbar({ setAuth, setUserRole }) {
           <h4 className="alias">
             Assalamu Alaykum
           </h4>
-          <h4 className="alias" style={{ marginRight: "10px", cursor: "pointer" }} onClick={onClickHandlerProfile}>
-            {alias} <i className="bi bi-person-circle" style={{ color: " #6a9e4a" }}></i>
-          </h4>
+          <h3 className="alias" style={{ marginRight: "10px", cursor: "pointer" }} >
+            {alias} <i onClick={onClickHandlerProfile} className="bi bi-person-circle" style={{ color: " #6a9e4a" }}></i>
+            <i onClick={onClickHandler}
+              className="bi bi-power"></i>
+          </h3>
+          {/* <h3 className="logout"
+            style={{ marginRight: "10px", cursor: "pointer" }}
+          >
+          </h3> */}
           {/* </div> */}
         </div>
       </div>

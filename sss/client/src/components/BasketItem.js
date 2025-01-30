@@ -9,7 +9,7 @@ function BasketItem({ onClose, stocks, getBaskets }) {
   const [basketDescription, setBasketDescription] = useState("");
   const [selectedStocks, setSelectedStocks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Track the current page for pagination
-  const itemsPerPage = 15; // Number of items per page for pagination
+  const itemsPerPage = 10; // Number of items per page for pagination
 
   const onChangehandler = (e) => {
     setQuery(e.target.value);

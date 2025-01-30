@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
+import Footer from "./components/Footer";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -120,6 +121,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+      <Footer/>
     </>
   );
 }
