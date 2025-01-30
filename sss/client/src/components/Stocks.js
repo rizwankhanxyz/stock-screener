@@ -152,7 +152,7 @@ function Stocks({ stocks, loading }) {
       {loading ? (
         <Loader />
       ) : (
-        <div>
+        <>
           <div className="search-filter-container">
             <div className="search-container">
               <i className="bi bi-search"></i>
@@ -186,6 +186,20 @@ function Stocks({ stocks, loading }) {
               </select>
             </div>
           </div>
+          {/* <div className="container-heading">
+            <div className="symbol-heading">
+              <h5>NSE/BSE Symbol</h5>
+            </div>
+            <div className="name-heading">
+              <h5>Company Name</h5>
+            </div>
+            <div className="exchange-heading">
+              <h5>Exchange</h5>
+            </div>
+            <div className="status-heading">
+              <h5>Compliant Status</h5>
+            </div>
+          </div> */}
           <div className="stocks-container">
             {currentData.map((stock, index) => (
               <Stock
@@ -196,7 +210,7 @@ function Stocks({ stocks, loading }) {
             ))}
           </div>
           <div className="pagination">{renderPagination()}</div>
-        </div>
+        </>
       )}
     </>
   );

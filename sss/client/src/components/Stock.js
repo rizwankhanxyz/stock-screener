@@ -55,7 +55,6 @@ function Stock({ stock, handleStockSelect, isSelected }) {
           )}
         </div>
       </div>
-
       {showComplianceReport && (
         <ComplianceReport stock={stock} onClose={closeComplianceReport} />
       )}

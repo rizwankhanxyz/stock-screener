@@ -10,33 +10,21 @@
   /* Container for filters */
 .filter-container {
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
 }
 
 /* Styles for select elements */
 .filter-select {
-  padding: 0.6rem;
-  font-size: 1rem;
+  padding: 0.65rem;
   border: none;
   border-radius: 0.5rem;
   color: #234110;
-  outline: none;
   box-shadow: 1px 2px 5px rgb(0 0 0 / 30%);
   transition: all 0.3s ease;
 }
-
-/* .filter-select:hover {
-  border-color: #bbb;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-} */
-
-/* .filter-select:focus {
-  border-color: #84BC62;
-  box-shadow: 0 0 5px #84BC62;
-} */
 
 /* Responsive behavior */
 @media (max-width: 768px) {

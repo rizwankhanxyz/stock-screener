@@ -3,12 +3,11 @@
   width: 100%;
   max-width: 95%;
   background-color: #ffffff;
-  box-shadow: 1px 2px 5px rgb(0 0 0 / 30%);
+  box-shadow: 1px 2px 5px rgba(214, 212, 212, 0.432);
   margin: 0 auto;
   display: flex;
   align-items: center;
-  padding: 0.3rem;
-  box-sizing: border-box;
+  padding: 0.1rem;
   transition: transform 0.3s ease;
 }
 

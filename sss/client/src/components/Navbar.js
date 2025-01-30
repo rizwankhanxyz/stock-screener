@@ -65,34 +65,26 @@ function Navbar({ setAuth, setUserRole }) {
     <>
       {/* {loading && <Loader />}
       {!loading && ( */}
-      <div className="navbarcontainer">
-        <div
-          className="navbar navbar-dark bg-white"
-          style={{
-            paddingTop: "0.2rem",
-            paddingBottom: "0.2rem",
-          }}
-        >
-          <img
-            style={{ marginLeft: "10px" }}
-            src="./se-logo.png"
-            alt="se-logo"
-          />
-          {/* <div className="alias" style={{marginRight: "10px", cursor: "pointer"}}> */}
-          <h4 className="alias">
-            Assalamu Alaykum
-          </h4>
-          <h3 className="alias" style={{ marginRight: "10px", cursor: "pointer" }} >
-            {alias} <i onClick={onClickHandlerProfile} className="bi bi-person-circle" style={{ color: " #6a9e4a" }}></i>
-            <i onClick={onClickHandler}
-              className="bi bi-power"></i>
-          </h3>
-          {/* <h3 className="logout"
+      <div
+        className="navbar navbar-dark bg-white">
+        <img
+          style={{ marginLeft: "10px" }}
+          src="./se-logo.png"
+          alt="se-logo"
+        />
+        {/* <div className="alias" style={{marginRight: "10px", cursor: "pointer"}}> */}
+        <h4 className="alias">
+          As-salamu alaykum
+        </h4>
+        <h4 className="alias" style={{ marginRight: "10px", cursor: "pointer" }} >
+          <i onClick={onClickHandlerProfile} className="bi bi-person-circle" style={{ color: " #6a9e4a" }}></i> {alias}
+          <i onClick={onClickHandler}
+            className="bi bi-power" style={{ fontSize: "larger" }}></i>
+        </h4>
+        {/* <h3 className="logout"
             style={{ marginRight: "10px", cursor: "pointer" }}
           >
           </h3> */}
-          {/* </div> */}
-        </div>
       </div>
 
       {profileContainer && (

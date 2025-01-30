@@ -3,10 +3,11 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  position: fixed;
+  margin: 0.8rem;
+  /* position: fixed;
   left: 0;
   right: 0;
-  bottom: 76%;
+  bottom: 76%; */
 }
 
 .pagination {
@@ -15,10 +16,10 @@
   align-items: center;
   text-align: center;
   margin: 1rem 0;
-  position: fixed;
+  /* position: fixed;
   left: 0;
   right: 0;
-  bottom: 5%;
+  bottom: 5%; */
 }
 
 .pagination-btn {
@@ -41,7 +42,6 @@
 }
 
 .search-container {
-  position: relative;
   width: 100%;
   max-width: 530px;
 }
@@ -75,8 +75,46 @@
   max-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
-  position: fixed;
+  /* position: fixed;
   left: 0;
   right: 0;
-  bottom: 10%;
+  bottom: 10%; */
+}
+
+
+.stock-container-heading{
+  width: 100%;
+  max-width: 95%;
+  background-color: #ffffff;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0.1rem;
+  transition: transform 0.3s ease;
+}
+
+.stock-symbol-heading h5{
+  text-align: left;
+  align-items: center;
+  width: 20%;
+  padding-left: 1rem;
+  color: black;
+}
+.stock-name-heading h5{
+  text-align: left;
+  align-self: center;
+  width: 45%;
+  color: black;
+}
+.stock-exchange-heading h5{
+  text-align: left;
+  align-items: center;
+  width: 10%;
+  color: black;
+}
+.stock-status-heading h5{
+  text-align: left;
+  align-items: center;
+  width: 20%;
+  color: black;
 }

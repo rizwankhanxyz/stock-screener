@@ -3,6 +3,15 @@
     display: flex;
     justify-content: center;
     background-color: #3c574c;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 55px;
+    z-index: 1000;
+  }
+
+  .tab-content{
+    margin-top: 7.5rem;
   }
   
   /* Individual Tab Styling */
