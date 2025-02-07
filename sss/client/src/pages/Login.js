@@ -43,10 +43,13 @@ function Login({ alert, showAlert, setAuth, setUserRole }) {
           "Authorization"
         ] = `Bearer ${data.accessToken}`; // Set Authorization header
         setAuth(true);
-        setUserRole(data.role);
-        localStorage.setItem("alias", data.alias); // Save alias to localStorage
+        setUserRole(data.alias.role);
+        localStorage.setItem("fullname", data.alias.fullname);
+        localStorage.setItem("email", data.alias.email);
+        localStorage.setItem("phonenumber", data.alias.phonenumber);
+        localStorage.setItem("role", data.alias.role);
         setTimeout(() => {
-          navigate(data.role === "admin" ? "/admin" : "/");
+          navigate(data.alias.role === "admin" ? "/admin" : "/");
         }, 3500);
       }
     } catch (error) {
@@ -89,9 +92,8 @@ function Login({ alert, showAlert, setAuth, setUserRole }) {
               required
             />
             <i
-              className={`bi ${
-                showPassword ? "bi-eye-slash" : "bi-eye"
-              } show-password`}
+              className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"
+                } show-password`}
               onClick={togglePasswordVisibility}
             ></i>
           </div>

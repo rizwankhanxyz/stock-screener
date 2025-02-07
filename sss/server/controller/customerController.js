@@ -137,9 +137,13 @@ router.post("/login", async (req, res) => {
     });
     res.status(200).json({
       success: "Login Sucessful",
-      role: userData.role,
       refreshToken: refreshToken,
-      alias: userData.fullname,
+      alias: {
+        fullname: userData.fullname,
+        email: userData.email,
+        phonenumber: userData.phonenumber,
+        role: userData.role
+      }
     });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error, Try Again" });

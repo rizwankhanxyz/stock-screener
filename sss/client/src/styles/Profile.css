@@ -1,11 +1,111 @@
-.profile-content {
+/* Profile container */
+.profile-container {
     position: fixed;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 10rem;
-    height: 20rem;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 10px;
+    z-index: 1000;
 }
-.logout{
+
+/* Profile box */
+.profile-content {
+    background: #fff;
+    padding: 3rem 0.5rem 0.5rem 0.5rem;
+    border-radius: 5px;
+    width: 15rem;
+    position: absolute;
+    top: 55px;
+    right: 1px;
+}
+
+/* Close button */
+.close-profile {
+    cursor: pointer;
     color: #6a9e4a;
+    font-size: x-large;
+    font-weight: bold;
+    background: none;
+    border: none;
+    right: 5px;
+    top: 55px;
+    position: absolute;
+
+}
+
+/* Profile Icon */
+.profile-info {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.profile-icon {
+    font-size: 3rem;
+    color: #6a9e4a;
+}
+
+/* User details */
+.profile-name {
+    font-size: 1.2rem;
+    color: #184b0d;
+    font-weight: bold;
+}
+
+.profile-email,
+.profile-phone {
+    font-size: 1rem;
+    color: #184b0d;
+}
+
+/* Profile Options */
+.profile-options {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.profile-options li {
+    padding: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #184b0d;
+}
+
+.profile-options li:hover {
+    background: #d7f0cb;
+    border-radius: 5px;
+}
+
+/* Logout button */
+.logout {
+    cursor: pointer;
+    color: #e74c3c;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+.logout i {
+    margin-right: 5px;
+    font-size: 1.3rem;
+}
+
+.logout:hover {
+    background: #f8d7da;
+    border-radius: 5px;
+}
+.link{
+    text-decoration-line: none;
+    color: #184b0d;
+}
+.icons{
+    margin-right: 6px;
 }

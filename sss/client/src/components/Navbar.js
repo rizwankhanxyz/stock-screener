@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../styles/Navbar.css";
 import Profile from "./Profile";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 // import Loader from "./Loader";
 
 function Navbar({ setAuth, setUserRole }) {
-  const navigate = useNavigate();
   const [alias, setAlias] = useState("");
   const [profileContainer, setProfileContainer] = useState(false);
   const profileRef = useRef(null); // Reference to the profile container
 
   useEffect(() => {
-    const storedAlias = localStorage.getItem("alias");
+    const storedAlias = localStorage.getItem("fullname");
     setAlias(storedAlias || ""); // Set alias from localStorage
 
     // Add click event listener to detect clicks outside the profile container
@@ -32,23 +29,6 @@ function Navbar({ setAuth, setUserRole }) {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [profileContainer]);
-
-  const onClickHandler = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(
-        "http://localhost:5000/api/customer/logout",
-        {},
-        { withCredentials: true }
-      );
-      localStorage.removeItem("alias");
-      setAuth(false);
-      setUserRole(null);
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
 
   //Open profile container
@@ -72,19 +52,12 @@ function Navbar({ setAuth, setUserRole }) {
           src="./se-logo.png"
           alt="se-logo"
         />
-        {/* <div className="alias" style={{marginRight: "10px", cursor: "pointer"}}> */}
         <h4 className="alias">
-          As-salamu alaykum
+          As-salamu Alaykum
         </h4>
         <h4 className="alias" style={{ marginRight: "10px", cursor: "pointer" }} >
           <i onClick={onClickHandlerProfile} className="bi bi-person-circle" style={{ color: " #6a9e4a" }}></i> {alias}
-          <i onClick={onClickHandler}
-            className="bi bi-power" style={{ fontSize: "larger" }}></i>
         </h4>
-        {/* <h3 className="logout"
-            style={{ marginRight: "10px", cursor: "pointer" }}
-          >
-          </h3> */}
       </div>
 
       {profileContainer && (
