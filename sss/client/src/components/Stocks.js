@@ -186,20 +186,23 @@ function Stocks({ stocks, loading }) {
               </select>
             </div>
           </div>
-          {/* <div className="container-heading">
-            <div className="symbol-heading">
-              <h5>NSE/BSE Symbol</h5>
+          <div className="stocks-container-heading">
+            <div className="stocks-symbol-heading">
+              Stock Symbol
             </div>
-            <div className="name-heading">
-              <h5>Company Name</h5>
+            <div className="stocks-name-heading">
+              Company Name
             </div>
-            <div className="exchange-heading">
-              <h5>Exchange</h5>
+            <div className="stocks-exchange-heading">
+              Exchange
             </div>
-            <div className="status-heading">
-              <h5>Compliant Status</h5>
+            <div className="stocks-status-heading">
+              Compliant Status
             </div>
-          </div> */}
+            <div className="stocks-wishlist-heading">
+            <i className="bi bi-plus-circle-dotted"></i> Wishlist
+            </div>
+          </div>
           <div className="stocks-container">
             {currentData.map((stock, index) => (
               <Stock

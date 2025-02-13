@@ -21,12 +21,12 @@
   text-align: left;
   align-items: center;
   width: 20%;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
 }
 .stock-name {
   text-align: left;
   align-self: center;
-  width: 45%;
+  width: 40%;
 }
 .stock-exchange{
   text-align: left;
@@ -69,9 +69,9 @@
 }
 
 .stock-wishlist {
-  width: 5%;
+  width: 10%;
   text-align: right;
-  padding-right: 1rem;
+  padding-right: 2rem;
   cursor: pointer;
   color: #234110;
   font-size: large;

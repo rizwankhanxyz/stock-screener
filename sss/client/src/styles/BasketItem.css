@@ -15,7 +15,6 @@
   background-color: beige;
   /* padding: 1rem; */
   border-radius: 8px;
-  /* max-width: 600px; */
   width: 95%;
   height: 95%;
   overflow: auto;
@@ -27,7 +26,6 @@
   padding: 0.8rem;
   display: flex;
   justify-content: space-evenly;
-  /* position: sticky; */
 }
 
 .close-btn {
@@ -50,10 +48,6 @@
   font-size: 1rem;
 }
 
-/* input,
-button {
-  margin: 0.2rem;
-} */
 
 .input-text {
   padding: 0.4rem;

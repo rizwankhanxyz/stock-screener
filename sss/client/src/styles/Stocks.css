@@ -4,10 +4,6 @@
   align-items: center;
   gap: 1rem;
   margin: 0.8rem;
-  /* position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 76%; */
 }
 
 .pagination {
@@ -16,10 +12,6 @@
   align-items: center;
   text-align: center;
   margin: 1rem 0;
-  /* position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 5%; */
 }
 
 .pagination-btn {
@@ -52,22 +44,7 @@
   top: 50%;
   transform: translateY(-50%);
   color: rgb(64, 139, 34);
-  /* Placeholder icon color */
   pointer-events: none;
-  /* Make the icon unclickable */
-}
-
-.search-container input {
-  width: 100%;
-  padding: 0.5rem 0.5rem 0.5rem 2.5rem;
-  border-radius: 0.5rem;
-  text-align: center;
-  border: none;
-  outline: none;
-}
-
-.search-container input::placeholder {
-  text-align: center;
 }
 
 .stocks-container {
@@ -75,46 +52,60 @@
   max-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
-  /* position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 10%; */
 }
 
 
-.stock-container-heading{
+.stocks-container-heading{
   width: 100%;
   max-width: 95%;
-  background-color: #ffffff;
-  margin: 0 auto;
+  background-color: #3c574c;
+  margin: 0 auto 0.5rem auto;
   display: flex;
   align-items: center;
-  padding: 0.1rem;
+  padding: 0.5rem 0.1rem;
   transition: transform 0.3s ease;
+  color: #ffffff;
 }
 
-.stock-symbol-heading h5{
+.stocks-symbol-heading{
   text-align: left;
   align-items: center;
+  font-size:large;
+  font-weight: bold;
   width: 20%;
-  padding-left: 1rem;
-  color: black;
+  padding-left: 1.5rem;
+  /* color: black; */
 }
-.stock-name-heading h5{
+.stocks-name-heading{
   text-align: left;
   align-self: center;
-  width: 45%;
-  color: black;
+  font-size:large;
+  font-weight: bold;
+  width: 40%;
+  /* color: black; */
 }
-.stock-exchange-heading h5{
+.stocks-exchange-heading{
   text-align: left;
+  align-items: center;
+  font-size:large;
+  font-weight: bold;
+  width: 10%;
+  /* color: black; */
+}
+.stocks-status-heading{
+  text-align: left;
+  align-items: center;
+  font-size:large;
+  font-weight: bold;
+  width: 20%;
+  /* color: black; */
+}
+.stocks-wishlist-heading{
+  text-align: right;
+  font-size:large;
+  font-weight: bold;
   align-items: center;
   width: 10%;
-  color: black;
-}
-.stock-status-heading h5{
-  text-align: left;
-  align-items: center;
-  width: 20%;
-  color: black;
+  padding-right: 1.5rem;
+  /* color: black; */
 }
