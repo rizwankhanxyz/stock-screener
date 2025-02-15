@@ -13,8 +13,8 @@ function Stocks({ stocks, loading }) {
 
 
 
-  const handleStockSelect = (stockId) => {
-  };
+  // const handleStockSelect = () => {};
+  const handleStockSelect = (stockId: string) => { };
 
   const onChangehandler = (e) => {
     setQuery(e.target.value);
@@ -55,12 +55,14 @@ function Stocks({ stocks, loading }) {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handlePageChange = (pageNumber) => {
+  // const handlePageChange = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  // };
+  const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-
   const renderPagination = () => {
-    const pageButtons = [];
+    const pageButtons: JSX.Element[] = []; // Explicitly define type
     const maxButtonsToShow = 5;
 
     if (totalPages < maxButtonsToShow) {
@@ -147,6 +149,7 @@ function Stocks({ stocks, loading }) {
     return pageButtons;
   };
 
+
   return (
     <>
       {loading ? (
@@ -200,17 +203,19 @@ function Stocks({ stocks, loading }) {
               Compliant Status
             </div>
             <div className="stocks-wishlist-heading">
-            <i className="bi bi-plus-circle-dotted"></i> Wishlist
+              <i className="bi bi-plus-circle-dotted"></i> Wishlist
             </div>
           </div>
           <div className="stocks-container">
-            {currentData.map((stock, index) => (
-              <Stock
-                key={index}
-                handleStockSelect={handleStockSelect}
-                stock={stock}
-              />
-            ))}
+            {Array.isArray(currentData) &&
+              currentData.map((stock, index) => (
+                <Stock
+                  key={index}
+                  handleStockSelect={handleStockSelect}
+                  stock={stock}
+                  isSelected={false}
+                />
+              ))}
           </div>
           <div className="pagination">{renderPagination()}</div>
         </>
@@ -220,5 +225,3 @@ function Stocks({ stocks, loading }) {
 }
 
 export default Stocks;
-
-//props is an input to a component
