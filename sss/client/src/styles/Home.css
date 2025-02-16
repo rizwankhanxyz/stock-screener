@@ -83,11 +83,13 @@
   .tab-container {
       flex-direction: column;
       align-items: center;
+      top: 125px;
   }
 
   .tab {
       padding: 0.5rem 1rem;
       font-size: 0.9rem;
-      width: 80%;
+      width: 100%;
+      margin: 0;
   }
 }
