@@ -32,10 +32,6 @@ function Profile({ onClose, setAuth, setUserRole }) {
     return (
         <div className="profile-container" onClick={onClose}>
             <div className="profile-content" onClick={(e) => e.stopPropagation()}>
-                <button className="close-profile" onClick={onClose}>
-                    <i className="bi bi-x"></i>
-                </button>
-
                 {/* User Info Section */}
                 <div className="profile-info">
                     <i className="bi bi-person-circle profile-icon"></i>

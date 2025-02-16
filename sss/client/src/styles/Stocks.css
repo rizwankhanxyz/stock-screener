@@ -2,8 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  margin: 0.8rem;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 0.8rem;
+  margin: 0.7rem;
+  padding: 0.2rem;
 }
 
 .pagination {
@@ -12,16 +14,18 @@
   align-items: center;
   text-align: center;
   margin: 1rem 0;
+  flex-wrap: wrap;
 }
 
 .pagination-btn {
-  margin: 0 5px;
+  margin: 0 4px;
   padding: 8px 12px;
   border: none;
   background-color: #ffffff;
   cursor: pointer;
   border-radius: 5px;
   transition: 0.3s;
+  font-size: 1rem;
 }
 
 .pagination-btn.active {
@@ -36,6 +40,7 @@
 .search-container {
   width: 100%;
   max-width: 530px;
+  position: relative;
 }
 
 .search-container i {
@@ -48,62 +53,109 @@
 }
 
 .stocks-container {
-  height: 410px;
+  height: 460px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.stocks-container-heading{
+/* Stock Table Heading */
+.stocks-container-heading {
   width: 100%;
   max-width: 95%;
-  background-color: #3c574c;
+  padding: 0.5rem 0.1rem;
   margin: 0 auto 0.5rem auto;
   display: flex;
-  align-items: center;
-  padding: 0.5rem 0.1rem;
+  background-color: #3c574c;
   transition: transform 0.3s ease;
+  align-items: center;
   color: #ffffff;
 }
 
-.stocks-symbol-heading{
-  text-align: left;
-  align-items: center;
-  font-size:large;
+/* Column Styling */
+.stocks-symbol-heading,
+.stocks-name-heading,
+.stocks-exchange-heading,
+.stocks-status-heading,
+.stocks-wishlist-heading {
+  font-size: 1rem;
   font-weight: bold;
-  width: 20%;
-  padding-left: 1.5rem;
-  /* color: black; */
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
 }
-.stocks-name-heading{
-  text-align: left;
-  align-self: center;
-  font-size:large;
-  font-weight: bold;
-  width: 40%;
-  /* color: black; */
+
+/* Column Widths for Desktop */
+.stocks-symbol-heading { width: 20%; text-align: left; padding-left: 1rem; }
+.stocks-name-heading { width: 40%; text-align: left; }
+.stocks-exchange-heading { width: 10%; text-align: left; }
+.stocks-status-heading { width: 20%; text-align: left; }
+.stocks-wishlist-heading { width: 10%; text-align: right; padding-right: 1rem; }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .stocks-symbol-heading,
+  .stocks-name-heading,
+  .stocks-exchange-heading,
+  .stocks-status-heading,
+  .stocks-wishlist-heading {
+    font-size: 0.9rem;
+  }
 }
-.stocks-exchange-heading{
-  text-align: left;
-  align-items: center;
-  font-size:large;
-  font-weight: bold;
-  width: 10%;
-  /* color: black; */
+
+@media (max-width: 768px) {
+  .search-filter-container {
+    flex-direction: column; /* Stack filters vertically */
+    align-items: stretch;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .pagination-btn {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+
+  .stocks-container {
+    height: auto;
+    max-height: 300px; /* Adjust max height on smaller screens */
+  }
+
+  .stocks-container-heading {
+    flex-direction: column; /* Stack column headings */
+    text-align: center;
+    padding: 0.8rem;
+  }
+
+  /* Stack elements vertically */
+  .stocks-symbol-heading,
+  .stocks-name-heading,
+  .stocks-exchange-heading,
+  .stocks-status-heading,
+  .stocks-wishlist-heading {
+    width: 100%;
+    text-align: center;
+    padding: 0.4rem 0;
+  }
 }
-.stocks-status-heading{
-  text-align: left;
-  align-items: center;
-  font-size:large;
-  font-weight: bold;
-  width: 20%;
-  /* color: black; */
-}
-.stocks-wishlist-heading{
-  text-align: right;
-  font-size:large;
-  font-weight: bold;
-  align-items: center;
-  width: 10%;
-  padding-right: 1.5rem;
-  /* color: black; */
+
+@media (max-width: 480px) {
+  .pagination-btn {
+    font-size: 0.85rem;
+    padding: 5px 8px;
+  }
+
+  .stocks-container-heading {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .stocks-symbol-heading,
+  .stocks-name-heading,
+  .stocks-exchange-heading,
+  .stocks-status-heading,
+  .stocks-wishlist-heading {
+    font-size: 0.85rem;
+  }
 }

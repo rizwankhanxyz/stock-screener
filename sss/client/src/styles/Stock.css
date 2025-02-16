@@ -7,8 +7,8 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  padding: 0.1rem;
   transition: transform 0.3s ease;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
 .stock-container:hover {
@@ -17,41 +17,32 @@
 }
 
 /* Left section styling */
-.stock-symbol{
+.stock-symbol,
+.stock-name,
+.stock-exchange,
+.stock-status,
+.stock-wishlist {
   text-align: left;
-  align-items: center;
-  width: 20%;
-  padding-left: 1.5rem;
-}
-.stock-name {
-  text-align: left;
-  align-self: center;
-  width: 40%;
-}
-.stock-exchange{
-  text-align: left;
-  align-items: center;
-  width: 10%;
-}
-.stock-status {
-  text-align: left;
-  align-items: center;
-  width: 20%;
-  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem;
 }
 
-.stock-symbol h6 {
+/* Column width for larger screens */
+.stock-symbol { width: 20%; padding-left: 1.5rem; }
+.stock-name { width: 40%; }
+.stock-exchange { width: 10%; }
+.stock-status { width: 20%; cursor: pointer; }
+.stock-wishlist { width: 10%; text-align: right; padding-right: 1.5rem; }
+
+/* Heading Styling */
+.stock-symbol h6,
+.stock-exchange h6 {
   font-size: large;
   color: #234110;
 }
 
 .stock-name h6 {
   color: #0f0a3f;
-}
-
-.stock-exchange h6 {
-  font-size: large;
-  color: #234110;
 }
 
 .status-badge h6 {
@@ -69,29 +60,63 @@
 }
 
 .stock-wishlist {
-  width: 10%;
-  text-align: right;
-  padding-right: 2rem;
   cursor: pointer;
   color: #234110;
   font-size: large;
 }
 
-/* Responsive styling */
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .stock-symbol, .stock-name, .stock-exchange, .stock-status, .stock-wishlist {
+    font-size: 0.9rem;
+    padding: 0.4rem;
+  }
+}
+
 @media (max-width: 768px) {
   .stock-container {
     flex-direction: column;
     align-items: flex-start;
+    padding: 0.8rem;
   }
 
-  .stock-namesymbol,
-  .stock-exchangestatus {
+  .stock-symbol,
+  .stock-name,
+  .stock-exchange,
+  .stock-status,
+  .stock-wishlist {
     width: 100%;
     text-align: left;
+    padding: 0.4rem 0;
+  }
+
+  .stock-wishlist {
+    text-align: right;
   }
 
   .status-badge {
     width: 100%;
     text-align: right;
+  }
+}
+
+@media (max-width: 480px) {
+  .stock-container {
+    padding: 0.5rem;
+  }
+
+  .stock-symbol h6,
+  .stock-name h6,
+  .stock-exchange h6,
+  .status-badge h6 {
+    font-size: 0.85rem;
+  }
+
+  .stock-symbol,
+  .stock-name,
+  .stock-exchange,
+  .stock-status,
+  .stock-wishlist {
+    font-size: 0.85rem;
   }
 }

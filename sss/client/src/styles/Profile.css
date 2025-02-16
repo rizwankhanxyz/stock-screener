@@ -1,41 +1,28 @@
-/* Profile container */
 .profile-container {
-    position: fixed;
+    position: fixed;  /* Fixes the container to cover the whole screen */
     top: 0;
-    right: 0;
     left: 0;
-    bottom: 0;
+    width: 100%;      /* Ensures full width */
+    height: 100%;     /* Ensures full height */
     background: rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
-    padding: 10px;
-    z-index: 1000;
+    z-index: 999; /* Ensures it's above other elements */
 }
 
 /* Profile box */
 .profile-content {
     background: #fff;
-    padding: 3rem 0.5rem 0.5rem 0.5rem;
-    border-radius: 5px;
-    width: 15rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    width: 90%;
+    max-width: 280px; /* Limits the max width */
     position: absolute;
-    top: 55px;
-    right: 1px;
-}
-
-/* Close button */
-.close-profile {
-    cursor: pointer;
-    color: #6a9e4a;
-    font-size: x-large;
-    font-weight: bold;
-    background: none;
-    border: none;
-    right: 5px;
-    top: 55px;
-    position: absolute;
-
+    right: 0.5px;
+    top: 112px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
 }
 
 /* Profile Icon */
@@ -54,12 +41,14 @@
     font-size: 1.2rem;
     color: #184b0d;
     font-weight: bold;
+    margin-bottom: 0.3rem;
 }
 
 .profile-email,
 .profile-phone {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #184b0d;
+    word-wrap: break-word;
 }
 
 /* Profile Options */
@@ -87,7 +76,7 @@
 .logout {
     cursor: pointer;
     color: #e74c3c;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     text-align: center;
     padding: 10px;
@@ -102,10 +91,75 @@
     background: #f8d7da;
     border-radius: 5px;
 }
-.link{
-    text-decoration-line: none;
+
+/* Links */
+.link {
+    text-decoration: none;
     color: #184b0d;
 }
-.icons{
+
+.icons {
     margin-right: 6px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .profile-content {
+        width: 95%;
+        max-width: 250px;
+        top: 40px;
+        right: 10px;
+        padding: 2rem 1rem;
+        z-index: 1000;
+    }
+
+    .profile-name {
+        font-size: 1.1rem;
+    }
+
+    .profile-email,
+    .profile-phone {
+        font-size: 0.85rem;
+    }
+
+    .profile-options li {
+        font-size: 0.95rem;
+    }
+
+    .logout {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-content {
+        width: 100%;
+        max-width: 220px;
+        left: 50%;
+        right: auto;
+        top: 90px;
+        transform: translateX(-50%);
+        padding: 0.5rem 1rem;
+    }
+
+    .profile-name {
+        font-size: 1.1rem;
+    }
+
+    .profile-email,
+    .profile-phone {
+        font-size: 0.8rem;
+    }
+
+    .profile-options li {
+        font-size: 0.9rem;
+    }
+
+    .logout {
+        font-size: 0.95rem;
+    }
+
+    .profile-icon {
+        font-size: 2.8rem;
+    }
 }
