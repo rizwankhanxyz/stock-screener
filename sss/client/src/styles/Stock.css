@@ -110,6 +110,7 @@
   .stock-exchange h6,
   .status-badge h6 {
     font-size: 0.85rem;
+    margin: 0.1px;
   }
 
   .stock-symbol,
@@ -118,5 +119,6 @@
   .stock-status,
   .stock-wishlist {
     font-size: 0.85rem;
+    margin: 0.1px;
   }
 }

@@ -191,7 +191,7 @@ function ComplianceReport({ stock, onClose }) {
       marginTop: "1rem",
       borderRadius: "5px",
       width: "300px",
-      height: "170px",
+      height: "190px",
       textAlign: "center",
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
     },
