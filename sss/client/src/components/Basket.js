@@ -83,7 +83,7 @@ function Basket({ loading, stocks }) {
       {loading ? (
         <Loader />
       ) : (
-        <div style={{padding:'1rem'}}>
+        <div style={{ padding: '1rem' }}>
           <center>
             <button
               data-bs-toggle="popover"
@@ -118,29 +118,31 @@ function Basket({ loading, stocks }) {
                     required
                   />
                 </div>
-                {filteredData.map((element, index) => (
-                  <div className="basket-portion" key={index}>
-                    <div className="basket-portionleft">
-                      <h3>{element.basketName}</h3>
-                      <p>{element.basketDescription}</p>
+                <div className="basket-list">
+                  {filteredData.map((element, index) => (
+                    <div className="basket-portion" key={index}>
+                      <div className="basket-portionleft">
+                        <h3>{element.basketName}</h3>
+                        <p>{element.basketDescription}</p>
+                      </div>
+                      <div className="basket-portionright">
+                        <h6
+                          className="basket-stocks"
+                          onClick={() => onClickOpenBasketStock(element)}
+                        >
+                          See Stocks:
+                          {element.stockIds.length}
+                        </h6>
+                        <button
+                          className="basket-delete"
+                          onClick={() => onClickDeleteBasket(element._id)} // Change to a function reference
+                        >
+                          <i className="bi bi-trash3-fill"></i>
+                        </button>
+                      </div>
                     </div>
-                    <div className="basket-portionright">
-                      <h6
-                        className="basket-stocks"
-                        onClick={() => onClickOpenBasketStock(element)}
-                      >
-                        See Stocks:
-                        {element.stockIds.length}
-                      </h6>
-                      <button
-                        className="basket-delete"
-                        onClick={() => onClickDeleteBasket(element._id)} // Change to a function reference
-                      >
-                        <i className="bi bi-trash3-fill"></i>
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </>
             ) : (
               <p

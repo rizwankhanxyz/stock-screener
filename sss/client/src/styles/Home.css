@@ -3,12 +3,15 @@
   display: flex;
   justify-content: center;
   background-color: #3c574c;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  /* width: 100%;*/
+  max-width: 95%;
+  margin: auto auto auto auto;
 }
 
 /* Individual Tab Styling */
 .tab {
-  padding: 0.8rem 2rem;
+  padding: 0.6rem 2rem;
   margin: 0 1rem;
   font-size: 1.2rem;
   color: #c3d3cd;
@@ -68,7 +71,6 @@
   .tab-container {
       flex-direction: column;
       align-items: center;
-      top: 125px;
   }
 
   .tab {

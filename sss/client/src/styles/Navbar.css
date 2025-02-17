@@ -4,6 +4,13 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    position: sticky;
+    left: 0;
+    right: 0;
+    top:0;
+    z-index:999;
+    max-width: 95%;
+    margin: 1rem auto auto auto;
 }
 
 .navbar img {

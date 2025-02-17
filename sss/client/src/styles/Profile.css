@@ -2,13 +2,16 @@
     position: fixed;  /* Fixes the container to cover the whole screen */
     top: 0;
     left: 0;
-    width: 100%;      /* Ensures full width */
-    height: 100%;     /* Ensures full height */
+    right:0;
+    width: 100%;
+    max-width: 95%;
+    height: 100%; 
     background: rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
     z-index: 999; /* Ensures it's above other elements */
+    margin: 1rem auto auto auto;
 }
 
 /* Profile box */
@@ -19,8 +22,6 @@
     width: 90%;
     max-width: 280px; /* Limits the max width */
     position: absolute;
-    right: 0.5px;
-    top: 112px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease-in-out;
 }
