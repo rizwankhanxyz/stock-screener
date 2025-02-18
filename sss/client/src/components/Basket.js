@@ -122,7 +122,7 @@ function Basket({ loading, stocks }) {
                   {filteredData.map((element, index) => (
                     <div className="basket-portion" key={index}>
                       <div className="basket-portionleft">
-                        <h3>{element.basketName}</h3>
+                        <h6 className="basket-stocks">{element.basketName}</h6>
                         <p>{element.basketDescription}</p>
                       </div>
                       <div className="basket-portionright">

@@ -1,58 +1,105 @@
+/* Modal Overlay */
 .basket-item-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    /* Dimmed background */
+    background: rgba(0, 0, 0, 0.7); /* Dimmed background */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    padding: 1rem;
+    /* Adds spacing for small screens */
 }
 
+/* Modal Content */
 .basket-item-content {
     position: relative;
-    /* For positioning the close button */
     background: white;
-    padding: 20px;
+    padding: 1.5rem;
     border-radius: 8px;
-    width: 100%;
-    /* Relative width for responsiveness */
-    max-width: 500px;
+    width: 90%;
+    max-width: 500px; /* Maximum width for larger screens */
+    max-height: 90vh;
+    /* Ensures the modal fits within the viewport */
+    overflow-y: auto;
+    /* Enables scrolling if content exceeds the modal height */
     display: flex;
     flex-direction: column;
-    /* Stack content vertically */
     gap: 0.5rem;
-    /* Space between elements */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    /* Optional: Add a shadow for better visibility */
 }
 
+/* Close Button */
 .close-button {
     position: absolute;
-    /* Position relative to .basket-item-content */
     top: 10px;
     right: 10px;
     background: none;
     color: rgb(255, 0, 0);
-    /* Red color */
     border: none;
     padding: 10px;
     cursor: pointer;
+    font-size: 1.2rem;
 }
 
 .close-button:hover,
 .close-button:focus {
     color: darkred;
-    /* Change color on hover/focus */
     transform: scale(1.1);
-    /* Slight zoom for interactivity */
 }
 
-.stock-delete{
+/* Delete Button */
+.stock-delete {
     background: none;
     border: none;
-    color:rgb(250, 94, 94);
+    color: rgb(250, 94, 94);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.stock-delete:hover {
+    color: darkred;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .basket-item-content {
+        width: 95%;
+        max-width: 90%;
+        padding: 1.2rem;
+    }
+
+    .close-button {
+        font-size: 1rem;
+        padding: 8px;
+    }
+
+    .stock-delete {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .basket-item-content {
+        width: 98%;
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .close-button {
+        font-size: 0.9rem;
+        top: 8px;
+        right: 8px;
+    }
+
+    .stock-delete {
+        font-size: 0.85rem;
+        padding: 0.3rem;
+    }
 }
