@@ -146,7 +146,9 @@ function Basket({ loading, stocks }) {
               </>
             ) : (
               <p
-                style={{ marginTop: "1rem", fontSize: "1.2rem", color: "#ffff" }}
+                style={{
+                  marginTop:"1rem",fontSize: "x-large", backgroundColor: "beige",color: "darkgreen", height: "365px", alignContent:"center"
+                }}
               >
                 No basket created yet.
               </p>
