@@ -12,7 +12,7 @@ function Funds() {
     window.open("https://shariahequities.com/contact/", "_blank");
   };
   return (
-    <div className="funds-container">
+    <div className="funds-container"> 
       <div className="funds-list">
         {fundList.map((fund, index) => (
           <div className="funds" key={index}>

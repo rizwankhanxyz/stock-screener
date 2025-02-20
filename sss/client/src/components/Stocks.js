@@ -11,11 +11,6 @@ function Stocks({ stocks, loading }) {
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 10; // Number of items per page
 
-
-
-  // const handleStockSelect = () => {};
-  const handleStockSelect = (stockId: string) => { };
-
   const onChangehandler = (e) => {
     setQuery(e.target.value);
   };
@@ -55,14 +50,11 @@ function Stocks({ stocks, loading }) {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
-  // const handlePageChange = (pageNumber) => {
-  //   setCurrentPage(pageNumber);
-  // };
-  const handlePageChange = (pageNumber: number) => {
+  const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
   const renderPagination = () => {
-    const pageButtons: JSX.Element[] = []; // Explicitly define type
+    const pageButtons = []; // Explicitly define type
     const maxButtonsToShow = 5;
 
     if (totalPages < maxButtonsToShow) {
@@ -211,9 +203,8 @@ function Stocks({ stocks, loading }) {
               currentData.map((stock, index) => (
                 <Stock
                   key={index}
-                  handleStockSelect={handleStockSelect}
                   stock={stock}
-                  isSelected={false}
+                  // isSelected={false}
                 />
               ))}
           </div>

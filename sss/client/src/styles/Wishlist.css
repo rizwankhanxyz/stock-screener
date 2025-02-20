@@ -1,0 +1,9 @@
+.wishlist-container {
+    width: 100%;
+    max-width: 95%;
+    background-color: beige;
+    height: 425px;
+    margin: 1rem auto 1.5rem auto;
+    padding: 1rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}

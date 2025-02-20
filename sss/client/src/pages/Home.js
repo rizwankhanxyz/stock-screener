@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Stocks from "../components/Stocks";
 import Funds from "../components/Funds";
 import Basket from "../components/Basket";
+import Wishlist from "../components/Wishlist";
 import "../styles/Home.css";
 
 function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
@@ -37,6 +38,12 @@ function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
         >
           Basket
         </div>
+        <div
+          className={activeTab === "Wishlist" ? "tab active-tab" : "tab"}
+          onClick={() => setActiveTab("Wishlist")}
+        >
+          Wishlist
+        </div>
       </div>
 
       {/* Tab Content */}
@@ -44,6 +51,7 @@ function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
         {activeTab === "Stocks" && <Stocks loading={loading} stocks={stocks} />}
         {activeTab === "Funds" && <Funds loading={loading} />}
         {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} />}
+        {activeTab === "Wishlist" && <Wishlist loading={loading} />}
       </div>
 
     </>
