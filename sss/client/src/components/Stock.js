@@ -50,10 +50,10 @@ function Stock({ stock, handleStockSelect, isSelected }) {
         >
           {isSelected ? (
             // <i className="bi bi-bookmark-check-fill"></i>
-            <i class="bi bi-check-square-fill"></i>
+            <i className="bi bi-check-square-fill"></i>
           ) : (
             // <i className="bi bi-bookmark"></i>
-            <i class="bi bi-square"></i>
+            <i className="bi bi-square"></i>
           )}
         </div>
       </div>

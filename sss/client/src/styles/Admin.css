@@ -1,7 +1,9 @@
 .admin-container {
   margin: auto;
-  padding: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-family: Arial, sans-serif;
+  max-width: 95%;
 }
 
 /* File Upload */
@@ -9,9 +11,45 @@
   margin: auto;
   border-radius: 8px;
   text-align: center;
-  background-color: azure;
+  background-color: rgb(255, 255, 255);
   max-width: 500px;
   padding: 1rem;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a modern look */
+}
+
+/* File Upload Input */
+.file-upload-input {
+  width: 100%;
+  padding: 10px;
+  border: 2px dashed #22682b; /* Dashed border to indicate drag-and-drop */
+  border-radius: 5px;
+  background-color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+}
+
+.file-upload-input:hover {
+  border-color: #0056b3; /* Darker blue on hover */
+}
+
+/* File Upload Button */
+.file-upload-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: #cee2a8; /* Blue button */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.file-upload-btn:hover {
+  background: #76be76; /* Darker blue on hover */
 }
 
 /* Filters */
@@ -46,6 +84,7 @@
   background: #cee2a8;
   color: #222c22;
   padding-right: 1rem;
+  /* font-size: small; */
 }
 
 .table-row {
@@ -58,6 +97,7 @@
   padding: 8px;
   text-align: left;
   width: 0;
+  font-size: small;
 }
 
 /* Status Colors */

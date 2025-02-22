@@ -109,14 +109,14 @@ function Admin({ stocks, setAuth, setUserRole, loading }) {
               <div className="table-cell">Company Name</div>
               <div className="table-cell">Symbol</div>
               <div className="table-cell">Exchange</div>
-              <div className="table-cell">Business Compliance</div>
-              <div className="table-cell">Debts Market Cap</div>
-              <div className="table-cell">Debts-Market Compliance Status</div>
-              <div className="table-cell">Interest-Bearing Securities</div>
-              <div className="table-cell">Interest-Bearing Compliance Status</div>
-              <div className="table-cell">Interest Income</div>
-              <div className="table-cell">Interest-Income to Total Income Status</div>
-              <div className="table-cell">Final Compliance</div>
+              <div className="table-cell">Business Compliance Status</div>
+              <div className="table-cell">Debts / Total Assets</div>
+              <div className="table-cell">Compliant Status (Debts / Total Assets)</div>
+              <div className="table-cell">Cash + Interest-Bearing Securities / Total Assets</div>
+              <div className="table-cell">Compliant Status (Cash + Interest-Bearing Securities / Total assets)</div>
+              <div className="table-cell">Interest Income / Total Income</div>
+              <div className="table-cell">Compliant Status (Interest Income / Total Income)</div>
+              <div className="table-cell">Final Compliance Status</div>
             </div>
 
             {filteredData.length > 0 ? (
