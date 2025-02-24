@@ -51,7 +51,9 @@
 .file-upload-btn:hover {
   background: #76be76; /* Darker blue on hover */
 }
-
+.{
+  
+}
 /* Filters */
 .filters-wrapper {
   display: flex;
