@@ -8,6 +8,11 @@
   padding: 0.2rem;
 }
 
+.filter-container{
+  gap: 1rem;
+  display: flex;
+}
+
 .pagination {
   display: flex;
   justify-content: center;

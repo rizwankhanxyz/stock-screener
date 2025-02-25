@@ -51,9 +51,6 @@
 .file-upload-btn:hover {
   background: #76be76; /* Darker blue on hover */
 }
-.{
-  
-}
 /* Filters */
 .filters-wrapper {
   display: flex;
@@ -65,8 +62,9 @@
 
 .search-input, select {
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-radius: 7px;
+  border:none;
+  box-shadow: 1px 2px 5px rgb(0 0 0 / 30%);
 }
 
 .search-input {
