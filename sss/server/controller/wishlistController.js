@@ -7,10 +7,6 @@ dotenv.config();
 
 const router = express.Router();
 
-/*
-post
-api/wishlist/customer/wishlist/add
-*/
 router.post("/customer/wishlist/toggle", async (req, res) => {
     try {
         const token = req.cookies.token; // Assuming token is stored in cookies
@@ -52,11 +48,7 @@ router.post("/customer/wishlist/toggle", async (req, res) => {
     }
 });
 
-/*
-get
-api/wishlist/customer/wishlist/
-*/
-// Get user's basket
+
 router.get("/customer/wishlist", async (req, res) => {
     try {
         const token = req.cookies.token; // Assuming token is stored in cookies
@@ -67,85 +59,14 @@ router.get("/customer/wishlist", async (req, res) => {
         }
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decoded.user_id;
-        const wishlist = await wishlistModel.find({ userId }).populate("wishlistedStockIds");
-        res.status(200).json({ wishlist: wishlist ? wishlist.wishlistedStockIds : [] });
+        const wishlist = await wishlistModel.findOne({ userId }).populate("wishlistedStockIds");
+        if (!wishlist) {
+            return res.status(200).json({ wishlist: [] }); // Return empty array if no wishlist exists
+        }
+        res.status(200).json({ wishlist: wishlist.wishlistedStockIds });
+
     } catch (error) {
         console.error("Error fetching wishlist:", error);
         res.status(500).json({ error: "Internal Server Error." });
     }
 });
-
-//Delete User's Basket
-/*
-delete
-api/baskets/customer/basket/:basketId
-*/
-
-// Delete a basket and associated stocks
-// router.delete("/customer/basket/:basketId", async (req, res) => {
-//     try {
-//         const token = req.cookies.token; // Assuming token is stored in cookies
-//         if (!token) {
-//             return res
-//                 .status(401)
-//                 .json({ error: "Unauthorized. No token provided." });
-//         }
-//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//         const userId = decoded.user_id;
-//         const { basketId } = req.params;
-
-//         const basket = await basketModel.findOne({ _id: basketId, userId });
-
-//         if (!basket) {
-//             console.log("Basket not found");
-//             return res.status(404).json({ error: "Basket not found." });
-//         }
-
-//         // Delete the basket
-//         await basketModel.findByIdAndDelete(basketId);
-
-//         res
-//             .status(200)
-//             .json({ success: "Basket and associated stocks deleted successfully." });
-//     } catch (error) {
-//         console.error("Error deleting basket:", error);
-//         res.status(500).json({ error: "Internal Server Error." });
-//     }
-// });
-
-//Delete stock from a User's Basket
-/*
-method: delete
-api/baskets/customer/basket/:basketId/remove-stock/:stockId
-*/
-// Delete stock from a basket
-// router.delete(
-//     "/customer/basket/:basketId/remove-stock/:stockId",
-//     async (req, res) => {
-//         try {
-//             const { basketId, stockId } = req.params;
-
-//             const basket = await basketModel.findById(basketId);
-
-//             if (!basket) {
-//                 return res.status(404).json({ error: "Basket not found." });
-//             }
-
-//             // Remove the stock from the basket
-//             basket.stockIds = basket.stockIds.filter(
-//                 (id) => id.toString() !== stockId
-//             );
-//             await basket.save();
-
-//             res.status(200).json({
-//                 success: "Stock removed from basket successfully.",
-//                 basket,
-//             });
-//         } catch (error) {
-//             console.error("Error removing stock from basket:", error);
-//             res.status(500).json({ error: "Internal Server Error." });
-//         }
-//     }
-// );
-
-export default router;
