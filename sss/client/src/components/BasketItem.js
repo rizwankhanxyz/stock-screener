@@ -186,7 +186,7 @@ function BasketItem({ onClose, stocks, getBaskets }) {
           </div>
         </center>
         <center>
-          <div className="search-container" style={{paddingTop:"1rem",paddingBottom:"1rem"}}>
+          <div className="search-container" style={{ paddingTop: "1rem", paddingBottom: "1rem" }}>
             <i className="bi bi-search"></i>
             <input
               type="text"
@@ -205,6 +205,7 @@ function BasketItem({ onClose, stocks, getBaskets }) {
               key={index}
               handleStockSelect={handleStockSelect}
               stock={stock}
+              parent="BasketItem"
               isSelected={selectedStocks.includes(stock._id)} // Pass the selection status
             />
           ))}{" "}

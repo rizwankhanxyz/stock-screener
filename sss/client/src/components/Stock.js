@@ -1,9 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Stock.css";
 import ComplianceReport from "./ComplianceReport";
+import axios from "axios";
 
-function Stock({ stock, handleStockSelect, isSelected }) {
+function Stock({ stock, handleStockSelect, isSelected, parent }) {
   const [showComplianceReport, setShowComplianceReport] = useState(false);
+  const [isWishlisted, setIsWishListed] = useState(false);
+
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/wishlist/customer/wishlist",
+          { withCredentials: true }
+        );
+        const wishlistStocks = response.data.wishlist || [];
+        setIsWishListed(wishlistStocks.some((item) => item._id === stock._id));
+      }
+      catch (error) {
+        console.error("Error fetching wishlist:", error);
+      }
+    };
+    // Fetch wishlist only if state hasn't changed
+    if (!isWishlisted) {
+      fetchWishlist();
+    }
+
+  }, [stock._id, isWishlisted]);
+
+  const handleStockBookmark = async () => {
+    // setIsWishListed((prev) => !prev);
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/wishlist/customer/wishlist/toggle",
+        { stockId: stock._id },
+        { withCredentials: true }
+      );
+      // setIsWishListed(true);
+      setIsWishListed(response.data.isWishlisted)
+    } catch (error) {
+      console.error("Error adding stock:", error.response.data.error);
+      alert(error.response.data.error || "Error updating wishlist.");
+      // setIsWishListed((prev) => !prev);
+    }
+  };
 
   // Function to handle click and show ComplianceReport component
   const openComplianceReport = (e) => {
@@ -46,15 +85,15 @@ function Stock({ stock, handleStockSelect, isSelected }) {
         </div>
         <div
           className="stock-wishlist"
-          onClick={() => handleStockSelect(stock._id)}
+          onClick={parent === "Stocks" ? handleStockBookmark : () => handleStockSelect(stock._id)}
+
         >
-          {isSelected ? (
-            // <i className="bi bi-bookmark-check-fill"></i>
-            <i className="bi bi-check-square-fill"></i>
-          ) : (
-            // <i className="bi bi-bookmark"></i>
-            <i className="bi bi-square"></i>
-          )}
+          {
+            parent === "Stocks" ?
+              (isWishlisted ? (<i className="bi bi-bookmark-check-fill"></i>) : (<i className="bi bi-bookmark"></i>))
+              :
+              (isSelected ? (<i className="bi bi-check-square-fill"></i>) : (<i className="bi bi-square"></i>))
+          }
         </div>
       </div>
       {showComplianceReport && (

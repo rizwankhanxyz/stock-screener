@@ -204,7 +204,7 @@ function Stocks({ stocks, loading }) {
                 <Stock
                   key={index}
                   stock={stock}
-                  // isSelected={false}
+                  parent="Stocks"
                 />
               ))}
           </div>

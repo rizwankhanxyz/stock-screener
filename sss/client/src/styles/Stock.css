@@ -19,7 +19,6 @@
 .stock-status,
 .stock-wishlist {
   text-align: left;
-  font-size: 1rem;
   padding: 0.25rem;
 }
 
@@ -33,7 +32,6 @@
 /* Heading Styling */
 .stock-symbol h6,
 .stock-exchange h6 {
-  font-size: large;
   color: #234110;
 }
 
@@ -42,7 +40,6 @@
 }
 
 .status-badge h6 {
-  font-size: 0.9rem;
   font-weight: bold;
 }
 
@@ -58,7 +55,6 @@
 .stock-wishlist {
   cursor: pointer;
   color: #234110;
-  font-size: large;
 }
 
 /* Responsive Design */

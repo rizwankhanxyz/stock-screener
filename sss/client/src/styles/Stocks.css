@@ -5,7 +5,7 @@
   flex-wrap: wrap; /* Allows wrapping on smaller screens */
   gap: 0.8rem;
   margin: 0.7rem;
-  padding: 0.2rem;
+  font-size: small;
 }
 
 .filter-container{
@@ -18,19 +18,20 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 1rem 0;
   flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .pagination-btn {
   margin: 0 4px;
-  padding: 8px 12px;
+  padding: 5px 10px;
   border: none;
-  background-color: #ffffff;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 2px;
   transition: 0.3s;
   font-size: 1rem;
+  /* background-color: #ffffff; */
 }
 
 .pagination-btn.active {
@@ -60,7 +61,7 @@
 .stocks-container {
   width: 100%; /*remove */
   max-width: 95%; /*remove */
-  height: 460px;
+  height: 315px;
   overflow-y: auto;
   overflow-x: hidden;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -72,6 +73,7 @@
   width: 100%;
   max-width: 95%;
   padding: 0.5rem 0.1rem;
+  padding-right: 1rem;
   margin: 0 auto 0.5rem auto;
   display: flex;
   background-color: #3c574c;
@@ -79,6 +81,8 @@
   align-items: center;
   color: #ffffff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 /* Column Styling */
@@ -87,8 +91,6 @@
 .stocks-exchange-heading,
 .stocks-status-heading,
 .stocks-wishlist-heading {
-  font-size: 1rem;
-  font-weight: bold;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
 }

@@ -1,5 +1,5 @@
 .navbar {
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -11,17 +11,18 @@
     z-index:999;
     max-width: 95%;
     margin: 1rem auto auto auto;
+    height: 50px;
 }
 
 .navbar img {
-    height: 45px; /* Adjusted size */
+    height: 35px; /* Adjusted size */
     cursor: pointer;
 }
 
 .alias {
     color: #6a9e4a;
-    font-size: 1.5rem;
-    font-weight: 500;
+    /* font-size: 1.5rem; */
+    /* font-weight: 500; */
 }
 
 .alias i {
