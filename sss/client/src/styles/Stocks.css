@@ -31,12 +31,13 @@
   border-radius: 2px;
   transition: 0.3s;
   font-size: 1rem;
-  /* background-color: #ffffff; */
+  color: white;
+  background-color: #3c574c;
 }
 
 .pagination-btn.active {
-  background-color: teal;
-  color: white;
+  background-color:whitesmoke;
+  color: rgb(12, 65, 19);
 }
 
 .pagination-btn:hover {
