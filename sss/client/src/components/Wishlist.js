@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/Wishlist.css";
 
-
 function Wishlist() {
     const [userWishlist, setUserWishlist] = useState([]);
 
@@ -32,13 +31,16 @@ function Wishlist() {
             {userWishlist.length === 0 ? (
                 <p>No stocks in wishlist.</p>
             ) : (
-                <ul className="wishlist-list">
+                <div className="wishlist-list">
                     {userWishlist.map((stock) => (
-                        <li key={stock._id}>
+                        <div key={stock._id}>
                             {stock.companyName} ({stock.nseorbseSymbol})
-                        </li>
+                            
+                        </div>
                     ))}
-                </ul>
+                </div>
+
+                
             )}
         </div>
     );
