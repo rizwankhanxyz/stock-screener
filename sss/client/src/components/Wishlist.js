@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/Wishlist.css";
+import "../styles/Stock.css";
 
 function Wishlist() {
     const [userWishlist, setUserWishlist] = useState([]);
@@ -24,43 +25,62 @@ function Wishlist() {
         fetchWishlist();
     }, []);
 
+    const handleWishlistToggle = async (stockId) => {
+        try {
+            await axios.post(
+                "http://localhost:5000/api/wishlist/customer/wishlist/toggle",
+                { stockId },
+                { withCredentials: true }
+            );
+            setUserWishlist((prevWishlist) =>
+                prevWishlist.filter((stock) => stock._id !== stockId)
+            );
+        } catch (error) {
+            console.error("Error updating wishlist:", error.response?.data?.error || error.message);
+            alert(error.response?.data?.error || "Error updating wishlist.");
+        }
+    };
 
     return (
         <div className="wishlist-container">
-            <h2>My Wishlist</h2>
             {userWishlist.length === 0 ? (
                 <p>No stocks in wishlist.</p>
             ) : (
                 <div className="wishlist-list">
                     {userWishlist.map((stock) => (
                         <div key={stock._id}>
-                            {stock.companyName} ({stock.nseorbseSymbol})
-                            
+                            <div className="stock-container">
+                                <div className="stock-symbol">
+                                    <h6>{stock.nseorbseSymbol}</h6>
+                                </div>
+                                <div className="stock-name">
+                                    <h6>{stock.companyName}</h6>
+                                </div>
+                                <div className="stock-exchange">
+                                    <h6>{stock.exchange}</h6>
+                                </div>
+                                <div className="stock-status">
+                                    <h6
+                                        data-bs-toggle="popover"
+                                        className={`status-badge ${stock.financialScreeningStatus === "PASS" ? "compliant" : "non-compliant"}`}
+                                    >
+                                        {stock.financialScreeningStatus === "PASS" ? "COMPLIANT" : "NON-COMPLIANT"}
+                                    </h6>
+                                </div>
+                                <div className="stock-wishlist"
+                                    onClick={() => handleWishlistToggle(stock._id)}
+                                >
+                                    <i className="bi bi-bookmark-check-fill"></i>
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
 
-                
+
             )}
         </div>
     );
 }
 
 export default Wishlist;
-
-//   const updateWishlist = (stockId) => {
-//     setUserWishlist((prev) =>
-//       prev.includes(stockId) ? prev.filter((id) => id !== stockId) : [...prev, stockId]
-//     );
-//   };
-//     <div>
-//       {stocks.map((stock) => (
-//         <Stock
-//           key={stock._id}
-//           stock={stock}
-//           userWishlist={userWishlist}
-//           updateWishlist={updateWishlist}
-//         />
-//       ))}
-//     </div>
-//   );
