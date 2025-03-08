@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import Footer from "./components/Footer";
+import FloatingSquares from "./components/FloatingSquares";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -63,6 +64,7 @@ function App() {
 
   return (
     <>
+      <FloatingSquares />
       <BrowserRouter>
         <Routes>
           <Route
@@ -121,7 +123,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-      <Footer/>
+      <Footer />
     </>
   );
 }

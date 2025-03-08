@@ -44,7 +44,7 @@ function Wishlist() {
     return (
         <div className="wishlist-container">
             {userWishlist.length === 0 ? (
-                <p>No stocks in wishlist.</p>
+                <p style={{ fontSize: "x-large", color: "darkgreen",alignContent: "center",textAlign:"center", height:"365px"}}>No stocks in wishlist yet.</p>
             ) : (
                 <div className="wishlist-list">
                     {userWishlist.map((stock) => (

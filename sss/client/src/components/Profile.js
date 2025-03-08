@@ -46,11 +46,18 @@ function Profile({ onClose, setAuth, setUserRole }) {
                         <i className="bi bi-lock icons"></i> Change Password
                     </li>
                     <li>
-                        <Link to={"https://shariahequities.com/about-2/"} className="link" target="_blank"><i className="bi bi-info-circle icons"></i>About Us</Link>
+                        <Link to={"https://shariahequities.com/about-2/"} className="link" target="_blank"><i className="bi bi-info-circle icons"></i>About Shariah Equities</Link>
+                    </li>
+                    <li>
+                        <Link to={"./Shariah-Equities-Screening-Methodology.pdf"} className="link" target="_blank"><i className="bi bi-journal-arrow-down icons"></i>Screening Methodology</Link>
                     </li>
                     <li>
                         <Link to={"https://shariahequities.com/contact/"}  className="link" target="_blank"><i className="bi bi-headset icons"></i>Contact Us</Link>
                     </li>
+                    <li>
+                        <Link to={"https://docs.google.com/forms/d/e/1FAIpQLSfzxpy_rz26-It4wMuP_Srq9Zt5qtgbDdLzGVsO81V-wCuY1w/viewform"}  className="link" target="_blank"><i className="bi bi-chat-left-text icons"></i>Feedback</Link>
+                    </li>
+
                 </ul>
 
                 {/* Logout Button */}
