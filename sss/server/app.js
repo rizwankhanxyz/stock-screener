@@ -9,6 +9,7 @@ import dataRouter from "./controller/dataController.js";
 import customerRouter from "./controller/customerController.js";
 import basketRouter from "./controller/basketController.js";
 import wishlistRouter from "./controller/wishlistController.js"
+import aiRouter from "./controller/aiController.js";
 
 
 dotenv.config();
@@ -31,6 +32,7 @@ server.use("/api/admin", dataRouter);
 server.use("/api/customer", customerRouter);
 server.use("/api/baskets/", basketRouter);
 server.use("/api/wishlist/", wishlistRouter);
+server.use("/api/ai/",aiRouter);
 
 //Listen: It listens or gets data from the port or host.
 server.listen(PORT, () => {

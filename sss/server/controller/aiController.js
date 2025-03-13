@@ -9,6 +9,15 @@ const router = express.Router();
 const TOGETHER_AI_API_KEY = process.env.TOGETHER_AI_API_KEY;
 
 // AI Chat Route
+
+/*
+ * API: /api/ai/ask-ai
+ * METHOD: POST
+ * DESC: Data Adding in Backend
+ * Body: Excel File Data
+ * Access: Private
+ * Validations: so far none
+ */
 router.post("/ask-ai", async (req, res) => {
     try {
         const { userQuery } = req.body;
