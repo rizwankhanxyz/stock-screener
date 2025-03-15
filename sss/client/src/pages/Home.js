@@ -4,6 +4,7 @@ import Stocks from "../components/Stocks";
 import Funds from "../components/Funds";
 import Basket from "../components/Basket";
 import Wishlist from "../components/Wishlist";
+import Chatbot from "../components/Chatbot";
 import "../styles/Home.css";
 
 function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
@@ -53,6 +54,8 @@ function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
         {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} />}
         {activeTab === "Wishlist" && <Wishlist loading={loading} />}
       </div>
+      
+      <Chatbot />
 
     </>
   );

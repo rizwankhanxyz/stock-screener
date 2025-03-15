@@ -24,6 +24,7 @@ router.post("/ask-ai", async (req, res) => {
 
         // Check if the user asked about a specific stock
         const match = userQuery.match(/status of (.*?)$/i);
+        console.log(match);
         let stockInfo = null;
         let aiResponse = "";
 
@@ -32,14 +33,17 @@ router.post("/ask-ai", async (req, res) => {
             stockInfo = await dataModel.findOne({ nseorbseSymbol: stockSymbol });
 
             if (stockInfo) {
-                const status = stockInfo.compliantStatusBusinessScreening;
-                const reason = stockInfo.compliantStatusDebts === "PASS"
-                    ? "It meets debt compliance norms."
-                    : "It does not meet debt compliance norms.";
+                console.log("Found NSE/BSE Symbol", nseorbseSymbol, stockSymbol);
+                // const status = stockInfo.compliantStatusBusinessScreening;
+                // const reason = stockInfo.compliantStatusDebts === "PASS"
+                //     ? "It meets debt compliance norms."
+                //     : "It does not meet debt compliance norms.";
 
-                aiResponse = `The stock ${stockSymbol} is ${status === "PASS" ? "Shariah-compliant ✅" : "Non-compliant ❌"}.\nReason: ${reason}`;
+                // aiResponse = `The stock ${stockSymbol} is ${status === "PASS" ? "Shariah-compliant ✅" : "Non-compliant ❌"}.\nReason: ${reason}`;
+
             } else {
-                aiResponse = `Sorry, I could not find the compliance status of ${stockSymbol}.`;
+                // aiResponse = `Sorry, I could not find the compliance status of ${stockSymbol}.`;
+                console.log("Not Found NSE/BSE Symbol");
             }
         } else {
             // Send query to Together AI Llama 2 model
