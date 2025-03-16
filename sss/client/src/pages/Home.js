@@ -54,9 +54,7 @@ function Home({ stocks, loading, setUserRole, setAuth, setAlias, alias }) {
         {activeTab === "Basket" && <Basket loading={loading} stocks={stocks} />}
         {activeTab === "Wishlist" && <Wishlist loading={loading} />}
       </div>
-      
       <Chatbot />
-
     </>
   );
 }
